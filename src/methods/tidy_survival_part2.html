@@ -1,0 +1,1012 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Comparing survival prediction models with tidymodels, part 2 &#8212; notebooks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=8bd22a0a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/methods/tidy_survival_part2';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Dragon Curve" href="../fun/dragon_curve.html" />
+    <link rel="prev" title="Comparing survival prediction models with tidymodels" href="tidy_survival_part1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">notebooks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    notebooks
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">ggplot2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/clustered_heatmap.html">Clustered Heatmap</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/color_palettes.html">Color Palettes</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/colors2d.html">2D Color Palette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_1D.html">Density 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_2D.html">Density 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/plot_composition.html">Composing multiple plots in a single page</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/scale_transforms.html">Scale Transforms</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data-analysis/crinacle.html">Crinacle IEMs Ranking</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../data-analysis/mahjong-yaku-stats.html">Mahjong Yaku stats</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="glmnet_cox.html">Regularized Cox Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-python.html">Practical Guide to PCA visualization in Python</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-r.html">Practical Guide to PCA visualization in R</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tidy_shap.html">Tidy SHAP</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tidy_survival_part1.html">Comparing survival prediction models with tidymodels</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Comparing survival prediction models with tidymodels, part 2</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fun</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fun/dragon_curve.html">Dragon Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/mandelbrot.html">Mandelbrot Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/star.html">Drawing star polygons with ggplot2</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/rvalieris/notebooks" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Comparing survival prediction models with tidymodels, part 2</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Comparing survival prediction models with tidymodels, part 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-preprocessing">Dataset preprocessing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definitions">Model definitions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-fitting">Model fitting</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-best-models-with-all-the-training-data">Fit the best models with all the training data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-importance">Variable Importance</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#futher-reading">Futher reading</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidymodels</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">survival</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">furrr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">censored</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">shapviz</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">fastshap</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nf">theme_set</span><span class="p">(</span><span class="nf">theme_cowplot</span><span class="p">())</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">9</span><span class="p">)</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># the multi model fitting process will use multiple cores</span>
+<span class="nf">plan</span><span class="p">(</span><span class="n">multicore</span><span class="p">,</span><span class="w"> </span><span class="n">workers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="comparing-survival-prediction-models-with-tidymodels-part-2">
+<h1>Comparing survival prediction models with tidymodels, part 2<a class="headerlink" href="#comparing-survival-prediction-models-with-tidymodels-part-2" title="Link to this heading">#</a></h1>
+<p>In part 1 we learned how to train different survival models and compare them with the concordance index.</p>
+<p>However there are other survival metrics that we might want to consider, depending on the context,
+in this notebook we will explore these metrics.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dataset-preprocessing">
+<h1>Dataset preprocessing<a class="headerlink" href="#dataset-preprocessing" title="Link to this heading">#</a></h1>
+<p>This time we will use the <code class="docutils literal notranslate"><span class="pre">censored::time_to_million</span></code> dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">time_to_million</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 49</caption>
+<thead>
+	<tr><th scope=col>title</th><th scope=col>time</th><th scope=col>event</th><th scope=col>released</th><th scope=col>released_theaters</th><th scope=col>distributor</th><th scope=col>year</th><th scope=col>rated</th><th scope=col>runtime</th><th scope=col>action</th><th scope=col>⋯</th><th scope=col>mandarin</th><th scope=col>usa</th><th scope=col>india</th><th scope=col>mexico</th><th scope=col>uk</th><th scope=col>france</th><th scope=col>china</th><th scope=col>canada</th><th scope=col>japan</th><th scope=col>australia</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;date&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>⋯</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>10 Cloverfield Lane</td><td> 0.111342778318533</td><td>1</td><td>2016-03-11</td><td>3427</td><td>paramount_pi  </td><td>2016</td><td>pg_13</td><td>103</td><td>1</td><td>⋯</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><td>102 Not Out        </td><td>10.654971015124438</td><td>1</td><td>2018-05-04</td><td> 102</td><td>sony_pictures </td><td>2018</td><td>pg   </td><td>102</td><td>0</td><td>⋯</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><td>12 Strong          </td><td> 0.176278921201207</td><td>1</td><td>2018-01-19</td><td>3018</td><td>warner_bros   </td><td>2018</td><td>r    </td><td>130</td><td>1</td><td>⋯</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><td>3 idiotas          </td><td> 9.406626540687972</td><td>1</td><td>2017-06-02</td><td> 349</td><td>lionsgate     </td><td>2017</td><td>pg_13</td><td>106</td><td>0</td><td>⋯</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><td>47 Meters Down     </td><td> 0.228973007974901</td><td>1</td><td>2017-06-16</td><td>2471</td><td>entertainmen  </td><td>2017</td><td>pg_13</td><td> 89</td><td>0</td><td>⋯</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><td>7 Days in Entebbe  </td><td> 1.713170877091160</td><td>1</td><td>2018-03-16</td><td> 838</td><td>focus_features</td><td>2018</td><td>pg_13</td><td>107</td><td>1</td><td>⋯</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
+<span class="w">    </span><span class="c1"># remove rows with missing data</span>
+<span class="w">    </span><span class="nf">na.omit</span><span class="p">(</span><span class="n">time_to_million</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">    </span><span class="c1"># the surv variable will be our outcome</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">surv</span><span class="o">=</span><span class="nf">Surv</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">))</span><span class="w"> </span>
+<span class="nf">dim</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>551</li><li>50</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># separate 20% of the dataset for testing the models later</span>
+<span class="n">data_split</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">initial_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">strata</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a recipe, to prepare the data for fitting</span>
+<span class="n">rec</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">recipe</span><span class="p">(</span><span class="n">surv</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="c1"># remove uneeded variables</span>
+<span class="w">    </span><span class="nf">step_rm</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">released</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">    </span><span class="c1"># convert factors to integers</span>
+<span class="w">    </span><span class="nf">step_integer</span><span class="p">(</span><span class="nf">all_nominal_predictors</span><span class="p">())</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="c1"># remove variables with zero variance</span>
+<span class="w">    </span><span class="nf">step_zv</span><span class="p">(</span><span class="nf">all_predictors</span><span class="p">())</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="c1"># center and scale all numeric variables</span>
+<span class="w">    </span><span class="nf">step_normalize</span><span class="p">(</span><span class="nf">all_numeric_predictors</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="model-definitions">
+<h1>Model definitions<a class="headerlink" href="#model-definitions" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">models</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<span class="w">    </span><span class="n">cox_ph_survival</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">proportional_hazards</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="s">&#39;survival&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">cox_ph_glmnet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">proportional_hazards</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="nf">tune</span><span class="p">(),</span><span class="w"> </span><span class="n">mixture</span><span class="o">=</span><span class="nf">tune</span><span class="p">(),</span><span class="w"> </span><span class="n">engine</span><span class="o">=</span><span class="s">&#39;glmnet&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">survreg_flexsurv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">survival_reg</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="s">&#39;flexsurv&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">rand_forest_partykit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rand_forest</span><span class="p">(</span><span class="n">trees</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">tune</span><span class="p">(),</span><span class="w"> </span><span class="n">engine</span><span class="o">=</span><span class="s">&#39;partykit&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">rand_forest_aorsf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rand_forest</span><span class="p">(</span><span class="n">trees</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">tune</span><span class="p">(),</span><span class="w"> </span><span class="n">engine</span><span class="o">=</span><span class="s">&#39;aorsf&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">decision_tree_partykit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">decision_tree</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="s">&#39;partykit&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">boost_tree_mboost</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">boost_tree</span><span class="p">(</span><span class="n">trees</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">tune</span><span class="p">(),</span><span class="w"> </span><span class="n">engine</span><span class="o">=</span><span class="s">&#39;mboost&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">map</span><span class="p">(</span><span class="o">~</span><span class="nf">set_mode</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="s">&#39;censored regression&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">wsets</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">workflow_set</span><span class="p">(</span>
+<span class="w">    </span><span class="n">preproc</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">rec</span><span class="p">),</span>
+<span class="w">    </span><span class="n">models</span><span class="o">=</span><span class="n">models</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="model-fitting">
+<h1>Model fitting<a class="headerlink" href="#model-fitting" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 5-fold cross-validation resampling for the tunning and comparisons</span>
+<span class="n">folds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">vfold_cv</span><span class="p">(</span><span class="nf">training</span><span class="p">(</span><span class="n">data_split</span><span class="p">),</span><span class="w"> </span><span class="n">v</span><span class="o">=</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">strata</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Some metrics are only evaluated at specific time points, for example,</p>
+<p>you might be interested in a model that can predict 1-year survival of cancer patients undergoing a treatment,</p>
+<p>so its always important to consider the question you want to answer.</p>
+<p>Here we will partition the time points with quantiles, but we could have used equally spaced time points instead, depends on your data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">eval_time_points</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">    </span><span class="nf">with</span><span class="p">(</span><span class="nf">training</span><span class="p">(</span><span class="n">data_split</span><span class="p">),</span><span class="w"> </span>
+<span class="w">         </span><span class="nf">quantile</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="o">=</span><span class="nf">seq</span><span class="p">(</span><span class="m">0.01</span><span class="p">,</span><span class="w"> </span><span class="m">0.99</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">))</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="n">eval_time_points</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.dl-inline {width: auto; margin:0; padding: 0}
+.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
+.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
+.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
+</style><dl class=dl-inline><dt>1%</dt><dd>0.0151560308243856</dd><dt>6.157895%</dt><dd>0.0424028085643098</dd><dt>11.31579%</dt><dd>0.0654215224706485</dd><dt>16.47368%</dt><dd>0.0910562799996761</dd><dt>21.63158%</dt><dd>0.10910910525672</dd><dt>26.78947%</dt><dd>0.140891877015565</dd><dt>31.94737%</dt><dd>0.172892207960269</dd><dt>37.10526%</dt><dd>0.200354610941643</dd><dt>42.26316%</dt><dd>0.233666944396109</dd><dt>47.42105%</dt><dd>0.264861003383604</dd><dt>52.57895%</dt><dd>0.333096401335164</dd><dt>57.73684%</dt><dd>0.429883980992403</dd><dt>62.89474%</dt><dd>0.597292977256363</dd><dt>68.05263%</dt><dd>0.738947868445357</dd><dt>73.21053%</dt><dd>1.14859426585908</dd><dt>78.36842%</dt><dd>1.72592274879734</dd><dt>83.52632%</dt><dd>2.62600273701295</dd><dt>88.68421%</dt><dd>7.18309059689147</dd><dt>93.84211%</dt><dd>10.7500402599578</dd><dt>99%</dt><dd>42</dd></dl>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">workflow_map</span><span class="p">(</span>
+<span class="w">    </span><span class="n">wsets</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;tune_grid&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">42</span><span class="p">,</span>
+<span class="w">    </span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span>
+<span class="w">    </span><span class="n">resamples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">folds</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># these metrics will be calculated for each fit</span>
+<span class="w">    </span><span class="n">metrics</span><span class="o">=</span><span class="nf">metric_set</span><span class="p">(</span><span class="n">brier_survival_integrated</span><span class="p">,</span><span class="w"> </span><span class="n">brier_survival</span><span class="p">,</span><span class="w"> </span><span class="n">roc_auc_survival</span><span class="p">,</span><span class="w"> </span><span class="n">concordance_survival</span><span class="p">),</span>
+<span class="w">    </span><span class="c1"># some metrics are evaluated at specific time points</span>
+<span class="w">    </span><span class="n">eval_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eval_time_points</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tune_metrics</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">collect_metrics</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This time we added more metrics to evaluate, each metric is calculated differently,
+its important to understand how each of these metrics work and what you want to predict in order to choose the best metric for your data:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://yardstick.tidymodels.org/reference/roc_auc_survival.html">roc_auc</a>: measures the area under the ROC curve for each of the chosen time points</p></li>
+<li><p><a class="reference external" href="https://yardstick.tidymodels.org/reference/brier_survival.html">brier_score</a>: mean squared error for each time points, lower is better.</p></li>
+<li><p><a class="reference external" href="https://yardstick.tidymodels.org/reference/concordance_survival.html">concordance index</a>: measures if the time predictions are concordant (events are ordered correctly)</p></li>
+<li><p><a class="reference external" href="https://yardstick.tidymodels.org/reference/brier_survival_integrated.html">integrated brier</a>: summary of the brier score over all given time points, lower is better.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tune_metrics</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">.eval_time</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">group_by</span><span class="p">(</span><span class="n">.metric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">group_map</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nf">factor</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">.eval_time</span><span class="p">,</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">paste</span><span class="p">(</span><span class="n">wflow_id</span><span class="p">,</span><span class="w"> </span><span class="n">.config</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">mean</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_tile</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">scale_fill_viridis_c</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="s">&#39;turbo&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="s">&#39;eval_time (days)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="p">})</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1]]
+
+[[2]]
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/90899b568ce3d448abbbcebab4daa5973b7a702b96a61f9d66f5c9cd3d41020e.png"><img alt="../../_images/90899b568ce3d448abbbcebab4daa5973b7a702b96a61f9d66f5c9cd3d41020e.png" src="../../_images/90899b568ce3d448abbbcebab4daa5973b7a702b96a61f9d66f5c9cd3d41020e.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/8e54fec97444a9393bade52a5154c0574e56d532bc8172ddd993ff82155aa935.png"><img alt="../../_images/8e54fec97444a9393bade52a5154c0574e56d532bc8172ddd993ff82155aa935.png" src="../../_images/8e54fec97444a9393bade52a5154c0574e56d532bc8172ddd993ff82155aa935.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tune_metrics</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">.eval_time</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">arrange</span><span class="p">(</span><span class="n">.metric</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">wflow_id</span><span class="p">,</span><span class="w"> </span><span class="n">.config</span><span class="p">),</span><span class="w"> </span><span class="n">mean</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">mean</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_pointrange</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="n">mean</span><span class="o">-</span><span class="n">std_err</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="o">=</span><span class="n">mean</span><span class="o">+</span><span class="n">std_err</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">.metric</span><span class="p">,</span><span class="w"> </span><span class="n">scales</span><span class="o">=</span><span class="s">&#39;free_x&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/f8382b30e926d15448f3015a83c7d1e16fb0830b4266452322379ad3dc27a683.png"><img alt="../../_images/f8382b30e926d15448f3015a83c7d1e16fb0830b4266452322379ad3dc27a683.png" src="../../_images/f8382b30e926d15448f3015a83c7d1e16fb0830b4266452322379ad3dc27a683.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<p>Note that, the model with lowest integrated brier might not necessarly be the same as the model with highest concordance.</p>
+<p>Again, its important to understand the difference between these metrics to decide which metric is better to optimize.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="fit-the-best-models-with-all-the-training-data">
+<h1>Fit the best models with all the training data<a class="headerlink" href="#fit-the-best-models-with-all-the-training-data" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">final_fits</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
+<span class="w">    </span><span class="c1"># map across each model in the table above</span>
+<span class="w">    </span><span class="nf">set_names</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">tune_metrics</span><span class="o">$</span><span class="n">wflow_id</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">future_map</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="n">wi</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1"># select the best model config, in case of tunnable parameters</span>
+<span class="w">        </span><span class="n">bwr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">extract_workflow_set_result</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">wi</span><span class="p">)</span>
+<span class="w">        </span><span class="n">best_params</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">select_best</span><span class="p">(</span><span class="n">bwr</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="o">=</span><span class="s">&#39;concordance_survival&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">bw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">finalize_workflow</span><span class="p">(</span>
+<span class="w">            </span><span class="nf">extract_workflow</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">wi</span><span class="p">),</span><span class="w"> </span>
+<span class="w">            </span><span class="n">best_params</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="c1"># re-fit the best config with the initial 80% train / 20% test</span>
+<span class="w">        </span><span class="n">fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">last_fit</span><span class="p">(</span>
+<span class="w">            </span><span class="n">bw</span><span class="p">,</span>
+<span class="w">            </span><span class="n">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data_split</span><span class="p">,</span>
+<span class="w">            </span><span class="n">metrics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">metric_set</span><span class="p">(</span><span class="n">brier_survival_integrated</span><span class="p">,</span><span class="w"> </span><span class="n">brier_survival</span><span class="p">,</span><span class="w"> </span><span class="n">roc_auc_survival</span><span class="p">,</span><span class="w"> </span><span class="n">concordance_survival</span><span class="p">),</span>
+<span class="w">            </span><span class="n">eval_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eval_time_points</span>
+<span class="w">        </span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">metrics</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">collect_metrics</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">mutate</span><span class="p">(</span><span class="n">wflow_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wi</span><span class="p">,</span><span class="w"> </span><span class="n">.config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">best_params</span><span class="o">$</span><span class="n">.config</span><span class="p">)</span>
+
+<span class="w">        </span><span class="nf">list</span><span class="p">(</span><span class="n">fit</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">fit</span><span class="p">),</span><span class="w"> </span><span class="n">metrics</span><span class="o">=</span><span class="n">metrics</span><span class="p">)</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="n">.options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">furrr_options</span><span class="p">(</span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">list_transpose</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">list_rbind</span><span class="p">(</span><span class="n">final_fits</span><span class="o">$</span><span class="n">metrics</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">inner_join</span><span class="p">(</span><span class="n">tune_metrics</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">.eval_time</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">wflow_id</span><span class="p">,</span><span class="n">mean</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">mean</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">.estimate</span><span class="p">),</span><span class="w"> </span><span class="n">shape</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">stroke</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;darkred&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_pointrange</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="n">mean</span><span class="o">-</span><span class="n">std_err</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="o">=</span><span class="n">mean</span><span class="o">+</span><span class="n">std_err</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;estimate&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="s">&#39;models&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">.metric</span><span class="p">,</span><span class="w"> </span><span class="n">scales</span><span class="o">=</span><span class="s">&#39;free_x&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Joining with `by = join_by(.metric, .estimator, .eval_time, .config, wflow_id)`
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/4941f8814a75404f7b41595e1e6d1c52fa4571d9a824b0c93b2d5cbcfbcd9a74.png"><img alt="../../_images/4941f8814a75404f7b41595e1e6d1c52fa4571d9a824b0c93b2d5cbcfbcd9a74.png" src="../../_images/4941f8814a75404f7b41595e1e6d1c52fa4571d9a824b0c93b2d5cbcfbcd9a74.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">list_rbind</span><span class="p">(</span><span class="n">final_fits</span><span class="o">$</span><span class="n">metrics</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">inner_join</span><span class="p">(</span><span class="n">tune_metrics</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">.eval_time</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">group_by</span><span class="p">(</span><span class="n">.metric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">group_map</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nf">factor</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">.eval_time</span><span class="p">,</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">paste</span><span class="p">(</span><span class="n">wflow_id</span><span class="p">,</span><span class="w"> </span><span class="n">.config</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">.estimate</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_tile</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">scale_fill_viridis_c</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="s">&#39;turbo&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="s">&#39;eval_time (days)&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="p">})</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Joining with `by = join_by(.metric, .estimator, .eval_time, .config, wflow_id)`
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1]]
+
+[[2]]
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/a3e515caa5da302d4f14934fb9a0cf03f0415e3a3a3b3a250d40e847957e11c5.png"><img alt="../../_images/a3e515caa5da302d4f14934fb9a0cf03f0415e3a3a3b3a250d40e847957e11c5.png" src="../../_images/a3e515caa5da302d4f14934fb9a0cf03f0415e3a3a3b3a250d40e847957e11c5.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/6eddb705567c076a927554737ea6bf07ffb5eb455c19b8a0ad3ac79ce58c5aa6.png"><img alt="../../_images/6eddb705567c076a927554737ea6bf07ffb5eb455c19b8a0ad3ac79ce58c5aa6.png" src="../../_images/6eddb705567c076a927554737ea6bf07ffb5eb455c19b8a0ad3ac79ce58c5aa6.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="variable-importance">
+<h1>Variable Importance<a class="headerlink" href="#variable-importance" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">names</span><span class="p">(</span><span class="n">final_fits</span><span class="o">$</span><span class="n">fit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'recipe_cox_ph_survival'</li><li>'recipe_cox_ph_glmnet'</li><li>'recipe_survreg_flexsurv'</li><li>'recipe_rand_forest_partykit'</li><li>'recipe_rand_forest_aorsf'</li><li>'recipe_decision_tree_partykit'</li><li>'recipe_boost_tree_mboost'</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">final_fits</span><span class="o">$</span><span class="n">fit</span><span class="p">[[</span><span class="s">&#39;recipe_cox_ph_glmnet&#39;</span><span class="p">]]</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">extract_spec_parsnip</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proportional Hazards Model Specification (censored regression)
+
+Main Arguments:
+  penalty = 0.0238338401768485
+  mixture = 0.843754897918552
+
+Computational engine: glmnet 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">final_fits</span><span class="o">$</span><span class="n">fit</span><span class="p">[[</span><span class="s">&#39;recipe_cox_ph_glmnet&#39;</span><span class="p">]]</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">extract_fit_engine</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">tidy</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.0238338401768485</span><span class="p">)</span><span class="o">&lt;</span><span class="m">0.001</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">exp.estimate</span><span class="o">=</span><span class="nf">exp</span><span class="p">(</span><span class="n">estimate</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">exp.estimate</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">term</span><span class="p">,</span><span class="w"> </span><span class="n">estimate</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;darkgray&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="o">=</span><span class="m">18</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_x_sqrt</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;hazard ratio at lambda.min&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="s">&#39;variable&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/f742ea77dc825a006f86468f0f905790048f59e89b9ff8f43c758070a9a2c714.png"><img alt="../../_images/f742ea77dc825a006f86468f0f905790048f59e89b9ff8f43c758070a9a2c714.png" src="../../_images/f742ea77dc825a006f86468f0f905790048f59e89b9ff8f43c758070a9a2c714.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">final_fits</span><span class="o">$</span><span class="n">fit</span><span class="p">[[</span><span class="s">&#39;recipe_boost_tree_mboost&#39;</span><span class="p">]]</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">extract_spec_parsnip</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Boosted Tree Model Specification (censored regression)
+
+Main Arguments:
+  trees = 94
+
+Computational engine: mboost 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mboost_obj</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="n">final_fits</span><span class="o">$</span><span class="n">fit</span><span class="p">[[</span><span class="s">&#39;recipe_boost_tree_mboost&#39;</span><span class="p">]]</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">extract_fit_parsnip</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">prec</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="n">final_fits</span><span class="o">$</span><span class="n">fit</span><span class="p">[[</span><span class="s">&#39;recipe_boost_tree_mboost&#39;</span><span class="p">]]</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">extract_recipe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="nf">bake</span><span class="p">(</span><span class="n">prec</span><span class="p">,</span><span class="n">new_data</span><span class="o">=</span><span class="nf">training</span><span class="p">(</span><span class="n">data_split</span><span class="p">),</span><span class="w"> </span><span class="nf">all_predictors</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">doFuture</span><span class="p">)</span>
+<span class="nf">registerDoFuture</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">shap.vals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fastshap</span><span class="o">::</span><span class="nf">explain</span><span class="p">(</span><span class="n">mboost_obj</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span><span class="m">100</span><span class="p">),</span><span class="w"> </span><span class="n">nsim</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">pred_wrapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">newdata</span><span class="p">)</span><span class="w"> </span><span class="nf">pull</span><span class="p">(</span><span class="nf">predict</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">new_data</span><span class="o">=</span><span class="n">newdata</span><span class="p">),</span><span class="n">.pred_time</span><span class="p">),</span><span class="w"> </span><span class="n">shap_only</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">parallel</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;UNRELIABLE VALUE: One of the foreach() iterations (&#39;doFuture-1&#39;) unexpectedly generated random numbers without declaring so. There is a risk that those random numbers are not statistically sound and the overall results might be invalid. To fix this, use &#39;%dorng%&#39; from the &#39;doRNG&#39; package instead of &#39;%dopar%&#39;. This ensures that proper, parallel-safe random numbers are produced via the L&#39;Ecuyer-CMRG method. To disable this check, set option &#39;doFuture.rng.onMisuse&#39; to &quot;ignore&quot;.&quot;
+Warning message:
+&quot;UNRELIABLE VALUE: One of the foreach() iterations (&#39;doFuture-2&#39;) unexpectedly generated random numbers without declaring so. There is a risk that those random numbers are not statistically sound and the overall results might be invalid. To fix this, use &#39;%dorng%&#39; from the &#39;doRNG&#39; package instead of &#39;%dopar%&#39;. This ensures that proper, parallel-safe random numbers are produced via the L&#39;Ecuyer-CMRG method. To disable this check, set option &#39;doFuture.rng.onMisuse&#39; to &quot;ignore&quot;.&quot;
+Warning message:
+&quot;UNRELIABLE VALUE: One of the foreach() iterations (&#39;doFuture-3&#39;) unexpectedly generated random numbers without declaring so. There is a risk that those random numbers are not statistically sound and the overall results might be invalid. To fix this, use &#39;%dorng%&#39; from the &#39;doRNG&#39; package instead of &#39;%dopar%&#39;. This ensures that proper, parallel-safe random numbers are produced via the L&#39;Ecuyer-CMRG method. To disable this check, set option &#39;doFuture.rng.onMisuse&#39; to &quot;ignore&quot;.&quot;
+Warning message:
+&quot;UNRELIABLE VALUE: One of the foreach() iterations (&#39;doFuture-4&#39;) unexpectedly generated random numbers without declaring so. There is a risk that those random numbers are not statistically sound and the overall results might be invalid. To fix this, use &#39;%dorng%&#39; from the &#39;doRNG&#39; package instead of &#39;%dopar%&#39;. This ensures that proper, parallel-safe random numbers are produced via the L&#39;Ecuyer-CMRG method. To disable this check, set option &#39;doFuture.rng.onMisuse&#39; to &quot;ignore&quot;.&quot;
+Warning message:
+&quot;UNRELIABLE VALUE: One of the foreach() iterations (&#39;doFuture-5&#39;) unexpectedly generated random numbers without declaring so. There is a risk that those random numbers are not statistically sound and the overall results might be invalid. To fix this, use &#39;%dorng%&#39; from the &#39;doRNG&#39; package instead of &#39;%dopar%&#39;. This ensures that proper, parallel-safe random numbers are produced via the L&#39;Ecuyer-CMRG method. To disable this check, set option &#39;doFuture.rng.onMisuse&#39; to &quot;ignore&quot;.&quot;
+Warning message:
+&quot;UNRELIABLE VALUE: One of the foreach() iterations (&#39;doFuture-6&#39;) unexpectedly generated random numbers without declaring so. There is a risk that those random numbers are not statistically sound and the overall results might be invalid. To fix this, use &#39;%dorng%&#39; from the &#39;doRNG&#39; package instead of &#39;%dopar%&#39;. This ensures that proper, parallel-safe random numbers are produced via the L&#39;Ecuyer-CMRG method. To disable this check, set option &#39;doFuture.rng.onMisuse&#39; to &quot;ignore&quot;.&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">sv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">shapviz</span><span class="p">(</span><span class="n">shap.vals</span><span class="p">)</span>
+<span class="nf">sv_importance</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;beeswarm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/07d24dbb3bf999e830fa14260be9720e8c5952de1a7c67f4d9dfa2215682e437.png"><img alt="../../_images/07d24dbb3bf999e830fa14260be9720e8c5952de1a7c67f4d9dfa2215682e437.png" src="../../_images/07d24dbb3bf999e830fa14260be9720e8c5952de1a7c67f4d9dfa2215682e437.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="futher-reading">
+<h1>Futher reading<a class="headerlink" href="#futher-reading" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.tidymodels.org/learn/statistics/survival-metrics-details/">Accounting for Censoring in Performance Metrics for Event Time Data</a></p></li>
+<li><p><a class="reference external" href="https://www.tidymodels.org/learn/statistics/survival-metrics/">Dynamic Performance Metrics for Event Time Data</a></p></li>
+<li><p><a class="reference external" href="https://www.tidymodels.org/learn/statistics/survival-case-study/">A survival analysis case study</a></p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./src/methods"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tidy_survival_part1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Comparing survival prediction models with tidymodels</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../fun/dragon_curve.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Dragon Curve</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Comparing survival prediction models with tidymodels, part 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-preprocessing">Dataset preprocessing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definitions">Model definitions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-fitting">Model fitting</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-best-models-with-all-the-training-data">Fit the best models with all the training data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-importance">Variable Importance</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#futher-reading">Futher reading</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By rvalieris
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

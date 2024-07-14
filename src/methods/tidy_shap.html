@@ -1,0 +1,942 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tidy SHAP &#8212; notebooks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=8bd22a0a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/methods/tidy_shap';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Comparing survival prediction models with tidymodels" href="tidy_survival_part1.html" />
+    <link rel="prev" title="Practical Guide to PCA visualization in R" href="pca-visualization-in-r.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">notebooks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    notebooks
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">ggplot2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/clustered_heatmap.html">Clustered Heatmap</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/color_palettes.html">Color Palettes</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/colors2d.html">2D Color Palette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_1D.html">Density 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_2D.html">Density 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/plot_composition.html">Composing multiple plots in a single page</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/scale_transforms.html">Scale Transforms</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data-analysis/crinacle.html">Crinacle IEMs Ranking</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../data-analysis/mahjong-yaku-stats.html">Mahjong Yaku stats</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="glmnet_cox.html">Regularized Cox Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-python.html">Practical Guide to PCA visualization in Python</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-r.html">Practical Guide to PCA visualization in R</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tidy SHAP</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tidy_survival_part1.html">Comparing survival prediction models with tidymodels</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tidy_survival_part2.html">Comparing survival prediction models with tidymodels, part 2</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fun</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fun/dragon_curve.html">Dragon Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/mandelbrot.html">Mandelbrot Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/star.html">Drawing star polygons with ggplot2</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/rvalieris/notebooks" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tidy SHAP</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tidy SHAP</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-model">Training a model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sample">data sample</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-to-collapse">variables to collapse</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#shapviz">shapviz</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">tidy shap</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">example</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidymodels</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">shapviz</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">visdat</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggbeeswarm</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nf">theme_set</span><span class="p">(</span><span class="nf">theme_cowplot</span><span class="p">())</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="o">=</span><span class="m">9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="tidy-shap">
+<h1>Tidy SHAP<a class="headerlink" href="#tidy-shap" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dataset">
+<h1>dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">data</span><span class="p">(</span><span class="n">credit_data</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="o">=</span><span class="s">&#39;modeldata&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">vis_dat</span><span class="p">(</span><span class="n">credit_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/b4b5ead2bd3327ef44426e06d21b518d19eea772aa9ed627420c472505d21a7a.png"><img alt="../../_images/b4b5ead2bd3327ef44426e06d21b518d19eea772aa9ed627420c472505d21a7a.png" src="../../_images/b4b5ead2bd3327ef44426e06d21b518d19eea772aa9ed627420c472505d21a7a.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="training-a-model">
+<h1>Training a model<a class="headerlink" href="#training-a-model" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
+<span class="n">split</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">initial_split</span><span class="p">(</span><span class="n">credit_data</span><span class="p">,</span><span class="w"> </span><span class="n">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.85</span><span class="p">,</span><span class="w">  </span><span class="n">strata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Status&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">recipe</span><span class="p">(</span><span class="n">Status</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">credit_data</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">step_normalize</span><span class="p">(</span><span class="nf">all_numeric_predictors</span><span class="p">())</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">step_unknown</span><span class="p">(</span><span class="n">Home</span><span class="p">,</span><span class="w"> </span><span class="n">Marital</span><span class="p">,</span><span class="w"> </span><span class="n">Records</span><span class="p">,</span><span class="w"> </span><span class="n">Job</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">step_dummy</span><span class="p">(</span><span class="n">Home</span><span class="p">,</span><span class="w"> </span><span class="n">Marital</span><span class="p">,</span><span class="w"> </span><span class="n">Records</span><span class="p">,</span><span class="w"> </span><span class="n">Job</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">step_zv</span><span class="p">(</span><span class="nf">all_predictors</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">cv_folds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">vfold_cv</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">training</span><span class="p">(</span><span class="n">split</span><span class="p">),</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">strata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Status&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">specification</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">boost_tree</span><span class="p">(</span>
+<span class="w">    </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;classification&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">tree_depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">tune</span><span class="p">(),</span><span class="w"> </span>
+<span class="w">    </span><span class="n">trees</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000</span><span class="p">,</span>
+<span class="w">    </span><span class="n">learn_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">tune</span><span class="p">(),</span><span class="w"> </span>
+<span class="w">    </span><span class="n">stop_iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">  </span><span class="nf">set_engine</span><span class="p">(</span><span class="s">&quot;xgboost&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nthread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">validation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_xgb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">workflow</span><span class="p">(</span><span class="n">preprocessor</span><span class="p">,</span><span class="w"> </span><span class="n">spec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">specification</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tuned</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tune_grid</span><span class="p">(</span>
+<span class="w">  </span><span class="n">workflow_xgb</span><span class="p">,</span>
+<span class="w">  </span><span class="n">resamples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cv_folds</span><span class="p">,</span>
+<span class="w">  </span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span>
+<span class="w">  </span><span class="n">metrics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">metric_set</span><span class="p">(</span><span class="n">mn_log_loss</span><span class="p">,</span><span class="w"> </span><span class="n">f_meas</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">collect_metrics</span><span class="p">(</span><span class="n">tuned</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;wide&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">arrange</span><span class="p">(</span><span class="n">mn_log_loss</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 5 × 5</caption>
+<thead>
+	<tr><th scope=col>tree_depth</th><th scope=col>learn_rate</th><th scope=col>.config</th><th scope=col>f_meas</th><th scope=col>mn_log_loss</th></tr>
+	<tr><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td> 3</td><td>0.08413419287830973</td><td>Preprocessor1_Model5</td><td>0.560753883054362</td><td>0.444741784984840</td></tr>
+	<tr><td> 5</td><td>0.00695062967853119</td><td>Preprocessor1_Model1</td><td>0.551113979932108</td><td>0.452879972073735</td></tr>
+	<tr><td> 7</td><td>0.11538321932545109</td><td>Preprocessor1_Model3</td><td>0.544838835525952</td><td>0.468485037392955</td></tr>
+	<tr><td>12</td><td>0.01063844696987032</td><td>Preprocessor1_Model4</td><td>0.544458685833135</td><td>0.479742427225425</td></tr>
+	<tr><td>11</td><td>0.00175779515778061</td><td>Preprocessor1_Model2</td><td>0.521459289598558</td><td>0.483887478575420</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">best_fit</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">    </span><span class="n">workflow_xgb</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">finalize_workflow</span><span class="p">(</span><span class="nf">select_best</span><span class="p">(</span><span class="n">tuned</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mn_log_loss&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">last_fit</span><span class="p">(</span>
+<span class="w">        </span><span class="n">split</span><span class="p">,</span>
+<span class="w">        </span><span class="n">metrics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">metric_set</span><span class="p">(</span><span class="n">accuracy</span><span class="p">,</span><span class="w"> </span><span class="n">f_meas</span><span class="p">,</span><span class="w"> </span><span class="n">roc_auc</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">collect_metrics</span><span class="p">(</span><span class="n">best_fit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 4</caption>
+<thead>
+	<tr><th scope=col>.metric</th><th scope=col>.estimator</th><th scope=col>.estimate</th><th scope=col>.config</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>accuracy</td><td>binary</td><td>0.816143497757848</td><td>Preprocessor1_Model1</td></tr>
+	<tr><td>f_meas  </td><td>binary</td><td>0.599348534201954</td><td>Preprocessor1_Model1</td></tr>
+	<tr><td>roc_auc </td><td>binary</td><td>0.872894620811287</td><td>Preprocessor1_Model1</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-sample">
+<h1>data sample<a class="headerlink" href="#data-sample" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
+<span class="n">small</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample_n</span><span class="p">(</span><span class="nf">training</span><span class="p">(</span><span class="n">split</span><span class="p">),</span><span class="w"> </span><span class="m">1e3</span><span class="p">)</span>
+<span class="n">small_prep</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">extract_recipe</span><span class="p">(</span><span class="n">best_fit</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">bake</span><span class="p">(</span><span class="n">new_data</span><span class="o">=</span><span class="n">small</span><span class="p">,</span><span class="w"> </span><span class="nf">all_predictors</span><span class="p">(),</span><span class="w"> </span><span class="n">composition</span><span class="o">=</span><span class="s">&#39;matrix&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="variables-to-collapse">
+<h1>variables to collapse<a class="headerlink" href="#variables-to-collapse" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colnames</span><span class="p">(</span><span class="n">small_prep</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">keep</span><span class="p">(</span><span class="o">~</span><span class="w"> </span><span class="nf">str_detect</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="s">&quot;_&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">as_tibble</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span>
+<span class="w">    </span><span class="n">name</span><span class="o">=</span><span class="nf">str_extract</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;^(.+?)_&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">summarize</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="n">.by</span><span class="o">=</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">deframe</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">collapse_vec</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">collapse_vec</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><dl>
+	<dt>$Home</dt>
+		<dd><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'Home_other'</li><li>'Home_owner'</li><li>'Home_parents'</li><li>'Home_priv'</li><li>'Home_rent'</li><li>'Home_unknown'</li></ol>
+</dd>
+	<dt>$Marital</dt>
+		<dd><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'Marital_married'</li><li>'Marital_separated'</li><li>'Marital_single'</li><li>'Marital_widow'</li><li>'Marital_unknown'</li></ol>
+</dd>
+	<dt>$Records</dt>
+		<dd>'Records_yes'</dd>
+	<dt>$Job</dt>
+		<dd><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'Job_freelance'</li><li>'Job_others'</li><li>'Job_partime'</li><li>'Job_unknown'</li></ol>
+</dd>
+</dl>
+</div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="shapviz">
+<h1>shapviz<a class="headerlink" href="#shapviz" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
+<span class="n">shapviz.sv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">shapviz</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">extract_fit_engine</span><span class="p">(</span><span class="n">best_fit</span><span class="p">),</span>
+<span class="w">    </span><span class="n">X_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">small_prep</span><span class="p">,</span>
+<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">small</span><span class="p">,</span>
+<span class="w">    </span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collapse_vec</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sv_importance</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">show_numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">max_display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
+<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sv_importance</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;beeswarm&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">max_display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
+<span class="nf">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/c8c6b9c14119c8d0e02c6e4e5c67b6ddb2fb8f6427f5d996d624e66ca4bb4ff7.png"><img alt="../../_images/c8c6b9c14119c8d0e02c6e4e5c67b6ddb2fb8f6427f5d996d624e66ca4bb4ff7.png" src="../../_images/c8c6b9c14119c8d0e02c6e4e5c67b6ddb2fb8f6427f5d996d624e66ca4bb4ff7.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sv_waterfall</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">row_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/feecef16d9e3fd588b133fe5c9e7924e98d099495950b4e372b31f472762f0b9.png"><img alt="../../_images/feecef16d9e3fd588b133fe5c9e7924e98d099495950b4e372b31f472762f0b9.png" src="../../_images/feecef16d9e3fd588b133fe5c9e7924e98d099495950b4e372b31f472762f0b9.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>tidy shap<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tidy_shap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">shapviz.obj</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">transform_values</span><span class="o">=</span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">imp</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">        </span><span class="n">shapviz</span><span class="o">::</span><span class="nf">sv_importance</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;no&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">enframe</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;var&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="s">&#39;importance&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">mutate</span><span class="p">(</span><span class="n">baseline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shapviz.obj</span><span class="o">$</span><span class="n">baseline</span><span class="p">)</span>
+<span class="w">    </span><span class="n">shap_vars</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">        </span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">shapviz.obj</span><span class="o">$</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">rownames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;row_index&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">pivot_longer</span><span class="p">(</span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;var&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;shap&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">row_index</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">inner_join</span><span class="p">(</span><span class="n">imp</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&#39;var&#39;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nf">if</span><span class="p">(</span><span class="o">!</span><span class="w"> </span><span class="n">include_values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nf">return</span><span class="p">(</span><span class="n">shap_vars</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">var_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="o">$</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">rownames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;row_index&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">if</span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">filter_values</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">var_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="n">var_values</span><span class="p">,</span><span class="w"> </span><span class="n">row_index</span><span class="p">,</span><span class="w"> </span><span class="nf">where</span><span class="p">(</span><span class="n">filter_values</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">var_values</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">pivot_longer</span><span class="p">(</span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;var&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;value&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_transform</span><span class="o">=</span><span class="n">transform_values</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">row_index</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">inner_join</span><span class="p">(</span><span class="n">shap_vars</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;row_index&#39;</span><span class="p">,</span><span class="s">&#39;var&#39;</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example">
+<h1>example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">sign</span><span class="o">=</span><span class="nf">factor</span><span class="p">(</span><span class="nf">sign</span><span class="p">(</span><span class="n">shap</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">summarize</span><span class="p">(</span>
+<span class="w">    </span><span class="n">importance</span><span class="o">=</span><span class="nf">first</span><span class="p">(</span><span class="n">importance</span><span class="p">),</span>
+<span class="w">    </span><span class="n">mean.abs.shap</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">shap</span><span class="p">)),</span>
+<span class="w">    </span><span class="n">.by</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="n">sign</span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="n">importance</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">mean.abs.shap</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">sign</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_col</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">importance</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="o">=</span><span class="s">&#39;dodge&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_col</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="s">&#39;dodge&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;mean abs shap&#39;</span><span class="p">)</span>
+
+<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">transform_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.numeric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">val.rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">percent_rank</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="n">.by</span><span class="o">=</span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="n">importance</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">shap</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">val.rank</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_quasirandom</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_color_viridis_c</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="s">&#39;inferno&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="o">=</span><span class="nf">percent_format</span><span class="p">())</span>
+
+<span class="nf">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Orientation inferred to be along y-axis; override with `position_quasirandom(orientation = &#39;x&#39;)`
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/feee3d8c75415488d9c6f43bac61c6e61552560cc84033f139aa0448e5073888.png"><img alt="../../_images/feee3d8c75415488d9c6f43bac61c6e61552560cc84033f139aa0448e5073888.png" src="../../_images/feee3d8c75415488d9c6f43bac61c6e61552560cc84033f139aa0448e5073888.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is.factor</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">var_order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">fct_reorder</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">importance</span><span class="p">,</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span><span class="n">importance</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">shap</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">shap</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_quasirandom</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">var_order</span><span class="p">,</span><span class="w"> </span><span class="n">scales</span><span class="o">=</span><span class="s">&#39;free_y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Orientation inferred to be along y-axis; override with `position_quasirandom(orientation = &#39;x&#39;)`
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/38d989c0433d152b96de9611b2e47c1844f602809e11910c908dd9f7575de5da.png"><img alt="../../_images/38d989c0433d152b96de9611b2e47c1844f602809e11910c908dd9f7575de5da.png" src="../../_images/38d989c0433d152b96de9611b2e47c1844f602809e11910c908dd9f7575de5da.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is.numeric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">var_order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">fct_reorder</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">importance</span><span class="p">,</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span><span class="n">importance</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">quant.val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">percent_rank</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="n">.by</span><span class="o">=</span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">quant.val</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">shap</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">var_order</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;Removed 107 rows containing missing values or values outside the scale range (`geom_point()`).&quot;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/b6e1dc6dbbe749844e116cf8061bd1eb722c3a4bf62aab8c3e55d8a0b16bd17b.png"><img alt="../../_images/b6e1dc6dbbe749844e116cf8061bd1eb722c3a4bf62aab8c3e55d8a0b16bd17b.png" src="../../_images/b6e1dc6dbbe749844e116cf8061bd1eb722c3a4bf62aab8c3e55d8a0b16bd17b.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is.numeric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="n">var</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;Amount&#39;</span><span class="p">,</span><span class="s">&#39;Income&#39;</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">pivot_wider</span><span class="p">(</span><span class="n">names_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="n">values_from</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">shap</span><span class="p">),</span><span class="w"> </span><span class="n">id_cols</span><span class="o">=</span><span class="n">row_index</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">rank_Income</span><span class="o">=</span><span class="nf">percent_rank</span><span class="p">(</span><span class="n">value_Income</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">value_Amount</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">shap_Amount</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">rank_Income</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;darkgray&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_x_log10</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_color_viridis_c</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="s">&#39;inferno&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/7dfcc2f4df3cb5440be23b1c8c2fcca27a97bbb84fa1580e8e7dd45adfaadee7.png"><img alt="../../_images/7dfcc2f4df3cb5440be23b1c8c2fcca27a97bbb84fa1580e8e7dd45adfaadee7.png" src="../../_images/7dfcc2f4df3cb5440be23b1c8c2fcca27a97bbb84fa1580e8e7dd45adfaadee7.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">transform_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.character</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="n">row_index</span><span class="o">==</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">arrange</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">shap</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">ts</span><span class="o">=</span><span class="n">baseline</span><span class="o">+</span><span class="nf">cumsum</span><span class="p">(</span><span class="n">shap</span><span class="p">),</span><span class="w"> </span><span class="n">nts</span><span class="o">=</span><span class="nf">replace_na</span><span class="p">(</span><span class="nf">lag</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span><span class="nf">first</span><span class="p">(</span><span class="n">baseline</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">var_label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">fct_reorder</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="s">&#39;=&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="nf">abs</span><span class="p">(</span><span class="n">shap</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">nts</span><span class="p">,</span><span class="w"> </span><span class="n">xend</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">var_label</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="nf">factor</span><span class="p">(</span><span class="nf">sign</span><span class="p">(</span><span class="n">shap</span><span class="p">))))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_segment</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">nts</span><span class="p">,</span><span class="w"> </span><span class="n">xend</span><span class="o">=</span><span class="n">nts</span><span class="p">,</span><span class="w"> </span><span class="n">yend</span><span class="o">=</span><span class="n">var_label</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">replace_na</span><span class="p">(</span><span class="nf">lag</span><span class="p">(</span><span class="n">var_label</span><span class="p">),</span><span class="nf">first</span><span class="p">(</span><span class="n">var_label</span><span class="p">))),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;darkgray&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_segment</span><span class="p">(</span><span class="n">arrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">arrow</span><span class="p">(</span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="m">0.03</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;npc&quot;</span><span class="p">)),</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;SHAP value&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;SHAP sign&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_label</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="nf">round</span><span class="p">(</span><span class="n">shap</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="n">nts</span><span class="o">+</span><span class="n">ts</span><span class="p">)</span><span class="o">/</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">hjust</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/54291fb1eabd828736e989998988f84666065e570b03baaa731ab39ee591cef9.png"><img alt="../../_images/54291fb1eabd828736e989998988f84666065e570b03baaa731ab39ee591cef9.png" src="../../_images/54291fb1eabd828736e989998988f84666065e570b03baaa731ab39ee591cef9.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./src/methods"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pca-visualization-in-r.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Practical Guide to PCA visualization in R</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tidy_survival_part1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Comparing survival prediction models with tidymodels</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tidy SHAP</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-model">Training a model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sample">data sample</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-to-collapse">variables to collapse</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#shapviz">shapviz</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">tidy shap</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">example</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By rvalieris
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

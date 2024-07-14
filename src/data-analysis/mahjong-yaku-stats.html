@@ -1,0 +1,931 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mahjong Yaku stats &#8212; notebooks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=8bd22a0a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/data-analysis/mahjong-yaku-stats';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Regularized Cox Regression" href="../methods/glmnet_cox.html" />
+    <link rel="prev" title="Crinacle IEMs Ranking" href="crinacle.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">notebooks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    notebooks
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">ggplot2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/clustered_heatmap.html">Clustered Heatmap</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/color_palettes.html">Color Palettes</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/colors2d.html">2D Color Palette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_1D.html">Density 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_2D.html">Density 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/plot_composition.html">Composing multiple plots in a single page</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/scale_transforms.html">Scale Transforms</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="crinacle.html">Crinacle IEMs Ranking</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mahjong Yaku stats</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../methods/glmnet_cox.html">Regularized Cox Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methods/pca-visualization-in-python.html">Practical Guide to PCA visualization in Python</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/pca-visualization-in-r.html">Practical Guide to PCA visualization in R</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_shap.html">Tidy SHAP</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part1.html">Comparing survival prediction models with tidymodels</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part2.html">Comparing survival prediction models with tidymodels, part 2</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fun</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fun/dragon_curve.html">Dragon Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/mandelbrot.html">Mandelbrot Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/star.html">Drawing star polygons with ggplot2</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/rvalieris/notebooks" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mahjong Yaku stats</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mahjong Yaku stats</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data">the data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#game-modes-popularity-over-time">game modes popularity over time</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#yaku-frequencies-vs-han-value">yaku frequencies vs. han value</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#yaku-frequencies-over-time">yaku frequencies over time</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#average-han-value-per-yaku">average han value per yaku</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-at-specific-yakus">looking at specific yakus</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#etc">etc</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggrepel</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">pheatmap</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">viridis</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">matrixStats</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nf">theme_set</span><span class="p">(</span><span class="nf">theme_cowplot</span><span class="p">())</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">15</span><span class="p">,</span><span class="n">repr.plot.height</span><span class="o">=</span><span class="m">9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="mahjong-yaku-stats">
+<h1>Mahjong Yaku stats<a class="headerlink" href="#mahjong-yaku-stats" title="Link to this heading">#</a></h1>
+<p>Analysis of yaku stats using <a class="reference external" href="https://tenhou.net/">Tenhou</a> winning hands data, downloaded in may 2023</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-data">
+<h1>the data<a class="headerlink" href="#the-data" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">read_tsv</span><span class="p">(</span><span class="s">&quot;data/data.tsv.gz&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">col_types</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">select</span><span class="p">(</span><span class="o">-</span><span class="n">hanp</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">chanp</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">rate</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="nf">complete</span><span class="p">(</span><span class="n">yaku</span><span class="p">,</span><span class="w"> </span><span class="nf">nesting</span><span class="p">(</span><span class="n">month</span><span class="p">,</span><span class="w"> </span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">room</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">count</span><span class="p">),</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="nf">as.Date</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="n">year</span><span class="p">,</span><span class="s">&#39;-&#39;</span><span class="p">,</span><span class="n">month</span><span class="p">,</span><span class="s">&#39;-01&#39;</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">inner_join</span><span class="p">(</span><span class="nf">read_tsv</span><span class="p">(</span><span class="s">&quot;data/rooms.tsv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">col_types</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&quot;room&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">inner_join</span><span class="p">(</span><span class="nf">read_tsv</span><span class="p">(</span><span class="s">&quot;data/yakus.tsv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">col_types</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&#39;yaku&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">inner_join</span><span class="p">(</span><span class="nf">read_tsv</span><span class="p">(</span><span class="s">&quot;data/modes.tsv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">col_types</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&#39;mode&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">yaku_romaji</span><span class="o">=</span><span class="nf">str_to_title</span><span class="p">(</span><span class="n">yaku_romaji</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">mutate</span><span class="p">(</span>
+<span class="w">    </span><span class="n">han_value_closed</span><span class="o">=</span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">        </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;yakuman&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">han_value_closed</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">str_to_title</span><span class="p">(</span><span class="n">han_value_closed</span><span class="p">),</span>
+<span class="w">        </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">han_value_closed</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Han&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">mutate</span><span class="p">(</span>
+<span class="w">    </span><span class="n">han_value_closed</span><span class="o">=</span><span class="nf">ordered</span><span class="p">(</span><span class="n">han_value_closed</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;1 Han&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2 Han&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;3 Han&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;6 Han&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Yakuman&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Double Yakuman&quot;</span><span class="p">))</span>
+<span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 16</caption>
+<thead>
+	<tr><th scope=col>yaku</th><th scope=col>month</th><th scope=col>year</th><th scope=col>room</th><th scope=col>mode</th><th scope=col>total</th><th scope=col>count</th><th scope=col>avg_yaku_han</th><th scope=col>avg_hand_han</th><th scope=col>date</th><th scope=col>room_romaji</th><th scope=col>yaku_romaji</th><th scope=col>han_value_closed</th><th scope=col>mode_romaji</th><th scope=col>n_players</th><th scope=col>n_rounds</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;date&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;ord&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>ドラ</td><td>1</td><td>2007</td><td>一般</td><td>三南喰赤</td><td>39157</td><td>30121</td><td>2.15</td><td>5.66</td><td>2007-01-01</td><td>ippan</td><td>Dora</td><td>1 Han</td><td>sanma hanchan kui-aka</td><td>3</td><td>6</td></tr>
+	<tr><td>ドラ</td><td>1</td><td>2007</td><td>一般</td><td>三東喰赤</td><td>11204</td><td> 8563</td><td>2.15</td><td>5.67</td><td>2007-01-01</td><td>ippan</td><td>Dora</td><td>1 Han</td><td>sanma tonpu kui-aka  </td><td>3</td><td>3</td></tr>
+	<tr><td>ドラ</td><td>1</td><td>2007</td><td>一般</td><td>南      </td><td>21206</td><td> 8127</td><td>1.56</td><td>3.93</td><td>2007-01-01</td><td>ippan</td><td>Dora</td><td>1 Han</td><td>hanchan              </td><td>4</td><td>8</td></tr>
+	<tr><td>ドラ</td><td>1</td><td>2007</td><td>一般</td><td>南喰    </td><td>14760</td><td> 5760</td><td>1.56</td><td>3.77</td><td>2007-01-01</td><td>ippan</td><td>Dora</td><td>1 Han</td><td>hanchan kui          </td><td>4</td><td>8</td></tr>
+	<tr><td>ドラ</td><td>1</td><td>2007</td><td>一般</td><td>南喰赤  </td><td>43756</td><td>16592</td><td>1.58</td><td>4.39</td><td>2007-01-01</td><td>ippan</td><td>Dora</td><td>1 Han</td><td>hanchan kui-aka      </td><td>4</td><td>8</td></tr>
+	<tr><td>ドラ</td><td>1</td><td>2007</td><td>一般</td><td>東      </td><td>46241</td><td>17642</td><td>1.57</td><td>3.93</td><td>2007-01-01</td><td>ippan</td><td>Dora</td><td>1 Han</td><td>tonpu                </td><td>4</td><td>4</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">select</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">month</span><span class="p">,</span><span class="w"> </span><span class="n">room</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">unique</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">with</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">total</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">1416125478</div></div>
+</div>
+<ul class="simple">
+<li><p>the data contains frequency of yakus in all winning hands played on tenhou since 2007</p></li>
+<li><p>the data is aggregated by month, room rank and game type, totalling 1.4 billion winning hands</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">select</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">room</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">n_players</span><span class="p">,</span><span class="w"> </span><span class="n">n_rounds</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">unique</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">group_by</span><span class="p">(</span><span class="n">date</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="nf">summarize</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">total</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">z1</span>
+<span class="nf">filter</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;2009-07-01&quot;</span><span class="p">,</span><span class="s">&quot;2016-11-01&quot;</span><span class="p">,</span><span class="s">&quot;2020-05-01&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">z1sel</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">total</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_line</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_y_continuous</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">scales</span><span class="o">::</span><span class="nf">comma_format</span><span class="p">())</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&quot;total of winning hands per month&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_label_repel</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">z1sel</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="nf">format</span><span class="p">(</span><span class="n">date</span><span class="p">,</span><span class="s">&quot;%Y-%b&quot;</span><span class="p">)),</span><span class="w"> </span><span class="n">max.overlaps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="n">min.segment.length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">segment.linetype</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/98416b55a65a6e9da060f1c4c7c312a66dcb8e869c61375c22027347ab5f3778.png"><img alt="../../_images/98416b55a65a6e9da060f1c4c7c312a66dcb8e869c61375c22027347ab5f3778.png" src="../../_images/98416b55a65a6e9da060f1c4c7c312a66dcb8e869c61375c22027347ab5f3778.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<ul class="simple">
+<li><p>may-2020 had the highest number of winning hands, and is probably because a state of emergency was declared in Japan at the time due to covid-19</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="game-modes-popularity-over-time">
+<h1>game modes popularity over time<a class="headerlink" href="#game-modes-popularity-over-time" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">select</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">room</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">n_players</span><span class="p">,</span><span class="w"> </span><span class="n">n_rounds</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">total_p</span><span class="o">=</span><span class="n">total</span><span class="o">/</span><span class="n">n_rounds</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="n">unique</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">z1</span>
+<span class="nf">group_by</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">room</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">slice_max</span><span class="p">(</span><span class="n">date</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">z1max</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">total_p</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">mode</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_line</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_y_continuous</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">scales</span><span class="o">::</span><span class="nf">comma_format</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_text_repel</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">z1max</span><span class="p">,</span><span class="nf">aes</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">mode</span><span class="p">),</span><span class="w"> </span><span class="n">segment.color</span><span class="o">=</span><span class="s">&#39;gray40&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">nudge_x</span><span class="o">=</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="n">max.iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1e4</span><span class="p">,</span><span class="w"> </span><span class="n">min.segment.length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">box.padding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">room</span><span class="p">,</span><span class="w"> </span><span class="n">scales</span><span class="o">=</span><span class="s">&quot;free_y&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&quot;# of winning hands / # of rounds&quot;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">guides</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;none&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/2ce9368385ec15cd29ccd1a798ed937dd8504f507d1673a7efbef179e57660b7.png"><img alt="../../_images/2ce9368385ec15cd29ccd1a798ed937dd8504f507d1673a7efbef179e57660b7.png" src="../../_images/2ce9368385ec15cd29ccd1a798ed937dd8504f507d1673a7efbef179e57660b7.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<ul class="simple">
+<li><p>modes without kuitan or akadora are the least popular option</p></li>
+<li><p>sanma east games are popular on ippan but on a decline in joukyuu, and inexistent in later rooms</p></li>
+<li><p>sanma south seems to be getting more popular in houou rooms</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="yaku-frequencies-vs-han-value">
+<h1>yaku frequencies vs. han value<a class="headerlink" href="#yaku-frequencies-vs-han-value" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="o">==</span><span class="s">&#39;南喰赤&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">yaku_romaji</span><span class="o">!=</span><span class="s">&#39;Bakaze Pei&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">group_by</span><span class="p">(</span><span class="n">yaku_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">han_value_closed</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="nf">summarize</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">count</span><span class="p">),</span><span class="w"> </span><span class="n">total</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">total</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">count</span><span class="o">/</span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">arrange</span><span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">han_value_closed</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">p</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_label_repel</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">yaku_romaji</span><span class="p">),</span><span class="w"> </span><span class="n">min.segment.length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">max.iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1e4</span><span class="p">,</span><span class="w"> </span><span class="n">max.overlaps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="n">box.padding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_y_log10</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">scales</span><span class="o">::</span><span class="nf">percent_format</span><span class="p">(),</span><span class="w"> </span><span class="n">n.breaks</span><span class="o">=</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`summarise()` has grouped output by &#39;yaku_romaji&#39;. You can override using the `.groups` argument.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/3faeec828aa004d115fe6ac79c6c6b971f308a6c98ace3b26a63ee9391f52ac3.png"><img alt="../../_images/3faeec828aa004d115fe6ac79c6c6b971f308a6c98ace3b26a63ee9391f52ac3.png" src="../../_images/3faeec828aa004d115fe6ac79c6c6b971f308a6c98ace3b26a63ee9391f52ac3.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<ul class="simple">
+<li><p>the Y-axis is in log scale, the difference between one tick and the next is 3x</p></li>
+<li><p>sankantsu is rarer than some yakumans, suukantsu is the rarest yaku at about 1 in 3 millon winning hands</p></li>
+<li><p>the frequency of the yaku doesn’t quite match its value, an explanation for this could be that players will tend to favor easier and/or more valuable yakus</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="yaku-frequencies-over-time">
+<h1>yaku frequencies over time<a class="headerlink" href="#yaku-frequencies-over-time" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="o">==</span><span class="s">&#39;南喰赤&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">year</span><span class="o">&gt;</span><span class="m">2011</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">rm</span><span class="o">=</span><span class="nf">paste</span><span class="p">(</span><span class="n">room</span><span class="p">,</span><span class="n">mode</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">count</span><span class="o">/</span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">room</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_y_continuous</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">scales</span><span class="o">::</span><span class="nf">percent_format</span><span class="p">())</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_smooth</span><span class="p">(</span><span class="n">se</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">span</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_x_date</span><span class="p">(</span><span class="n">date_labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;%Y&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="o">=</span><span class="nf">as.Date</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;2012-01-01&quot;</span><span class="p">,</span><span class="s">&quot;2017-01-01&quot;</span><span class="p">,</span><span class="s">&quot;2022-01-01&quot;</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">yaku_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">scales</span><span class="o">=</span><span class="s">&quot;free_y&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme</span><span class="p">(</span>
+<span class="w">    </span><span class="n">strip.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">),</span><span class="w"> </span>
+<span class="w">    </span><span class="n">axis.text.y</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">8</span><span class="p">),</span>
+<span class="w">    </span><span class="n">axis.text.x</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/ab2fff2f636f8a198ecd16dc896b86e557293d4018ebf26c75c3f9a40479a6df.png"><img alt="../../_images/ab2fff2f636f8a198ecd16dc896b86e557293d4018ebf26c75c3f9a40479a6df.png" src="../../_images/ab2fff2f636f8a198ecd16dc896b86e557293d4018ebf26c75c3f9a40479a6df.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<ul class="simple">
+<li><p>remember this is % of winning hands, the yaku chance is not changing, what changes is the way people play</p></li>
+<li><p>bakaze pei is weird, its super rare yes, but after 2010 it was never recorded, probably a change in the algorithm avoids a north round extension</p></li>
+<li><p>I removed the early years because to low amount of data makes it hard to observe the low frequencies of the rarer yakus</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="average-han-value-per-yaku">
+<h1>average han value per yaku<a class="headerlink" href="#average-han-value-per-yaku" title="Link to this heading">#</a></h1>
+<p>doras can appear more than once on the hand, so we can look at the average amount of value contributed to the hand</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">select</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">yaku_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">avg_yaku_han</span><span class="p">,</span><span class="w"> </span><span class="n">avg_hand_han</span><span class="p">,</span><span class="w"> </span><span class="n">han_value_closed</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">unique</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">filter</span><span class="p">(</span><span class="n">yaku_romaji</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Dora&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Akadora&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Uradora&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">avg_yaku_han</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">yaku_romaji</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_boxplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">scale_x_sqrt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;Removed 3 rows containing non-finite values (`stat_boxplot()`).&quot;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/50dd5dcc261756e107a08876ec41d75a6aa8842fd465cb08b553b07db340a6fd.png"><img alt="../../_images/50dd5dcc261756e107a08876ec41d75a6aa8842fd465cb08b553b07db340a6fd.png" src="../../_images/50dd5dcc261756e107a08876ec41d75a6aa8842fd465cb08b553b07db340a6fd.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">select</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">yaku_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">avg_yaku_han</span><span class="p">,</span><span class="w"> </span><span class="n">avg_hand_han</span><span class="p">,</span><span class="w"> </span><span class="n">han_value_closed</span><span class="p">,</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">room</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">unique</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">perc_han</span><span class="o">=</span><span class="n">avg_yaku_han</span><span class="o">/</span><span class="n">avg_hand_han</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">perc_han</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">yaku_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">perc_han</span><span class="p">,</span><span class="w"> </span><span class="n">.na_rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">han_value_closed</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">outlier.shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_fill_brewer</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s">&#39;Set1&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_x_continuous</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="n">scales</span><span class="o">::</span><span class="nf">percent_format</span><span class="p">())</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="s">&quot;percentage of total hand value contributed by this yaku&quot;</span><span class="p">)</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;Removed 70864 rows containing non-finite values (`stat_boxplot()`).&quot;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/5651d9f82ccb4c3025256def5835e05a49abdd12494e6fceb050a44fe6da80e0.png"><img alt="../../_images/5651d9f82ccb4c3025256def5835e05a49abdd12494e6fceb050a44fe6da80e0.png" src="../../_images/5651d9f82ccb4c3025256def5835e05a49abdd12494e6fceb050a44fe6da80e0.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="looking-at-specific-yakus">
+<h1>looking at specific yakus<a class="headerlink" href="#looking-at-specific-yakus" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">yaku_romaji</span><span class="o">==</span><span class="s">&#39;Ippatsu&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">group_by</span><span class="p">(</span><span class="n">room_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">mode_romaji</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">summarize</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">total</span><span class="p">),</span><span class="w"> </span><span class="n">count</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">count</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="m">100</span><span class="o">*</span><span class="n">count</span><span class="o">/</span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="o">=</span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">room_romaji</span><span class="o">=</span><span class="nf">ordered</span><span class="p">(</span><span class="n">room_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ippan&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;joukyuu&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tokujou&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;houou&quot;</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">pivot_wider</span><span class="p">(</span><span class="n">names_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;mode_romaji&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;p&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">arrange</span><span class="p">(</span><span class="n">room_romaji</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">column_to_rownames</span><span class="p">(</span><span class="s">&#39;room_romaji&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="nf">as.matrix</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="n">.</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="nf">rowMaxs</span><span class="p">(</span><span class="n">.</span><span class="p">)),</span><span class="nf">order</span><span class="p">(</span><span class="nf">colMaxs</span><span class="p">(</span><span class="n">.</span><span class="p">))]</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">pheatmap</span><span class="p">(</span><span class="n">display_numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&#39;Ippatsu frequency across rooms and modes&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="nf">viridis</span><span class="p">(</span><span class="m">100</span><span class="p">),</span><span class="w"> </span><span class="n">number_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;black&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">cluster_rows</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span><span class="w"> </span><span class="n">cluster_cols</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span><span class="w"> </span><span class="n">border_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`summarise()` has grouped output by &#39;room_romaji&#39;. You can override using the `.groups` argument.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/443d45d9ab565b623d25079fa3a2e70d394137f051a5cd7da56f0a4f267721f8.png"><img alt="../../_images/443d45d9ab565b623d25079fa3a2e70d394137f051a5cd7da56f0a4f267721f8.png" src="../../_images/443d45d9ab565b623d25079fa3a2e70d394137f051a5cd7da56f0a4f267721f8.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">yaku_romaji</span><span class="o">==</span><span class="s">&#39;Tsumo&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">group_by</span><span class="p">(</span><span class="n">room_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">mode_romaji</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">summarize</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">total</span><span class="p">),</span><span class="w"> </span><span class="n">count</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">count</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="m">100</span><span class="o">*</span><span class="n">count</span><span class="o">/</span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="o">=</span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">pivot_wider</span><span class="p">(</span><span class="n">names_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;mode_romaji&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;p&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">column_to_rownames</span><span class="p">(</span><span class="s">&#39;room_romaji&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="nf">as.matrix</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="n">.</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="nf">rowMaxs</span><span class="p">(</span><span class="n">.</span><span class="p">)),</span><span class="nf">order</span><span class="p">(</span><span class="nf">colMaxs</span><span class="p">(</span><span class="n">.</span><span class="p">))]</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">pheatmap</span><span class="p">(</span><span class="n">display_numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&#39;Tsumo frequency across rooms and modes&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="nf">viridis</span><span class="p">(</span><span class="m">100</span><span class="p">),</span><span class="w"> </span><span class="n">number_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;black&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">cluster_rows</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span><span class="w"> </span><span class="n">cluster_cols</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">border_color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`summarise()` has grouped output by &#39;room_romaji&#39;. You can override using the `.groups` argument.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/75a308d1e948098ad95f4b88e80e99c6cb045138307de1f1a046e7ff9f477a15.png"><img alt="../../_images/75a308d1e948098ad95f4b88e80e99c6cb045138307de1f1a046e7ff9f477a15.png" src="../../_images/75a308d1e948098ad95f4b88e80e99c6cb045138307de1f1a046e7ff9f477a15.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="etc">
+<h1>etc<a class="headerlink" href="#etc" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">avg_yaku_han</span><span class="o">&gt;</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">yaku_romaji</span><span class="o">==</span><span class="s">&#39;Dora&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 16</caption>
+<thead>
+	<tr><th scope=col>yaku</th><th scope=col>month</th><th scope=col>year</th><th scope=col>room</th><th scope=col>mode</th><th scope=col>total</th><th scope=col>count</th><th scope=col>avg_yaku_han</th><th scope=col>avg_hand_han</th><th scope=col>date</th><th scope=col>room_romaji</th><th scope=col>yaku_romaji</th><th scope=col>han_value_closed</th><th scope=col>mode_romaji</th><th scope=col>n_players</th><th scope=col>n_rounds</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;date&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;ord&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>ドラ</td><td> 1</td><td>2014</td><td>上級</td><td>東      </td><td>2</td><td>1</td><td>5</td><td> 8</td><td>2014-01-01</td><td>joukyuu</td><td>Dora</td><td>1 Han</td><td>tonpu              </td><td>4</td><td>4</td></tr>
+	<tr><td>ドラ</td><td>10</td><td>2022</td><td>特上</td><td>三東喰赤</td><td>2</td><td>1</td><td>6</td><td>10</td><td>2022-10-01</td><td>tokujou</td><td>Dora</td><td>1 Han</td><td>sanma tonpu kui-aka</td><td>3</td><td>3</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">yaku_romaji</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Dora&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Akadora&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Uradora&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">avg_yaku_han</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">avg_hand_han</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_hex</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_fill_viridis</span><span class="p">(</span><span class="n">trans</span><span class="o">=</span><span class="s">&#39;log2&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">yaku_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">scales</span><span class="o">=</span><span class="s">&quot;free&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;Removed 2269 rows containing non-finite values (`stat_binhex()`).&quot;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/020f07942c84c563785806a622c54ec8600fe70e2cac6353c11c528ea401eee6.png"><img alt="../../_images/020f07942c84c563785806a622c54ec8600fe70e2cac6353c11c528ea401eee6.png" src="../../_images/020f07942c84c563785806a622c54ec8600fe70e2cac6353c11c528ea401eee6.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">mutate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="o">=</span><span class="n">count</span><span class="o">/</span><span class="n">total</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">avg_yaku_han</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">total</span><span class="o">&gt;</span><span class="m">10000</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">select</span><span class="p">(</span><span class="n">yaku_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">avg_yaku_han</span><span class="p">,</span><span class="w"> </span><span class="n">avg_hand_han</span><span class="p">,</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">room</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">unique</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 184032 × 9</caption>
+<thead>
+	<tr><th scope=col>yaku_romaji</th><th scope=col>count</th><th scope=col>total</th><th scope=col>avg_yaku_han</th><th scope=col>avg_hand_han</th><th scope=col>date</th><th scope=col>room</th><th scope=col>mode</th><th scope=col>z</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;date&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>Dora</td><td> 30121</td><td> 39157</td><td>2.15</td><td>5.66</td><td>2007-01-01</td><td>一般</td><td>三南喰赤</td><td>1.653858824731210</td></tr>
+	<tr><td>Dora</td><td>  8563</td><td> 11204</td><td>2.15</td><td>5.67</td><td>2007-01-01</td><td>一般</td><td>三東喰赤</td><td>1.643203320242770</td></tr>
+	<tr><td>Dora</td><td>  8127</td><td> 21206</td><td>1.56</td><td>3.93</td><td>2007-01-01</td><td>一般</td><td>南      </td><td>0.597855323964916</td></tr>
+	<tr><td>Dora</td><td>  5760</td><td> 14760</td><td>1.56</td><td>3.77</td><td>2007-01-01</td><td>一般</td><td>南喰    </td><td>0.608780487804878</td></tr>
+	<tr><td>Dora</td><td> 16592</td><td> 43756</td><td>1.58</td><td>4.39</td><td>2007-01-01</td><td>一般</td><td>南喰赤  </td><td>0.599126062711400</td></tr>
+	<tr><td>Dora</td><td> 17642</td><td> 46241</td><td>1.57</td><td>3.93</td><td>2007-01-01</td><td>一般</td><td>東      </td><td>0.598990938777276</td></tr>
+	<tr><td>Dora</td><td>159783</td><td>422043</td><td>1.58</td><td>4.36</td><td>2007-01-01</td><td>一般</td><td>東喰赤  </td><td>0.598178716386719</td></tr>
+	<tr><td>Dora</td><td> 26446</td><td> 68752</td><td>1.55</td><td>4.27</td><td>2007-01-01</td><td>上級</td><td>東喰赤  </td><td>0.596219746334652</td></tr>
+	<tr><td>Dora</td><td>151123</td><td>195751</td><td>2.14</td><td>5.48</td><td>2008-01-01</td><td>一般</td><td>三南喰赤</td><td>1.652115289321638</td></tr>
+	<tr><td>Dora</td><td> 82477</td><td>107548</td><td>2.17</td><td>5.53</td><td>2008-01-01</td><td>一般</td><td>三東喰赤</td><td>1.664141499609477</td></tr>
+	<tr><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td></tr>
+	<tr><td>Tsumo</td><td>211101</td><td>726500</td><td>1</td><td>5.56</td><td>2022-12-01</td><td>上級</td><td>三南喰赤</td><td>0.290572608396421</td></tr>
+	<tr><td>Tsumo</td><td>  4082</td><td> 14841</td><td>1</td><td>5.60</td><td>2022-12-01</td><td>上級</td><td>三東喰赤</td><td>0.275048851155583</td></tr>
+	<tr><td>Tsumo</td><td>188639</td><td>889683</td><td>1</td><td>4.33</td><td>2022-12-01</td><td>上級</td><td>南喰赤  </td><td>0.212029453187259</td></tr>
+	<tr><td>Tsumo</td><td> 58246</td><td>298332</td><td>1</td><td>4.29</td><td>2022-12-01</td><td>上級</td><td>東喰赤  </td><td>0.195238861402733</td></tr>
+	<tr><td>Tsumo</td><td>181720</td><td>572860</td><td>1</td><td>5.47</td><td>2022-12-01</td><td>特上</td><td>三南喰赤</td><td>0.317215375484412</td></tr>
+	<tr><td>Tsumo</td><td>148986</td><td>630563</td><td>1</td><td>4.31</td><td>2022-12-01</td><td>特上</td><td>南喰赤  </td><td>0.236274567331099</td></tr>
+	<tr><td>Tsumo</td><td> 39391</td><td>183113</td><td>1</td><td>4.26</td><td>2022-12-01</td><td>特上</td><td>東喰赤  </td><td>0.215118533364644</td></tr>
+	<tr><td>Tsumo</td><td> 19370</td><td> 54694</td><td>1</td><td>5.47</td><td>2022-12-01</td><td>鳳凰</td><td>三南喰赤</td><td>0.354152192196585</td></tr>
+	<tr><td>Tsumo</td><td> 26541</td><td>106082</td><td>1</td><td>4.30</td><td>2022-12-01</td><td>鳳凰</td><td>南喰赤  </td><td>0.250193246733659</td></tr>
+	<tr><td>Tsumo</td><td>  2509</td><td> 11032</td><td>1</td><td>4.21</td><td>2022-12-01</td><td>鳳凰</td><td>東喰赤  </td><td>0.227429296591733</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">select</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">yaku_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">avg_yaku_han</span><span class="p">,</span><span class="w"> </span><span class="n">avg_hand_han</span><span class="p">,</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">room</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">unique</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">avg_exp_han</span><span class="o">=</span><span class="n">count</span><span class="o">/</span><span class="n">total</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">avg_yaku_han</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">avg_exp_han</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">yaku_romaji</span><span class="p">,</span><span class="n">avg_exp_han</span><span class="p">,</span><span class="w"> </span><span class="n">.na_rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">outlier.shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_x_sqrt</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="s">&quot;average expected han from each yaku&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;Removed 70864 rows containing non-finite values (`stat_boxplot()`).&quot;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/d7454160b54f716ed64cf4409377a12ff4acca9a8de3acf94b3bf88465c9fde9.png"><img alt="../../_images/d7454160b54f716ed64cf4409377a12ff4acca9a8de3acf94b3bf88465c9fde9.png" src="../../_images/d7454160b54f716ed64cf4409377a12ff4acca9a8de3acf94b3bf88465c9fde9.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">select</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">yaku_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">avg_yaku_han</span><span class="p">,</span><span class="w"> </span><span class="n">avg_hand_han</span><span class="p">,</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">room</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">han_value_closed</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">unique</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">avg_exp_han</span><span class="o">=</span><span class="n">count</span><span class="o">/</span><span class="n">total</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">avg_yaku_han</span><span class="p">,</span><span class="w"> </span><span class="n">perc_contrib_yaku</span><span class="o">=</span><span class="n">avg_yaku_han</span><span class="o">/</span><span class="n">avg_hand_han</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">group_by</span><span class="p">(</span><span class="n">yaku_romaji</span><span class="p">,</span><span class="w"> </span><span class="n">han_value_closed</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">summarize</span><span class="p">(</span>
+<span class="w">    </span><span class="n">avg_exp_han</span><span class="o">=</span><span class="nf">median</span><span class="p">(</span><span class="n">avg_exp_han</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span>
+<span class="w">    </span><span class="n">perc_contrib_yaku</span><span class="o">=</span><span class="nf">median</span><span class="p">(</span><span class="n">perc_contrib_yaku</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">avg_exp_han</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">perc_contrib_yaku</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">han_value_closed</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_label_repel</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">yaku_romaji</span><span class="p">),</span><span class="w"> </span><span class="n">max.overlaps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="n">min.segment.length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_x_sqrt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`summarise()` has grouped output by &#39;yaku_romaji&#39;. You can override using the `.groups` argument.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/b863673ffbafdddf69cfb073a4d2d4bc2b233b8aa2fb8ab1a412055ef20b1f0d.png"><img alt="../../_images/b863673ffbafdddf69cfb073a4d2d4bc2b233b8aa2fb8ab1a412055ef20b1f0d.png" src="../../_images/b863673ffbafdddf69cfb073a4d2d4bc2b233b8aa2fb8ab1a412055ef20b1f0d.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./src/data-analysis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="crinacle.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Crinacle IEMs Ranking</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../methods/glmnet_cox.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Regularized Cox Regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mahjong Yaku stats</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data">the data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#game-modes-popularity-over-time">game modes popularity over time</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#yaku-frequencies-vs-han-value">yaku frequencies vs. han value</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#yaku-frequencies-over-time">yaku frequencies over time</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#average-han-value-per-yaku">average han value per yaku</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-at-specific-yakus">looking at specific yakus</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#etc">etc</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By rvalieris
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

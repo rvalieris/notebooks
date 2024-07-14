@@ -1,0 +1,1068 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Drawing star polygons with ggplot2 &#8212; notebooks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=8bd22a0a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/fun/star';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Mandelbrot Set" href="mandelbrot.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">notebooks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    notebooks
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">ggplot2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/clustered_heatmap.html">Clustered Heatmap</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/color_palettes.html">Color Palettes</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/colors2d.html">2D Color Palette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_1D.html">Density 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_2D.html">Density 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/plot_composition.html">Composing multiple plots in a single page</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/scale_transforms.html">Scale Transforms</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data-analysis/crinacle.html">Crinacle IEMs Ranking</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../data-analysis/mahjong-yaku-stats.html">Mahjong Yaku stats</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../methods/glmnet_cox.html">Regularized Cox Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methods/pca-visualization-in-python.html">Practical Guide to PCA visualization in Python</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/pca-visualization-in-r.html">Practical Guide to PCA visualization in R</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_shap.html">Tidy SHAP</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part1.html">Comparing survival prediction models with tidymodels</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part2.html">Comparing survival prediction models with tidymodels, part 2</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fun</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dragon_curve.html">Dragon Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mandelbrot.html">Mandelbrot Set</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Drawing star polygons with ggplot2</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/rvalieris/notebooks" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Drawing star polygons with ggplot2</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nf">theme_set</span><span class="p">(</span><span class="nf">theme_cowplot</span><span class="p">())</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">9</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="o">=</span><span class="m">9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="drawing-star-polygons-with-ggplot2">
+<h1>Drawing star polygons with ggplot2<a class="headerlink" href="#drawing-star-polygons-with-ggplot2" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> is a R package for making data graphics, it is known for how flexible and composable the plots are, with its syntax based on the grammar of graphics.</p>
+<p>Star polygon is a type of non-convex polygon that looks like a star, in this post, we will be focused on the subset of unicursal star polygons.</p>
+<p>Unicursal means that the star can be drawn as a single continuous line, “without lifting the pen from the paper”.</p>
+<p>To get started, first, we need a set of points around a circle to play with:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">circle_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">	</span><span class="nf">tibble</span><span class="p">(</span>
+<span class="w">        </span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span>
+<span class="w">        </span><span class="n">p</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">,</span>
+<span class="w">        </span><span class="n">x</span><span class="o">=</span><span class="nf">cos</span><span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="kc">pi</span><span class="o">*</span><span class="n">p</span><span class="o">/</span><span class="n">N</span><span class="p">),</span>
+<span class="w">        </span><span class="n">y</span><span class="o">=</span><span class="nf">sin</span><span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="kc">pi</span><span class="o">*</span><span class="n">p</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we defined a function that returns a data frame, each row of the data frame contains a point on the circumference of a circle,</p>
+<p>using a bit of trigonometry, we convert radian angles to cartesian coordinates, which we will use to plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 5 × 4</caption>
+<thead>
+	<tr><th scope=col>N</th><th scope=col>p</th><th scope=col>x</th><th scope=col>y</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>5</td><td>1</td><td> 0.309016994374947</td><td> 9.51056516295154e-01</td></tr>
+	<tr><td>5</td><td>2</td><td>-0.809016994374947</td><td> 5.87785252292473e-01</td></tr>
+	<tr><td>5</td><td>3</td><td>-0.809016994374948</td><td>-5.87785252292473e-01</td></tr>
+	<tr><td>5</td><td>4</td><td> 0.309016994374947</td><td>-9.51056516295154e-01</td></tr>
+	<tr><td>5</td><td>5</td><td> 1.000000000000000</td><td>-2.44929359829471e-16</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>with these coordinates, we can plot our points:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/94c4b04d7e889db585db471a0fe8bbb42288cdb5d9c674bc687d2427e0fb80cd.png"><img alt="../../_images/94c4b04d7e889db585db471a0fe8bbb42288cdb5d9c674bc687d2427e0fb80cd.png" src="../../_images/94c4b04d7e889db585db471a0fe8bbb42288cdb5d9c674bc687d2427e0fb80cd.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>If we increase the number of points, they spread around the circumference, as expected:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">40</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/7730b5d8f5412931ec3a8de071f8d1aeecbeaed4f4ead82babd3600ee8f7a1c0.png"><img alt="../../_images/7730b5d8f5412931ec3a8de071f8d1aeecbeaed4f4ead82babd3600ee8f7a1c0.png" src="../../_images/7730b5d8f5412931ec3a8de071f8d1aeecbeaed4f4ead82babd3600ee8f7a1c0.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">|&gt;</span></code> is the pipe operator, if you haven’t seen it before, these two lines are equivalent:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">first_arg</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">f</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="n">second_arg</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">h</span><span class="p">(</span><span class="n">another_2nd</span><span class="p">,</span><span class="w"> </span><span class="n">and_a_3rd_arg</span><span class="p">)</span>
+
+
+<span class="nf">h</span><span class="p">(</span><span class="nf">g</span><span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="n">first_arg</span><span class="p">),</span><span class="n">second_arg</span><span class="p">),</span><span class="w"> </span><span class="n">another_2nd</span><span class="p">,</span><span class="w"> </span><span class="n">and_a_3rd_arg</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The pipe operator allows us to compose a sequence of functions in a readable way.</p>
+<p>nice, so the next step is to connect the dots, and <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> has a few tools to help us with that,
+the most commonly used is the <code class="docutils literal notranslate"><span class="pre">geom_line</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_line</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/f18966d4fd7f311f0d6084fd1b250c6776ce076e4b9c51b88f83e64cb443d242.png"><img alt="../../_images/f18966d4fd7f311f0d6084fd1b250c6776ce076e4b9c51b88f83e64cb443d242.png" src="../../_images/f18966d4fd7f311f0d6084fd1b250c6776ce076e4b9c51b88f83e64cb443d242.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">geom_line</span></code> connects the points in the order of the x-axis, this is usually what you want if you have a time series, but not in our case, we want the points to be connected in a specific order we will define, and for that, we can use the <code class="docutils literal notranslate"><span class="pre">geom_path</span></code> instead:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_path</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/29498534b3cef87d845869a8fbaef10ea8fc1f1959952e637631500f545eec4d.png"><img alt="../../_images/29498534b3cef87d845869a8fbaef10ea8fc1f1959952e637631500f545eec4d.png" src="../../_images/29498534b3cef87d845869a8fbaef10ea8fc1f1959952e637631500f545eec4d.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>Cool! That is a pentagon, almost, all the points were connected in the same order as they appear in our data frame, however, the last connection is missing, to have that last segment we would need to repeat the first point as the last row on the data frame.</p>
+<p>finally, <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> has another geom that can help us, the aptly named <code class="docutils literal notranslate"><span class="pre">geom_polygon</span></code>!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_polygon</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="s">&#39;skyblue&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/af23a97c864c0223cba8bf1ccc1f60d7ed6aa7a9a71aa14eb0cba6fecfcc4935.png"><img alt="../../_images/af23a97c864c0223cba8bf1ccc1f60d7ed6aa7a9a71aa14eb0cba6fecfcc4935.png" src="../../_images/af23a97c864c0223cba8bf1ccc1f60d7ed6aa7a9a71aa14eb0cba6fecfcc4935.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>Now that is a proper pentagon! <code class="docutils literal notranslate"><span class="pre">geom_polygon</span></code> not only connects the ends for us, but it also allows us to fill the shape.</p>
+<p>But we aren’t here to draw boring convex polygons, so let’s go back to <code class="docutils literal notranslate"><span class="pre">geom_path</span></code>, what we need now is to figure out how to re-order our points such that when they are connected they form a star polygon.</p>
+<p>If you look back at the pentagram example above, you will see that the points don’t connect to their adjacent point, instead they “skip” a point and connect to the next one, the <code class="docutils literal notranslate"><span class="pre">dplyr</span></code> package has a function called <code class="docutils literal notranslate"><span class="pre">slice</span></code> that allows us to take rows from a data frame by their index, using this function we can reorder our points with a vector of indexes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">slice</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 4</caption>
+<thead>
+	<tr><th scope=col>N</th><th scope=col>p</th><th scope=col>x</th><th scope=col>y</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>5</td><td>1</td><td> 0.309016994374947</td><td> 9.51056516295154e-01</td></tr>
+	<tr><td>5</td><td>3</td><td>-0.809016994374948</td><td>-5.87785252292473e-01</td></tr>
+	<tr><td>5</td><td>5</td><td> 1.000000000000000</td><td>-2.44929359829471e-16</td></tr>
+	<tr><td>5</td><td>2</td><td>-0.809016994374947</td><td> 5.87785252292473e-01</td></tr>
+	<tr><td>5</td><td>4</td><td> 0.309016994374947</td><td>-9.51056516295154e-01</td></tr>
+	<tr><td>5</td><td>1</td><td> 0.309016994374947</td><td> 9.51056516295154e-01</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Note that the last row repeats the first point to complete the path, lets plot this to see how it looks:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">slice</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_path</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/8024e1537e08a8a57e5a6ee658eb2030ed8a700fd1ea9c5065d1193ffc4362e1.png"><img alt="../../_images/8024e1537e08a8a57e5a6ee658eb2030ed8a700fd1ea9c5065d1193ffc4362e1.png" src="../../_images/8024e1537e08a8a57e5a6ee658eb2030ed8a700fd1ea9c5065d1193ffc4362e1.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>and there we go, a pentagram!</p>
+<p>now, what if we wanted to draw a star polygon with 7 points? or 29 points? I’m too lazy to figure out the point order by hand, so let’s try to generalize this.</p>
+<p>We need to write a function that returns <code class="docutils literal notranslate"><span class="pre">N+1</span></code> points in the order they need to be connected, skipping a point.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">accumulate</span></code> function from the <code class="docutils literal notranslate"><span class="pre">purrr</span></code> package allows us to sequentially apply a function to a vector and return intermediary results, with some math we can use it to return the points in the order that we want:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># note: %% is the modulo operator</span>
+<span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">accumulate</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="n">acc</span><span class="m">+1</span><span class="p">)</span><span class="o">%%</span><span class="m">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">.init</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1</li><li>3</li><li>5</li><li>2</li><li>4</li><li>1</li></ol>
+</div></div>
+</div>
+<p>Looks good, let’s turn this into a function and give it a try:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">star_path_reorder</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">path_order</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
+<span class="w">        </span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">accumulate</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="n">acc</span><span class="m">+1</span><span class="p">)</span><span class="o">%%</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">.init</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">points</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">slice</span><span class="p">(</span><span class="n">path_order</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function takes a data frame of points, reorders and returns them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">11</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">star_path_reorder</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_path</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/b567eedf902b8865dff9d637dcfbb5035ce3e69d683b53d9d4ef2c571f6ec863.png"><img alt="../../_images/b567eedf902b8865dff9d637dcfbb5035ce3e69d683b53d9d4ef2c571f6ec863.png" src="../../_images/b567eedf902b8865dff9d637dcfbb5035ce3e69d683b53d9d4ef2c571f6ec863.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>A 11-point star polygon ! it works !!</p>
+<p>However, there is more than one way to draw an 11-point star polygon, there are 4 different ways in fact, and we can get these different ways by varying how many points we “skip”, so we need to modify our function to allow for this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">star_path_reorder</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">path_order</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
+<span class="w">        </span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">accumulate</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="n">acc</span><span class="o">+</span><span class="n">d</span><span class="m">-1</span><span class="p">)</span><span class="o">%%</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">.init</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">points</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">slice</span><span class="p">(</span><span class="n">path_order</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">d</span></code> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Density_(polytope)">density</a>.</p>
+<p>Let’s give it a try with a few different values for <code class="docutils literal notranslate"><span class="pre">d</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">map_df</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">circle_points</span><span class="p">(</span><span class="m">11</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">star_path_reorder</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="p">})</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_path</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/d2d9c5f6f7585ff54ed58fe5c73f551193041836aa38d9416e1072d5b237e863.png"><img alt="../../_images/d2d9c5f6f7585ff54ed58fe5c73f551193041836aa38d9416e1072d5b237e863.png" src="../../_images/d2d9c5f6f7585ff54ed58fe5c73f551193041836aa38d9416e1072d5b237e863.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>We used <code class="docutils literal notranslate"><span class="pre">map_df</span></code> from the <code class="docutils literal notranslate"><span class="pre">purrr</span></code> package to map over the vector <code class="docutils literal notranslate"><span class="pre">1:11</span></code>, we are generating 11-star points for each value of <code class="docutils literal notranslate"><span class="pre">d</span></code>, and then we plot all of them with ggplot2 <code class="docutils literal notranslate"><span class="pre">facet_wrap</span></code>, which allows us to generate subplots for each value of <code class="docutils literal notranslate"><span class="pre">d</span></code>.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">d=1</span></code> we get a boring undecagon, with <code class="docutils literal notranslate"><span class="pre">d=2</span></code> we get the same results as before, and with <code class="docutils literal notranslate"><span class="pre">d=3,4,5</span></code> we get new stars ! but then something interesting happens, with <code class="docutils literal notranslate"><span class="pre">d=6</span></code> we get the same shape as <code class="docutils literal notranslate"><span class="pre">d=5</span></code>, and <code class="docutils literal notranslate"><span class="pre">d=7</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">d=4</span></code>, and so on.</p>
+<p>There is a symmetry here, so we don’t need to draw all the densities up to <code class="docutils literal notranslate"><span class="pre">N</span></code>, looks like only halfway is enough, let’s try a different <code class="docutils literal notranslate"><span class="pre">N</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">map_df</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">circle_points</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">star_path_reorder</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="p">})</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_path</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/b6c3b233ddc6a72ab3fc2e2722692534634ed3f46252cb1340f37ad3d1d1d6cf.png"><img alt="../../_images/b6c3b233ddc6a72ab3fc2e2722692534634ed3f46252cb1340f37ad3d1d1d6cf.png" src="../../_images/b6c3b233ddc6a72ab3fc2e2722692534634ed3f46252cb1340f37ad3d1d1d6cf.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">N=10</span></code> we see a similar pattern, with <code class="docutils literal notranslate"><span class="pre">d=7</span></code> generating the same star polygon as with <code class="docutils literal notranslate"><span class="pre">d=3</span></code>, but there is something else going on here, we got a pentagon with <code class="docutils literal notranslate"><span class="pre">d=2</span></code>, and <code class="docutils literal notranslate"><span class="pre">d=5</span></code> does not even look like a polygon at all.</p>
+<p>To draw the star we need a path that goes through all the points, <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">5</span></code> are divisors of <code class="docutils literal notranslate"><span class="pre">10</span></code>, so it makes sense that we can’t get a unicursal path at these densities, but it didn’t work for <code class="docutils literal notranslate"><span class="pre">d=4</span></code> either…</p>
+<p>as it turns out, the answer is prime numbers, coprime to be specific, we can only get a star polygon <a class="reference external" href="https://en.wikipedia.org/wiki/Schl%C3%A4fli_symbol"><code class="docutils literal notranslate"><span class="pre">{N/d}</span></code></a> if <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">d</span></code> are coprime, otherwise some points will be left unvisited, so let’s make a function that lists all possible densities for a star polygon <code class="docutils literal notranslate"><span class="pre">N</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+
+<span class="n">star_densities</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="m">2</span><span class="o">:</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">keep</span><span class="p">(</span><span class="nf">partial</span><span class="p">(</span><span class="n">coprime</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>once again, <code class="docutils literal notranslate"><span class="pre">keep</span></code> and <code class="docutils literal notranslate"><span class="pre">partial</span></code> are functions from the <code class="docutils literal notranslate"><span class="pre">purrr</span></code> package, <code class="docutils literal notranslate"><span class="pre">keep</span></code> will filter the vector with a given function, and <code class="docutils literal notranslate"><span class="pre">partial</span></code> partially applies a function with the given argument,</p>
+<p>we are testing all numbers from <code class="docutils literal notranslate"><span class="pre">2</span></code> to <code class="docutils literal notranslate"><span class="pre">N/2</span></code> and <em>keeping</em> only the coprimes with <code class="docutils literal notranslate"><span class="pre">N</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">star_densities</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">3</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">star_densities</span><span class="p">(</span><span class="m">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+</div></div>
+</div>
+<p>naturally, for prime numbers like <code class="docutils literal notranslate"><span class="pre">11</span></code>, any number between <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">N/2</span></code> will work.</p>
+<p>armed with this, we can now build a function that will generate all star polygons with <code class="docutils literal notranslate"><span class="pre">N</span></code> points:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">generate_star_paths</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">star_densities</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">map_df</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nf">circle_points</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">star_path_reorder</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">mutate</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and plot them like so:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">generate_star_paths</span><span class="p">(</span><span class="m">13</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_path</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/e24bb4d446e5239cf5d0801476f42768d18fa4db48152b3cf2449aa82c94574a.png"><img alt="../../_images/e24bb4d446e5239cf5d0801476f42768d18fa4db48152b3cf2449aa82c94574a.png" src="../../_images/e24bb4d446e5239cf5d0801476f42768d18fa4db48152b3cf2449aa82c94574a.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>and building on that, we can also generate star polygons for many <code class="docutils literal notranslate"><span class="pre">N</span></code> at once:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">map_df</span><span class="p">(</span><span class="m">5</span><span class="o">:</span><span class="m">17</span><span class="p">,</span><span class="w"> </span><span class="n">generate_star_paths</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_path</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_grid</span><span class="p">(</span><span class="n">d</span><span class="o">~</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme_void</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/e44b3153d37f4ddac7863c4acdb59e16ca4c230b46b9ea52a61f7fae09fbe2a5.png"><img alt="../../_images/e44b3153d37f4ddac7863c4acdb59e16ca4c230b46b9ea52a61f7fae09fbe2a5.png" src="../../_images/e44b3153d37f4ddac7863c4acdb59e16ca4c230b46b9ea52a61f7fae09fbe2a5.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">facet_grid</span></code> makes a 2D grid of subplots with <code class="docutils literal notranslate"><span class="pre">N</span></code> along the horizontal axis and <code class="docutils literal notranslate"><span class="pre">d</span></code> along the vertical axis, also I used <code class="docutils literal notranslate"><span class="pre">theme_void()</span></code> to save some space on the figure.</p>
+<p><strong>Bonus</strong>: not every <code class="docutils literal notranslate"><span class="pre">N</span></code> has a regular star polygon, <code class="docutils literal notranslate"><span class="pre">6</span></code> is an example of this since <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code> are divisors of <code class="docutils literal notranslate"><span class="pre">6</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">star_densities</span><span class="p">(</span><span class="m">6</span><span class="p">)</span>
+<span class="c1"># no results :(</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"></div></div>
+</div>
+<p>but <code class="docutils literal notranslate"><span class="pre">6</span></code> is special in other ways, because there is another type of unicursal 6-point star polygon:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">6</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">slice</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_path</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/5d414099c0a6f63090ac0d5d3a3f02d806456abb229a6f162d8e492793b8ba3f.png"><img alt="../../_images/5d414099c0a6f63090ac0d5d3a3f02d806456abb229a6f162d8e492793b8ba3f.png" src="../../_images/5d414099c0a6f63090ac0d5d3a3f02d806456abb229a6f162d8e492793b8ba3f.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>This one is different because the number of “skipped” points varies from one point to the next, but there is a pattern to it, see if you can figure it out.</p>
+<p><strong>Bonus 2</strong>: Coloring the star</p>
+<p>So far we only drew the skeleton of the star, we can make it look nicer by adding some colors:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">13</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">star_path_reorder</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_path</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">lineend</span><span class="o">=</span><span class="s">&#39;round&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_path</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">p</span><span class="p">),</span><span class="n">linewidth</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">lineend</span><span class="o">=</span><span class="s">&#39;round&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_color_viridis_c</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="s">&#39;turbo&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/886f028f2a19f507803f893ec7d6cf7d2c95638dc9de1fe5d061246974956b02.png"><img alt="../../_images/886f028f2a19f507803f893ec7d6cf7d2c95638dc9de1fe5d061246974956b02.png" src="../../_images/886f028f2a19f507803f893ec7d6cf7d2c95638dc9de1fe5d061246974956b02.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>Note that we call <code class="docutils literal notranslate"><span class="pre">geom_path</span></code> two times, to create the border effect we are actually drawing the star twice, first thicker in black then thinner with different colors for each line.</p>
+<p>However the effect does not quite work as intended because all the colors are draw after the black lines,</p>
+<p>to fix this we need to change how we are drawing it, instead of a list of points we can instead generate a list of segments, this allows more control on how each segment is draw.</p>
+<p>First, to convert the list of points into segments we can use <code class="docutils literal notranslate"><span class="pre">dplyr::lead</span></code>, which gives us access to the value of the next row.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">star_segments</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">    </span><span class="nf">circle_points</span><span class="p">(</span><span class="m">13</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">star_path_reorder</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="c1"># xend,yend is the x,y of the next row</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">xend</span><span class="o">=</span><span class="nf">lead</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">yend</span><span class="o">=</span><span class="nf">lead</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="c1"># omits the last row, because the next to last row is already connecting the last point</span>
+<span class="w">    </span><span class="nf">na.omit</span><span class="p">()</span>
+
+<span class="nf">head</span><span class="p">(</span><span class="n">star_segments</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 6</caption>
+<thead>
+	<tr><th scope=col>N</th><th scope=col>p</th><th scope=col>x</th><th scope=col>y</th><th scope=col>xend</th><th scope=col>yend</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>13</td><td> 1</td><td> 0.885456025653210</td><td> 4.64723172043769e-01</td><td>-0.970941817426052</td><td> 2.39315664287558e-01</td></tr>
+	<tr><td>13</td><td> 6</td><td>-0.970941817426052</td><td> 2.39315664287558e-01</td><td> 0.568064746731155</td><td>-8.22983865893657e-01</td></tr>
+	<tr><td>13</td><td>11</td><td> 0.568064746731155</td><td>-8.22983865893657e-01</td><td> 0.120536680255323</td><td> 9.92708874098054e-01</td></tr>
+	<tr><td>13</td><td> 3</td><td> 0.120536680255323</td><td> 9.92708874098054e-01</td><td>-0.748510748171101</td><td>-6.63122658240795e-01</td></tr>
+	<tr><td>13</td><td> 8</td><td>-0.748510748171101</td><td>-6.63122658240795e-01</td><td> 1.000000000000000</td><td> 6.43249059870655e-16</td></tr>
+	<tr><td>13</td><td>13</td><td> 1.000000000000000</td><td> 6.43249059870655e-16</td><td>-0.748510748171101</td><td> 6.63122658240795e-01</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Now we can use <code class="docutils literal notranslate"><span class="pre">geom_segment</span></code> to plot our segments:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">star_segments</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="c1"># every row is repeated for size 5 and 2</span>
+<span class="nf">crossing</span><span class="p">(</span><span class="n">sz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="c1"># map line sizes to colors</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">sz</span><span class="o">==</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;black&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">viridis</span><span class="o">::</span><span class="nf">turbo</span><span class="p">(</span><span class="m">13</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">arrange</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="nf">desc</span><span class="p">(</span><span class="n">sz</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">xend</span><span class="o">=</span><span class="n">xend</span><span class="p">,</span><span class="w"> </span><span class="n">yend</span><span class="o">=</span><span class="n">yend</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_segment</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="n">sz</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">),</span><span class="w"> </span><span class="n">lineend</span><span class="o">=</span><span class="s">&#39;round&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_linewidth_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_color_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme_void</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/2304d4d24ee6b5329938fdfab42dff7ac74a794ac02511c668670c80205a2836.png"><img alt="../../_images/2304d4d24ee6b5329938fdfab42dff7ac74a794ac02511c668670c80205a2836.png" src="../../_images/2304d4d24ee6b5329938fdfab42dff7ac74a794ac02511c668670c80205a2836.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p><strong>Bonus 3</strong>: bezier star polygons</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggforce</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Its not possible not draw a 3-point star polygon, you only get a triangle, however if relax the constraint of using only straight lines:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">circle_points</span><span class="p">(</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">slice</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">g</span><span class="o">=</span><span class="nf">sort</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">group</span><span class="o">=</span><span class="n">g</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_bezier</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/3614f6e1c5b80bde79cc09a4c12198b7ca6314e0e8db4e2375f03b950b46c995.png"><img alt="../../_images/3614f6e1c5b80bde79cc09a4c12198b7ca6314e0e8db4e2375f03b950b46c995.png" src="../../_images/3614f6e1c5b80bde79cc09a4c12198b7ca6314e0e8db4e2375f03b950b46c995.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<p>We get a shape that looks similar to a <a class="reference external" href="https://en.wikipedia.org/wiki/Triquetra">Triquetra</a> or a <a class="reference external" href="https://en.wikipedia.org/wiki/Trefoil_knot">Trefoil knot</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">star_bezier_reorder</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">        </span><span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="m">-1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">        </span><span class="nf">accumulate</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">z</span><span class="o">&lt;-</span><span class="nf">tail</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="m">1</span><span class="p">);</span><span class="w"> </span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">z</span><span class="m">-1</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">z</span><span class="m">+1</span><span class="p">)</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">))</span><span class="m">+1</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">.init</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">list_c</span><span class="p">()</span>
+<span class="w">    </span><span class="n">points</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">slice</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="nf">sort</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">),</span><span class="w"> </span><span class="m">3</span><span class="p">)))</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">star_bezier2_reorder</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">        </span><span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="m">-1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">        </span><span class="nf">accumulate</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">z</span><span class="o">&lt;-</span><span class="nf">tail</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="m">1</span><span class="p">);</span><span class="w"> </span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">z</span><span class="m">-1</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">z</span><span class="m">+1</span><span class="p">,</span><span class="n">z</span><span class="m">+2</span><span class="p">)</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">))</span><span class="m">+1</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">.init</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">list_c</span><span class="p">()</span>
+<span class="w">    </span><span class="n">points</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">slice</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="nf">sort</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">)))</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">star_bezier3_reorder</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">if</span><span class="p">(</span><span class="n">d</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">            </span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">            </span><span class="nf">accumulate</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">z</span><span class="o">&lt;-</span><span class="nf">tail</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="m">1</span><span class="p">);</span><span class="w"> </span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">z</span><span class="m">-1</span><span class="p">,</span><span class="n">z</span><span class="o">+</span><span class="n">d</span><span class="m">-2</span><span class="p">,</span><span class="n">z</span><span class="o">+</span><span class="n">d</span><span class="m">-1</span><span class="p">)</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">))</span><span class="m">+1</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">.init</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">            </span><span class="nf">tail</span><span class="p">(</span><span class="m">-1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">            </span><span class="nf">list_c</span><span class="p">()</span>
+<span class="w">        </span><span class="n">points</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">            </span><span class="nf">slice</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">            </span><span class="nf">mutate</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="nf">sort</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">),</span><span class="w"> </span><span class="m">3</span><span class="p">)),</span><span class="w"> </span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">            </span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">            </span><span class="nf">accumulate</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">z</span><span class="o">&lt;-</span><span class="nf">tail</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="m">1</span><span class="p">);</span><span class="w"> </span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">z</span><span class="m">-1</span><span class="p">,</span><span class="n">z</span><span class="o">+</span><span class="n">d</span><span class="m">-3</span><span class="p">,</span><span class="n">z</span><span class="o">+</span><span class="n">d</span><span class="m">-2</span><span class="p">,</span><span class="n">z</span><span class="o">+</span><span class="n">d</span><span class="m">-1</span><span class="p">)</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">))</span><span class="m">+1</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">.init</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">            </span><span class="nf">tail</span><span class="p">(</span><span class="m">-1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">            </span><span class="nf">list_c</span><span class="p">()</span>
+<span class="w">        </span><span class="n">points</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">            </span><span class="nf">slice</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">            </span><span class="nf">mutate</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="nf">sort</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">points</span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">)),</span><span class="w"> </span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">map_df</span><span class="p">(</span><span class="m">3</span><span class="o">:</span><span class="m">9</span><span class="p">,</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">circle_points</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">star_bezier3_reorder</span><span class="p">(</span><span class="n">N</span><span class="m">-1</span><span class="p">)</span>
+<span class="p">})</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_bezier</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/1de1a5d6cd91b82594abb06eb1e52489a398e3c71b908f735b287b95ade79873.png"><img alt="../../_images/1de1a5d6cd91b82594abb06eb1e52489a398e3c71b908f735b287b95ade79873.png" src="../../_images/1de1a5d6cd91b82594abb06eb1e52489a398e3c71b908f735b287b95ade79873.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">map_df</span><span class="p">(</span><span class="m">3</span><span class="o">:</span><span class="m">9</span><span class="p">,</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">map_df</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nf">circle_points</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">star_bezier3_reorder</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">})</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_bezier</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_grid</span><span class="p">(</span><span class="n">d</span><span class="o">~</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/ec59ee5a60277f7df24628bdc41204c12431f896338d7f19b24bfbe7d6adef93.png"><img alt="../../_images/ec59ee5a60277f7df24628bdc41204c12431f896338d7f19b24bfbe7d6adef93.png" src="../../_images/ec59ee5a60277f7df24628bdc41204c12431f896338d7f19b24bfbe7d6adef93.png" style="width: 540px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./src/fun"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mandelbrot.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mandelbrot Set</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By rvalieris
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

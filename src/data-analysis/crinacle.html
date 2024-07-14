@@ -1,0 +1,990 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Crinacle IEMs Ranking &#8212; notebooks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=8bd22a0a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/data-analysis/crinacle';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Mahjong Yaku stats" href="mahjong-yaku-stats.html" />
+    <link rel="prev" title="Scale Transforms" href="../ggplot2/scale_transforms.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">notebooks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    notebooks
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">ggplot2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/clustered_heatmap.html">Clustered Heatmap</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/color_palettes.html">Color Palettes</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/colors2d.html">2D Color Palette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_1D.html">Density 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_2D.html">Density 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/plot_composition.html">Composing multiple plots in a single page</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/scale_transforms.html">Scale Transforms</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Crinacle IEMs Ranking</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="mahjong-yaku-stats.html">Mahjong Yaku stats</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../methods/glmnet_cox.html">Regularized Cox Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methods/pca-visualization-in-python.html">Practical Guide to PCA visualization in Python</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/pca-visualization-in-r.html">Practical Guide to PCA visualization in R</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_shap.html">Tidy SHAP</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part1.html">Comparing survival prediction models with tidymodels</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part2.html">Comparing survival prediction models with tidymodels, part 2</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fun</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fun/dragon_curve.html">Dragon Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/mandelbrot.html">Mandelbrot Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/star.html">Drawing star polygons with ggplot2</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/rvalieris/notebooks" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Crinacle IEMs Ranking</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Crinacle IEMs Ranking</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">data preprocessing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grade-correlations">Grade Correlations</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-distribution">Rank distribution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#price-distribution">Price distribution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#price-x-rank">Price x Rank</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-tws">What about TWS ?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#brands">Brands</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-model-for-rank">Regression model for Rank</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggrepel</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggbeeswarm</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">patchwork</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">pheatmap</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">broom</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nf">theme_set</span><span class="p">(</span><span class="nf">theme_cowplot</span><span class="p">())</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">15</span><span class="p">,</span><span class="n">repr.plot.height</span><span class="o">=</span><span class="m">9</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="m">150</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="crinacle-iems-ranking">
+<h1>Crinacle IEMs Ranking<a class="headerlink" href="#crinacle-iems-ranking" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-preprocessing">
+<h1>data preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># data downloaded from the site on 2023-11-17</span>
+<span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="s">&quot;crinacle.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">col_types</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">name_repair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;universal&#39;</span><span class="p">)</span>
+
+<span class="c1"># group signatures into fewer categories</span>
+<span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mutate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">sig_group</span><span class="o">=</span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;Balanced&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Signature</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Neutral&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Signature</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Mid-centric&quot;</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Neutral&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Signature</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Bassy&quot;</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Warm&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;Dark&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Signature</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Warm&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;Warm&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Signature</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Warm&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;Bright&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Signature</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Bright&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;failure&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Signature</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Unique&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Signature</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Variable&quot;</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Unique&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Signature</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;W-shaped&quot;</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Unique&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;U-shape&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Signature</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;U-shaped&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;V-shape&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Signature</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;V-shaped&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;Neutral with&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Signature</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Neutral&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Signature</span>
+<span class="p">))</span>
+
+<span class="n">rank_levels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
+<span class="w">    </span><span class="s">&#39;N/A&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;DQ&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;F&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;E&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s">&#39;D-&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;D&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;D+&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&#39;C-&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;C+&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&#39;B-&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;B&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;B+&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&#39;A-&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;A+&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&#39;S-&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;S&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;S+&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># transform ranks into ordered factors</span>
+<span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mutate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">Rank</span><span class="o">=</span><span class="nf">ordered</span><span class="p">(</span><span class="n">Rank</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="o">=</span><span class="n">rank_levels</span><span class="p">),</span>
+<span class="w">    </span><span class="n">Technical.Grade</span><span class="o">=</span><span class="nf">ordered</span><span class="p">(</span><span class="n">Technical.Grade</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="o">=</span><span class="n">rank_levels</span><span class="p">),</span>
+<span class="w">    </span><span class="n">Tone.Grade</span><span class="o">=</span><span class="nf">ordered</span><span class="p">(</span><span class="n">Tone.Grade</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="o">=</span><span class="n">rank_levels</span><span class="p">),</span>
+<span class="w">    </span><span class="n">Value.Rating</span><span class="o">=</span><span class="nf">ordered</span><span class="p">(</span><span class="nf">replace_na</span><span class="p">(</span><span class="n">Value.Rating</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">levels</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;★&#39;</span><span class="p">,</span><span class="s">&#39;★★&#39;</span><span class="p">,</span><span class="s">&#39;★★★&#39;</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mutate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span>
+<span class="w">    </span><span class="c1"># extract brand from model</span>
+<span class="w">    </span><span class="n">brand</span><span class="o">=</span><span class="nf">str_extract</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;^\\S+&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="c1"># number of total drivers</span>
+<span class="w">    </span><span class="n">n_drivers</span><span class="o">=</span><span class="nf">unlist</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nf">str_split</span><span class="p">(</span><span class="n">Setup</span><span class="p">,</span><span class="w"> </span><span class="s">&#39; &#39;</span><span class="p">),</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">replace_na</span><span class="p">(</span><span class="nf">str_extract</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;\\d+&#39;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p">))))),</span>
+<span class="w">    </span><span class="c1"># number of distict drivers</span>
+<span class="w">    </span><span class="n">n_setup</span><span class="o">=</span><span class="nf">lengths</span><span class="p">(</span><span class="nf">str_split</span><span class="p">(</span><span class="n">Setup</span><span class="p">,</span><span class="w"> </span><span class="s">&#39; &#39;</span><span class="p">)),</span>
+<span class="w">    </span><span class="c1"># group setup into fewer categories</span>
+<span class="w">    </span><span class="n">setup_group</span><span class="o">=</span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">        </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^\\d+DD$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Setup</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;DD&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^\\d+BA$&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;\\/&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">Setup</span><span class="p">))</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;BA&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;\\?|MS|Piezo|BC|Exciter|AMT&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Setup</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Others&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Setup</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#39;Electrostatic&#39;</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&#39;EST&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">n_setup</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&quot;Hybrid&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">n_setup</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s">&#39;Tribrid&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Setup</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># rename some columns</span>
+<span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rename</span><span class="p">(</span><span class="n">a</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Price_MSRP</span><span class="o">=</span><span class="n">Pricesort</span>
+<span class="p">)</span>
+
+<span class="c1"># remove discontinued/free stuff</span>
+<span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Price_MSRP</span><span class="o">&gt;</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">Price_MSRP</span><span class="o">&lt;</span><span class="m">99999</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>New names:
+<span class=" -Color -Color-Cyan">•</span> `Value Rating` -&gt; `Value.Rating`
+<span class=" -Color -Color-Cyan">•</span> `Price (MSRP)` -&gt; `Price..MSRP.`
+<span class=" -Color -Color-Cyan">•</span> `Tone Grade` -&gt; `Tone.Grade`
+<span class=" -Color -Color-Cyan">•</span> `Technical Grade` -&gt; `Technical.Grade`
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 19</caption>
+<thead>
+	<tr><th scope=col>Rank</th><th scope=col>Value.Rating</th><th scope=col>Model</th><th scope=col>Price..MSRP.</th><th scope=col>Signature</th><th scope=col>Comments</th><th scope=col>Tone.Grade</th><th scope=col>Technical.Grade</th><th scope=col>Setup</th><th scope=col>Status</th><th scope=col>Ranksort</th><th scope=col>Tonesort</th><th scope=col>Techsort</th><th scope=col>Price_MSRP</th><th scope=col>sig_group</th><th scope=col>brand</th><th scope=col>n_drivers</th><th scope=col>n_setup</th><th scope=col>setup_group</th></tr>
+	<tr><th scope=col>&lt;ord&gt;</th><th scope=col>&lt;ord&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;ord&gt;</th><th scope=col>&lt;ord&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>S-</td><td>★★ </td><td>Hidition Viento(B-mode, custom)</td><td>950 </td><td><span style=white-space:pre-wrap>Variable               </span></td><td>Best-in-class tuning and tonal balance with near-perfect coherency. Recommended as a custom-fit. </td><td>S+</td><td>A+</td><td><span style=white-space:pre-wrap>4BA         </span></td><td><span style=white-space:pre-wrap>Zeppelin &amp; Co demo unit          </span></td><td>14</td><td> 1</td><td>13</td><td> 950</td><td><span style=white-space:pre-wrap>Unique  </span></td><td>Hidition </td><td> 4</td><td>1</td><td><span style=white-space:pre-wrap>BA     </span></td></tr>
+	<tr><td>S-</td><td>★★ </td><td>ThieAudio Monarch Mk2          </td><td>1000</td><td>Neutral with bass boost</td><td>NA                                                                                               </td><td>S+</td><td>A+</td><td>2EST 6BA 1DD</td><td>Available for demo at The Hangout</td><td>14</td><td> 1</td><td>13</td><td>1000</td><td>Neutral </td><td>ThieAudio</td><td> 9</td><td>3</td><td>Tribrid</td></tr>
+	<tr><td>A+</td><td>★  </td><td>Hidition NT6                   </td><td>1050</td><td>Neutral                </td><td>If Etymotic made a multi-BA IEM, this would be the closest to that dream                         </td><td>S-</td><td>A+</td><td>6BA         </td><td>Null Audio demo unit             </td><td>20</td><td> 7</td><td>13</td><td>1050</td><td>Neutral </td><td>Hidition </td><td> 6</td><td>1</td><td>BA     </td></tr>
+	<tr><td>A+</td><td>★  </td><td>ThieAudio V16 Divinity         </td><td>1500</td><td>Neutral with bass boost</td><td>NA                                                                                               </td><td>S-</td><td>A+</td><td>16BA        </td><td>Available for demo at The Hangout</td><td>20</td><td> 7</td><td>13</td><td>1500</td><td>Neutral </td><td>ThieAudio</td><td>16</td><td>1</td><td>BA     </td></tr>
+	<tr><td>A+</td><td>★  </td><td>Sony IER-Z1R                   </td><td>1700</td><td>Mild V-shape           </td><td>Extended yet natural treble, realistic sub-bass focus and spacious imaging capabilities.         </td><td>A+</td><td>S-</td><td>1BA 2DD     </td><td>Personal unit                    </td><td>20</td><td>13</td><td> 7</td><td>1700</td><td>V-shaped</td><td>Sony     </td><td> 3</td><td>2</td><td>Hybrid </td></tr>
+	<tr><td>A+</td><td>★★★</td><td>Moondrop Variations            </td><td>520 </td><td>U-shaped               </td><td>Sub-bass-focused signature with Moondrop's clean tuning makes this one of the best $500 tribrids.</td><td>S </td><td>A </td><td>2EST 2BA 1DD</td><td>Available for demo at The Hangout</td><td>24</td><td> 3</td><td>21</td><td> 520</td><td>U-shaped</td><td>Moondrop </td><td> 5</td><td>3</td><td>Tribrid</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="grade-correlations">
+<h1>Grade Correlations<a class="headerlink" href="#grade-correlations" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">select</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Model</span><span class="p">,</span><span class="w"> </span><span class="n">Rank</span><span class="p">,</span><span class="w"> </span><span class="n">Technical.Grade</span><span class="p">,</span><span class="w"> </span><span class="n">Tone.Grade</span><span class="p">,</span><span class="w"> </span><span class="n">Value.Rating</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">pivot_longer</span><span class="p">(</span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;v&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span><span class="w"> </span><span class="n">Value.Rating</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="nf">inner_join</span><span class="p">(</span><span class="nf">eval</span><span class="p">(</span><span class="n">.</span><span class="p">),</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;Model&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Value.Rating&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">relationship</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;many-to-many&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="n">k.x</span><span class="o">&lt;</span><span class="n">k.y</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="nf">paste</span><span class="p">(</span><span class="n">k.x</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="n">k.y</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="nf">abs</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">v.x</span><span class="p">)</span><span class="o">-</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">v.y</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">arrange</span><span class="p">(</span><span class="n">Value.Rating</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">b</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">v.x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">v.y</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">Value.Rating</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;gray&#39;</span><span class="p">,</span><span class="s">&#39;#c7e9c0&#39;</span><span class="p">,</span><span class="s">&#39;#74c476&#39;</span><span class="p">,</span><span class="s">&#39;#006d2c&#39;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_jitter</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.y</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">hjust</span><span class="o">=</span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_label_repel</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nf">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="o">&gt;</span><span class="m">7</span><span class="p">),</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">Model</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="o">=</span><span class="nf">position_jitter</span><span class="p">(),</span><span class="w"> </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/d97920bcbe739e0c4893fd236e7c1d6c0c6c8595a01f340e86dbc8c1726fc693.png"><img alt="../../_images/d97920bcbe739e0c4893fd236e7c1d6c0c6c8595a01f340e86dbc8c1726fc693.png" src="../../_images/d97920bcbe739e0c4893fd236e7c1d6c0c6c8595a01f340e86dbc8c1726fc693.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<p>the table includes 3 different grades: Technical, Tone, and overall Rank.</p>
+<p>as we can see in the plots, the grades correlate very well with each other, with the exception of a few models labeled in the graph.</p>
+<p>with this in mind, in the following analyses, I will focus just on the overall ranking.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="rank-distribution">
+<h1>Rank distribution<a class="headerlink" href="#rank-distribution" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Rank</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">sig_group</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_bar</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Rank</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">sig_group</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_bar</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="s">&#39;fill&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&#39;frequency&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+<span class="n">p1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">plot_layout</span><span class="p">(</span><span class="n">guides</span><span class="o">=</span><span class="s">&#39;collect&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/429a3e466f75c6ee453836f98291e5bd0e6f9b4a7ab2c9a92aa559463d1f8886.png"><img alt="../../_images/429a3e466f75c6ee453836f98291e5bd0e6f9b4a7ab2c9a92aa559463d1f8886.png" src="../../_images/429a3e466f75c6ee453836f98291e5bd0e6f9b4a7ab2c9a92aa559463d1f8886.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<p>on the left we can see the total amount of headphones by rank, we see a somewhat normally-shaped distribution, with C-Ranks as the most common headphones in the table.</p>
+<p>on the right we see the relative frequency of sound signatures by rank,
+note how warm signatures are frequent at the lower ranks but go down in frequency, while neutral, V-shaped and “unique” signatures dominate the higher ranks.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="price-distribution">
+<h1>Price distribution<a class="headerlink" href="#price-distribution" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Price_MSRP</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">Rank</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_histogram</span><span class="p">(</span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_x_log10</span><span class="p">()</span>
+
+<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">Rank</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">Price_MSRP</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_boxplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_x_log10</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="o">=</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;darkblue&#39;</span><span class="p">)</span>
+
+<span class="n">p1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Orientation inferred to be along y-axis; override with `position_quasirandom(orientation = &#39;x&#39;)`
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/67d4cab65697e8f7749af63dd86341d43c322b0205a6005491f7eafa8d79c33d.png"><img alt="../../_images/67d4cab65697e8f7749af63dd86341d43c322b0205a6005491f7eafa8d79c33d.png" src="../../_images/67d4cab65697e8f7749af63dd86341d43c322b0205a6005491f7eafa8d79c33d.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<p>on the left, we can see the overall price distribution of all headphones,
+note that the x-axes here are log-scaled, we can see headphones for as low as 5 and as high as 10k, but most headphones, are priced around 100~1000.</p>
+<p>on the right, we can see the price breakdown by rank,
+note how even though there is a tendency for higher-ranked headphones to be more expensive you shouldn’t have to spend more than 1k to have the best-sounding headphones.</p>
+<p>There still is a lot of variation even among headphones of the same rank,
+as an example, let’s look at the price variation of rank B headphones:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Rank</span><span class="o">==</span><span class="s">&#39;B&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">with</span><span class="p">(</span><span class="nf">summary</span><span class="p">(</span><span class="n">Price_MSRP</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+     20     300     700     896    1100    3800 
+</pre></div>
+</div>
+</div>
+</div>
+<p>even though the median price is 700, you can find headphones at this rank for as low as 20 and as high as 3800 !!</p>
+<p>obviously, there is more to the price than just sound, but since this dataset only grades the sonic performance,
+a natural question that follows is: what is the best price for performance that we can get?</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="price-x-rank">
+<h1>Price x Rank<a class="headerlink" href="#price-x-rank" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">arrange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Price_MSRP</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">group_by</span><span class="p">(</span><span class="n">Rank</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">pr</span><span class="o">=</span><span class="nf">row_number</span><span class="p">())</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">ungroup</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">Rank</span><span class="o">&gt;=</span><span class="s">&quot;C&quot;</span><span class="p">)</span>
+
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">Rank</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">Price_MSRP</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">Value.Rating</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_quasirandom</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_color_hue</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_label_repel</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nf">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">pr</span><span class="o">&lt;</span><span class="m">10</span><span class="p">),</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">Model</span><span class="p">),</span><span class="w"> </span><span class="n">min.segment.length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">max.overlaps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">position_quasirandom</span><span class="p">(),</span><span class="w"> </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_x_log10</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Orientation inferred to be along y-axis; override with `position_quasirandom(orientation = &#39;x&#39;)`
+Orientation inferred to be along y-axis; override with `position_quasirandom(orientation = &#39;x&#39;)`
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/7dfc64b169024d5b651993327a086558a8900592b0b622e00f361352644e6fca.png"><img alt="../../_images/7dfc64b169024d5b651993327a086558a8900592b0b622e00f361352644e6fca.png" src="../../_images/7dfc64b169024d5b651993327a086558a8900592b0b622e00f361352644e6fca.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<p>here we have a scatter plot of the Rank x Price,
+I only included C-Rank and above because I think if you only care about sound performance there is nothing worth the money below this rank.</p>
+<p>the top 10 cheapest headphones of each rank are labeled in the graph, and the colors indicate the “Value Rating” from the dataset.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-about-tws">
+<h1>What about TWS ?<a class="headerlink" href="#what-about-tws" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;Sams|Appl&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Model</span><span class="p">)</span><span class="o">|</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;TWS&quot;</span><span class="p">,</span><span class="n">Comments</span><span class="p">),</span><span class="w"> </span><span class="n">pr</span><span class="o">&lt;</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">Price_MSRP</span><span class="o">&gt;</span><span class="m">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 20</caption>
+<thead>
+	<tr><th scope=col>Rank</th><th scope=col>Value.Rating</th><th scope=col>Model</th><th scope=col>Price..MSRP.</th><th scope=col>Signature</th><th scope=col>Comments</th><th scope=col>Tone.Grade</th><th scope=col>Technical.Grade</th><th scope=col>Setup</th><th scope=col>Status</th><th scope=col>Ranksort</th><th scope=col>Tonesort</th><th scope=col>Techsort</th><th scope=col>Price_MSRP</th><th scope=col>sig_group</th><th scope=col>brand</th><th scope=col>n_drivers</th><th scope=col>n_setup</th><th scope=col>setup_group</th><th scope=col>pr</th></tr>
+	<tr><th scope=col>&lt;ord&gt;</th><th scope=col>&lt;ord&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;ord&gt;</th><th scope=col>&lt;ord&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>B </td><td>★★★</td><td>Lypertek PurePlay Z3 2.0(PurePlay Z3)(Tevi)</td><td>90 </td><td>Neutral with bass boost</td><td>Probably the closest thing to an ER2XR in TWS form.                                                 </td><td>A </td><td>C+</td><td>DD </td><td>Jaben Melbourne demo unit        </td><td>112</td><td>21</td><td>91</td><td> 90</td><td>Neutral </td><td>Lypertek</td><td>1</td><td>1</td><td>DD</td><td>5</td></tr>
+	<tr><td>B </td><td>★★ </td><td>Samsung Galaxy Buds                        </td><td>130</td><td>Neutral                </td><td>A surprisingly well-tuned TWS with the technical chops to boot.                                     </td><td>A-</td><td>B </td><td>DD </td><td>Personal unit                    </td><td> 88</td><td>31</td><td>57</td><td>130</td><td>Neutral </td><td>Samsung </td><td>1</td><td>1</td><td>DD</td><td>7</td></tr>
+	<tr><td>B </td><td>★★ </td><td>Samsung Galaxy Buds+                       </td><td>150</td><td>U-shaped               </td><td>Tuned even closer to the Harman IE target compared to the original.                                 </td><td>B+</td><td>B </td><td>2DD</td><td>Personal unit                    </td><td>100</td><td>43</td><td>57</td><td>150</td><td>U-shaped</td><td>Samsung </td><td>2</td><td>1</td><td>DD</td><td>8</td></tr>
+	<tr><td>B+</td><td>★★ </td><td>Samsung Galaxy Buds Pro                    </td><td>200</td><td>Warm V-shape           </td><td>More lower mids than your average Harman-tuned IEM, but works in its favour by being more pleasant. </td><td>A+</td><td>B </td><td>2DD</td><td>Available for demo at The Hangout</td><td> 70</td><td>13</td><td>57</td><td>200</td><td>Warm    </td><td>Samsung </td><td>2</td><td>1</td><td>DD</td><td>6</td></tr>
+	<tr><td>B+</td><td>★★ </td><td>Samsung Galaxy Buds2 Pro                   </td><td>230</td><td>U-shaped               </td><td>A less shouty interpretation of Harman with the same controlled yet impactful bass response.        </td><td>S-</td><td>B </td><td>2DD</td><td>Available for demo at The Hangout</td><td> 64</td><td> 7</td><td>57</td><td>230</td><td>U-shaped</td><td>Samsung </td><td>2</td><td>1</td><td>DD</td><td>8</td></tr>
+	<tr><td>B+</td><td>★★ </td><td>Apple AirPods Pro 2                        </td><td>250</td><td>Mild V-shape           </td><td>A more exciting sound signature in comparison to its predecessor, with little in terms of drawbacks.</td><td>A+</td><td>B </td><td>DD </td><td>Available for demo at The Hangout</td><td> 70</td><td>13</td><td>57</td><td>250</td><td>V-shaped</td><td>Apple   </td><td>1</td><td>1</td><td>DD</td><td>9</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Interestingly, some wireless buds make it into the top 10, it’s not the best you can get for the money but it’s up there which I found notable.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="brands">
+<h1>Brands<a class="headerlink" href="#brands" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">Rank</span><span class="o">&gt;</span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pr</span><span class="o">&lt;</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">add_count</span><span class="p">(</span><span class="n">brand</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&#39;total&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">brand</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">Rank</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_bar</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="s">&#39;stack&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/c7f648cab42abab8cb89541517e8c28165556246a1dacc87eff940bc860bbe74.png"><img alt="../../_images/c7f648cab42abab8cb89541517e8c28165556246a1dacc87eff940bc860bbe74.png" src="../../_images/c7f648cab42abab8cb89541517e8c28165556246a1dacc87eff940bc860bbe74.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<p>if we group these selected top 10s by brand, we see that Moondrop appears 11 times across the ranks C and above, followed by ThieAudio.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">n_setup</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Price_MSRP</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="n">n_setup</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_boxplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">scale_y_log10</span><span class="p">()</span>
+
+<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">n_drivers</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Price_MSRP</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_boxplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="n">n_drivers</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">scale_y_log10</span><span class="p">()</span>
+
+<span class="n">p1</span><span class="o">+</span><span class="n">p2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/e78af4d901352b0cd6233ab2ab93231ab0d36f3edc67879a7a3da718641fd605.png"><img alt="../../_images/e78af4d901352b0cd6233ab2ab93231ab0d36f3edc67879a7a3da718641fd605.png" src="../../_images/e78af4d901352b0cd6233ab2ab93231ab0d36f3edc67879a7a3da718641fd605.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<p>there is a clear correlation between the total number of drivers, drivers setup, and the price, as expected.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">n_setup</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Rank</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_boxplot</span><span class="p">()</span>
+<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">n_drivers</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Rank</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_boxplot</span><span class="p">()</span>
+
+<span class="n">p1</span><span class="o">+</span><span class="n">p2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/1956986d2220704df7ff4dd55173ae5c63dc43e9f2649adfd8aaed094269609c.png"><img alt="../../_images/1956986d2220704df7ff4dd55173ae5c63dc43e9f2649adfd8aaed094269609c.png" src="../../_images/1956986d2220704df7ff4dd55173ae5c63dc43e9f2649adfd8aaed094269609c.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<p>more drivers do not necessarily mean better sound, although highly ranked headphones tend to have more drivers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggplot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Rank</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Price_MSRP</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">Value.Rating</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_jitter</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">setup_group</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_y_log10</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/eda31ee10c428fc66317189058a81872386b054164d8121aae71a632d452aca1.png"><img alt="../../_images/eda31ee10c428fc66317189058a81872386b054164d8121aae71a632d452aca1.png" src="../../_images/eda31ee10c428fc66317189058a81872386b054164d8121aae71a632d452aca1.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">setup_group</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Rank</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">setup_group</span><span class="p">,</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">Rank</span><span class="p">)),</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="n">setup_group</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">outlier.shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_jitter</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="m">0.2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;gray30&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/720549157123d803c0ac46713d410e80bd1c05432f38bf006fe3c290402e0794.png"><img alt="../../_images/720549157123d803c0ac46713d410e80bd1c05432f38bf006fe3c290402e0794.png" src="../../_images/720549157123d803c0ac46713d410e80bd1c05432f38bf006fe3c290402e0794.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="regression-model-for-rank">
+<h1>Regression model for Rank<a class="headerlink" href="#regression-model-for-rank" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">mutate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">n_DD</span><span class="o">=</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;DD&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Setup</span><span class="p">),</span><span class="w"> </span><span class="nf">replace_na</span><span class="p">(</span><span class="nf">str_extract</span><span class="p">(</span><span class="n">Setup</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;(\\d+)DD&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p">),</span><span class="w"> </span><span class="m">0</span><span class="p">)),</span>
+<span class="w">       </span><span class="n">n_BA</span><span class="o">=</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;BA&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Setup</span><span class="p">),</span><span class="w"> </span><span class="nf">replace_na</span><span class="p">(</span><span class="nf">str_extract</span><span class="p">(</span><span class="n">Setup</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;(\\d+)BA&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p">),</span><span class="w"> </span><span class="m">0</span><span class="p">)),</span>
+<span class="w">       </span><span class="n">n_EST</span><span class="o">=</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;EST|Electrostatic&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Setup</span><span class="p">),</span><span class="w"> </span><span class="nf">replace_na</span><span class="p">(</span><span class="nf">str_extract</span><span class="p">(</span><span class="n">Setup</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;(\\d+)EST&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p">),</span><span class="w"> </span><span class="m">0</span><span class="p">)),</span>
+<span class="w">       </span><span class="n">n_planar</span><span class="o">=</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;Planar&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Setup</span><span class="p">),</span><span class="w"> </span><span class="nf">replace_na</span><span class="p">(</span><span class="nf">str_extract</span><span class="p">(</span><span class="n">Setup</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;(\\d+)Planar&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p">),</span><span class="w"> </span><span class="m">0</span><span class="p">))</span>
+<span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">glm</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">Rank</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">Price_MSRP</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n_drivers</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n_setup</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n_planar</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n_DD</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n_EST</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n_BA</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sig_group</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">setup_group</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span>_<span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;gaussian&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">m</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+glm(formula = as.numeric(Rank) ~ log(Price_MSRP) + n_drivers + 
+    n_setup + n_planar + n_DD + n_EST + n_BA + sig_group + setup_group, 
+    family = &quot;gaussian&quot;, data = mutate(a, n_DD = as.numeric(ifelse(grepl(&quot;DD&quot;, 
+        Setup), replace_na(str_extract(Setup, &quot;(\\d+)DD&quot;, group = 1), 
+        &quot;1&quot;), 0)), n_BA = as.numeric(ifelse(grepl(&quot;BA&quot;, Setup), 
+        replace_na(str_extract(Setup, &quot;(\\d+)BA&quot;, group = 1), 
+            &quot;1&quot;), 0)), n_EST = as.numeric(ifelse(grepl(&quot;EST|Electrostatic&quot;, 
+        Setup), replace_na(str_extract(Setup, &quot;(\\d+)EST&quot;, group = 1), 
+        &quot;1&quot;), 0)), n_planar = as.numeric(ifelse(grepl(&quot;Planar&quot;, 
+        Setup), replace_na(str_extract(Setup, &quot;(\\d+)Planar&quot;, 
+        group = 1), &quot;1&quot;), 0))))
+
+Coefficients:
+                           Estimate       Std. Error  t value   Pr(&gt;|t|)    
+(Intercept)         5.0388646194512  0.7059948937889  7.13725 1.8868e-12 ***
+log(Price_MSRP)     0.3876471381845  0.0702759023098  5.51607 4.4671e-08 ***
+n_drivers          -2.1050299659669  0.5819941972715 -3.61693 0.00031378 ***
+n_setup             1.1794861463120  0.4946853124821  2.38432 0.01730591 *  
+n_planar            0.6001636438329  0.8015013761459  0.74880 0.45416316    
+n_DD                1.5737409820566  0.6235871424272  2.52369 0.01177476 *  
+n_EST               2.1732189427560  0.6015507027739  3.61269 0.00031888 ***
+n_BA                2.2739762780733  0.5791393801483  3.92647 9.2414e-05 ***
+sig_groupNeutral    1.1106529366202  0.2823646301092  3.93340 8.9832e-05 ***
+sig_groupU-shaped   1.8555293224095  0.3691330964797  5.02672 5.9594e-07 ***
+sig_groupUnique    -0.3763688609290  0.4086378940143 -0.92103 0.35726669    
+sig_groupV-shaped   0.7164846781807  0.2681806694116  2.67165 0.00767684 ** 
+sig_groupWarm      -0.5816734492416  0.2728846228803 -2.13157 0.03329753 *  
+setup_groupDD       0.9183154894721  0.3545251992584  2.59027 0.00973667 ** 
+setup_groupEST      1.9803622239615  1.5185396115553  1.30412 0.19250692    
+setup_groupHybrid  -0.2931567125193  0.5374543577266 -0.54545 0.58556898    
+setup_groupOthers   1.1223559977683  0.9857057289061  1.13863 0.25514316    
+setup_groupPlanar   1.8350494465020  0.7869457285812  2.33186 0.01991571 *  
+setup_groupTribrid -0.3794302558383  1.0502003203315 -0.36129 0.71796042    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for gaussian family taken to be 4.44009424513967)
+
+    Null deviance: 5705.946446962  on 970  degrees of freedom
+Residual deviance: 4226.969721373  on 952  degrees of freedom
+  (2 observations deleted due to missingness)
+AIC: 4223.836289681
+
+Number of Fisher Scoring iterations: 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="nf">filter</span><span class="p">(</span><span class="n">term</span><span class="o">!=</span><span class="s">&#39;(Intercept)&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">estimate</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">term</span><span class="p">,</span><span class="w"> </span><span class="n">estimate</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">p.value</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_errorbar</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="n">estimate</span><span class="o">-</span><span class="n">std.error</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="o">=</span><span class="n">estimate</span><span class="o">+</span><span class="n">std.error</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/985a17de91b5ffbe8f544b3bf9b1e20eb6f5c5892e78d6520902e2179e9467b2.png"><img alt="../../_images/985a17de91b5ffbe8f544b3bf9b1e20eb6f5c5892e78d6520902e2179e9467b2.png" src="../../_images/985a17de91b5ffbe8f544b3bf9b1e20eb6f5c5892e78d6520902e2179e9467b2.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+<p>the number of BA, EST, and DD drivers was associated with better ranking but the number of planar drivers did not affect the prediction.</p>
+<p>the number of distinct drivers had a positive effect while the total number of drivers was associated with a worst ranking.</p>
+<p>Neutral, U-shaped, and V-shaped signatures were associated with better rank while Warm signatures were associated with worse rank.</p>
+<p>among different setup groups, Planar, EST, and DD had a positive effect.</p>
+<p>price had a small but significant positive effect on ranking.</p>
+<p>note however that these interpretations are only valid when the model is utilizing all these variables together,
+the interpretation could change if we were to add or remove some of these variables.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./src/data-analysis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../ggplot2/scale_transforms.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Scale Transforms</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="mahjong-yaku-stats.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mahjong Yaku stats</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Crinacle IEMs Ranking</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">data preprocessing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grade-correlations">Grade Correlations</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-distribution">Rank distribution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#price-distribution">Price distribution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#price-x-rank">Price x Rank</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-tws">What about TWS ?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#brands">Brands</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-model-for-rank">Regression model for Rank</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By rvalieris
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
