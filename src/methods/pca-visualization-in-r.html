@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Practical Guide to PCA visualization in R &#8212; notebooks</title>
+    <title>PCA visualization in R &#8212; notebooks</title>
   
   
   
@@ -32,10 +32,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
-    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=975b782d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=2a5f61ea" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Tidy SHAP" href="tidy_shap.html" />
-    <link rel="prev" title="Practical Guide to PCA visualization in Python" href="pca-visualization-in-python.html" />
+    <link rel="prev" title="PCA visualization in Python" href="pca-visualization-in-python.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -223,7 +223,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Methods</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="glmnet_cox.html">Regularized Cox Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-python.html">Practical Guide to PCA visualization in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-python.html">PCA visualization in Python</a></li>
 
 
 
@@ -233,7 +233,7 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Practical Guide to PCA visualization in R</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">PCA visualization in R</a></li>
 
 
 
@@ -244,6 +244,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="tidy_shap.html">Tidy SHAP</a></li>
+
 
 
 
@@ -375,7 +376,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Practical Guide to PCA visualization in R</h1>
+    <h1>PCA visualization in R</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -385,7 +386,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Practical Guide to PCA visualization in R</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">PCA visualization in R</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-pca-decomposition">Run a PCA decomposition</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot-of-observations">Scatter plot of observations</a></li>
@@ -421,10 +422,10 @@ document.write(`
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="practical-guide-to-pca-visualization-in-r">
-<h1>Practical Guide to PCA visualization in R<a class="headerlink" href="#practical-guide-to-pca-visualization-in-r" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="pca-visualization-in-r">
+<h1>PCA visualization in R<a class="headerlink" href="#pca-visualization-in-r" title="Link to this heading">#</a></h1>
 <p>This guide illustrates how to visualize the results of a PCA analysis</p>
-<p>There is a sister notebook to this one in Python here: <a class="reference internal" href="pca-visualization-in-python.html"><span class="std std-doc">Practical Guide to PCA visualization in Python</span></a></p>
+<p>There is a sister notebook to this one in Python here: <a class="reference internal" href="pca-visualization-in-python.html"><span class="std std-doc">PCA visualization in Python</span></a></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="dataset">
 <h1>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h1>
@@ -715,7 +716,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Practical Guide to PCA visualization in Python</p>
+        <p class="prev-next-title">PCA visualization in Python</p>
       </div>
     </a>
     <a class="right-next"
@@ -743,7 +744,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Practical Guide to PCA visualization in R</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">PCA visualization in R</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-pca-decomposition">Run a PCA decomposition</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot-of-observations">Scatter plot of observations</a></li>

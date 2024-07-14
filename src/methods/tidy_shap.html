@@ -32,10 +32,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
-    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=975b782d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=2a5f61ea" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Comparing survival prediction models with tidymodels" href="tidy_survival_part1.html" />
-    <link rel="prev" title="Practical Guide to PCA visualization in R" href="pca-visualization-in-r.html" />
+    <link rel="prev" title="PCA visualization in R" href="pca-visualization-in-r.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -223,7 +223,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Methods</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="glmnet_cox.html">Regularized Cox Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-python.html">Practical Guide to PCA visualization in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-python.html">PCA visualization in Python</a></li>
 
 
 
@@ -233,7 +233,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-r.html">Practical Guide to PCA visualization in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-r.html">PCA visualization in R</a></li>
 
 
 
@@ -244,6 +244,7 @@
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Tidy SHAP</a></li>
+
 
 
 
@@ -392,7 +393,8 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-to-collapse">variables to collapse</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#shapviz">shapviz</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">tidy shap</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">usage</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#plots">plots</a></li>
 </ul>
 
             </nav>
@@ -637,7 +639,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
-<span class="n">shapviz.sv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">shapviz</span><span class="p">(</span>
+<span class="n">sv</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">shapviz</span><span class="p">(</span>
 <span class="w">    </span><span class="nf">extract_fit_engine</span><span class="p">(</span><span class="n">best_fit</span><span class="p">),</span>
 <span class="w">    </span><span class="n">X_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">small_prep</span><span class="p">,</span>
 <span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">small</span><span class="p">,</span>
@@ -649,8 +651,8 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sv_importance</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">show_numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">max_display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
-<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sv_importance</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;beeswarm&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">max_display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sv_importance</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">show_numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">max_display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
+<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sv_importance</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;beeswarm&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">max_display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
 <span class="nf">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -661,12 +663,15 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sv_waterfall</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">row_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sv_dependence</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="o">=</span><span class="s">&#39;Amount&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">color_var</span><span class="o">=</span><span class="s">&#39;Income&#39;</span><span class="p">)</span>
+<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sv_waterfall</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">row_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+
+<span class="nf">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/feecef16d9e3fd588b133fe5c9e7924e98d099495950b4e372b31f472762f0b9.png"><img alt="../../_images/feecef16d9e3fd588b133fe5c9e7924e98d099495950b4e372b31f472762f0b9.png" src="../../_images/feecef16d9e3fd588b133fe5c9e7924e98d099495950b4e372b31f472762f0b9.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/3e5baa154d54bb3bfb8e6c7a8f9da18cf1017a3de63ac422fdd818221b8d7ae4.png"><img alt="../../_images/3e5baa154d54bb3bfb8e6c7a8f9da18cf1017a3de63ac422fdd818221b8d7ae4.png" src="../../_images/3e5baa154d54bb3bfb8e6c7a8f9da18cf1017a3de63ac422fdd818221b8d7ae4.png" style="width: 900px; height: 540px;" /></a>
 </div>
 </div>
 </section>
@@ -702,12 +707,79 @@ document.write(`
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="example">
-<h1>example<a class="headerlink" href="#example" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="usage">
+<h1>usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">sv</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">head</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 5</caption>
+<thead>
+	<tr><th scope=col>row_index</th><th scope=col>var</th><th scope=col>shap</th><th scope=col>importance</th><th scope=col>baseline</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>1</td><td>Seniority</td><td> 0.6657209992408752</td><td>0.5135692869247869</td><td>-1.00632798671722</td></tr>
+	<tr><td>1</td><td>Time     </td><td> 0.0617356821894646</td><td>0.1089294210467488</td><td>-1.00632798671722</td></tr>
+	<tr><td>1</td><td>Age      </td><td>-0.0729636922478676</td><td>0.0532231391973328</td><td>-1.00632798671722</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is.factor</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">head</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 6</caption>
+<thead>
+	<tr><th scope=col>row_index</th><th scope=col>var</th><th scope=col>value</th><th scope=col>shap</th><th scope=col>importance</th><th scope=col>baseline</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>1</td><td>Home   </td><td>parents</td><td>-0.10859897080808878</td><td>0.1306315630756435</td><td>-1.00632798671722</td></tr>
+	<tr><td>1</td><td>Marital</td><td>single </td><td>-0.00880320451688021</td><td>0.0300340787640525</td><td>-1.00632798671722</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">transform_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.character</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">head</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 2 × 6</caption>
+<thead>
+	<tr><th scope=col>row_index</th><th scope=col>var</th><th scope=col>value</th><th scope=col>shap</th><th scope=col>importance</th><th scope=col>baseline</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>1</td><td>Seniority</td><td>0 </td><td>0.6657209992408752</td><td>0.513569286924787</td><td>-1.00632798671722</td></tr>
+	<tr><td>1</td><td>Time     </td><td>60</td><td>0.0617356821894646</td><td>0.108929421046749</td><td>-1.00632798671722</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="plots">
+<h1>plots<a class="headerlink" href="#plots" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span>
-<span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">tidy_shap</span><span class="p">(</span><span class="n">sv</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">mutate</span><span class="p">(</span><span class="n">sign</span><span class="o">=</span><span class="nf">factor</span><span class="p">(</span><span class="nf">sign</span><span class="p">(</span><span class="n">shap</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">summarize</span><span class="p">(</span>
 <span class="w">    </span><span class="n">importance</span><span class="o">=</span><span class="nf">first</span><span class="p">(</span><span class="n">importance</span><span class="p">),</span>
@@ -720,7 +792,7 @@ document.write(`
 <span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;mean abs shap&#39;</span><span class="p">)</span>
 
 <span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span>
-<span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">transform_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.numeric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">tidy_shap</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">transform_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.numeric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">mutate</span><span class="p">(</span><span class="n">val.rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">percent_rank</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="n">.by</span><span class="o">=</span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="n">importance</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">shap</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">val.rank</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="nf">geom_quasirandom</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
@@ -739,7 +811,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is.factor</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is.factor</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">mutate</span><span class="p">(</span><span class="n">var_order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">fct_reorder</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">importance</span><span class="p">,</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span><span class="n">importance</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">shap</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">shap</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="nf">geom_quasirandom</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
@@ -756,7 +828,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is.numeric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is.numeric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">mutate</span><span class="p">(</span><span class="n">var_order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">fct_reorder</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">importance</span><span class="p">,</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span><span class="n">importance</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">mutate</span><span class="p">(</span><span class="n">quant.val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">percent_rank</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="n">.by</span><span class="o">=</span><span class="n">var</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">quant.val</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">shap</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
@@ -775,7 +847,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is.numeric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is.numeric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">filter</span><span class="p">(</span><span class="n">var</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;Amount&#39;</span><span class="p">,</span><span class="s">&#39;Income&#39;</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">pivot_wider</span><span class="p">(</span><span class="n">names_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="n">values_from</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">shap</span><span class="p">),</span><span class="w"> </span><span class="n">id_cols</span><span class="o">=</span><span class="n">row_index</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">mutate</span><span class="p">(</span><span class="n">rank_Income</span><span class="o">=</span><span class="nf">percent_rank</span><span class="p">(</span><span class="n">value_Income</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
@@ -793,7 +865,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">transform_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.character</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_shap</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">transform_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.character</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">filter</span><span class="p">(</span><span class="n">row_index</span><span class="o">==</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">arrange</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">shap</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">mutate</span><span class="p">(</span><span class="n">ts</span><span class="o">=</span><span class="n">baseline</span><span class="o">+</span><span class="nf">cumsum</span><span class="p">(</span><span class="n">shap</span><span class="p">),</span><span class="w"> </span><span class="n">nts</span><span class="o">=</span><span class="nf">replace_na</span><span class="p">(</span><span class="nf">lag</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span><span class="nf">first</span><span class="p">(</span><span class="n">baseline</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span>
@@ -848,7 +920,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Practical Guide to PCA visualization in R</p>
+        <p class="prev-next-title">PCA visualization in R</p>
       </div>
     </a>
     <a class="right-next"
@@ -883,7 +955,8 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-to-collapse">variables to collapse</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#shapviz">shapviz</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">tidy shap</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example">example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">usage</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#plots">plots</a></li>
 </ul>
 
   </nav></div>
