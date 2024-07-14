@@ -1,0 +1,17 @@
+
+title: notebooks
+author: rvalieris
+
+only_build_toc_files: true
+
+execute:
+  execute_notebooks: off
+
+sphinx:
+  config:
+    html_theme_options:
+      repository_url: https://github.com/rvalieris/notebooks
+      home_page_in_toc: true
+      use_repository_button: true
+      use_download_button: false
+

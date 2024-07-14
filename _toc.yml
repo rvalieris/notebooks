@@ -1,0 +1,17 @@
+
+format: jb-book
+root: intro
+parts:
+- caption: ggplot2
+  chapters:
+  - glob: src/ggplot2/*
+- caption: Data Analysis
+  chapters:
+  - glob: src/data-analysis/*
+- caption: Methods
+  chapters:
+  - glob: src/methods/*
+- caption: Fun
+  chapters:
+  - glob: src/fun/*
+

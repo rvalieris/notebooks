@@ -1,0 +1,5 @@
+_build/.doctrees
+_build/jupyter_execute
+_build/html/_sources
+sources
+**/.ipynb_checkpoints
