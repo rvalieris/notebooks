@@ -6,5 +6,6 @@
 img {
   /* remove dark filter from theme */
   filter: none !important;
+  padding: 0 !important;
 }
 
