@@ -1,5 +1,5 @@
 
-REPO=https://github.com/rvalieris/notebooks/
+REPO=$(shell git config --get remote.origin.url)
 
 all:
 	jupyter-book build .
