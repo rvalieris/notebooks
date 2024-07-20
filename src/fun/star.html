@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Drawing star polygons with ggplot2 &#8212; notebooks</title>
+    <title>Star polygons &#8212; notebooks</title>
   
   
   
@@ -187,9 +187,15 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../ggplot2/colors2d.html">2D Color Palette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/colors2d.html">Bivariate Color Palette</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_1D.html">Density 1D</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_2D.html">Density 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/labeling_series.html">Labeling Data Series</a></li>
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="../ggplot2/plot_composition.html">Composing multiple plots in a single page</a></li>
 
 
@@ -251,13 +257,13 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part1.html">Comparing survival prediction models with tidymodels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part1.html">Survival prediction models, part 1</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part2.html">Comparing survival prediction models with tidymodels, part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part2.html">Survival prediction models, part 2</a></li>
 
 
 
@@ -269,7 +275,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="dragon_curve.html">Dragon Curve</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mandelbrot.html">Mandelbrot Set</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Drawing star polygons with ggplot2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Star polygons</a></li>
 </ul>
 
     </div>
@@ -373,7 +379,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Drawing star polygons with ggplot2</h1>
+    <h1>Star polygons</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -399,8 +405,8 @@ document.write(`
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="drawing-star-polygons-with-ggplot2">
-<h1>Drawing star polygons with ggplot2<a class="headerlink" href="#drawing-star-polygons-with-ggplot2" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="star-polygons">
+<h1>Star polygons<a class="headerlink" href="#star-polygons" title="Link to this heading">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> is a R package for making data graphics, it is known for how flexible and composable the plots are, with its syntax based on the grammar of graphics.</p>
 <p>Star polygon is a type of non-convex polygon that looks like a star, in this post, we will be focused on the subset of unicursal star polygons.</p>
 <p>Unicursal means that the star can be drawn as a single continuous line, “without lifting the pen from the paper”.</p>

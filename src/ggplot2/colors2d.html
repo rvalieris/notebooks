@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2D Color Palette &#8212; notebooks</title>
+    <title>Bivariate Color Palette &#8212; notebooks</title>
   
   
   
@@ -188,9 +188,15 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2D Color Palette</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bivariate Color Palette</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="density_1D.html">Density 1D</a></li>
 <li class="toctree-l1"><a class="reference internal" href="density_2D.html">Density 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labeling_series.html">Labeling Data Series</a></li>
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="plot_composition.html">Composing multiple plots in a single page</a></li>
 
 
@@ -252,13 +258,13 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part1.html">Comparing survival prediction models with tidymodels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part1.html">Survival prediction models, part 1</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part2.html">Comparing survival prediction models with tidymodels, part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part2.html">Survival prediction models, part 2</a></li>
 
 
 
@@ -270,7 +276,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../fun/dragon_curve.html">Dragon Curve</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fun/mandelbrot.html">Mandelbrot Set</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fun/star.html">Drawing star polygons with ggplot2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/star.html">Star polygons</a></li>
 </ul>
 
     </div>
@@ -376,7 +382,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>2D Color Palette</h1>
+    <h1>Bivariate Color Palette</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -386,10 +392,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bivariate Color Palette</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-palettes">other palettes</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choropleth">Choropleth</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -407,6 +418,8 @@ document.write(`
 <span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span>
 <span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">patchwork</span><span class="p">)</span>
 <span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">colors3d</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">prismatic</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">pals</span><span class="p">)</span>
 <span class="w">    </span><span class="nf">theme_set</span><span class="p">(</span><span class="nf">theme_cowplot</span><span class="p">())</span>
 <span class="p">})</span>
 <span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">16</span><span class="p">,</span><span class="n">repr.plot.height</span><span class="o">=</span><span class="m">10</span><span class="p">)</span>
@@ -414,24 +427,24 @@ document.write(`
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="d-color-palette">
-<h1>2D Color Palette<a class="headerlink" href="#d-color-palette" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="bivariate-color-palette">
+<h1>Bivariate Color Palette<a class="headerlink" href="#bivariate-color-palette" title="Link to this heading">#</a></h1>
 <section id="code">
 <h2>code<a class="headerlink" href="#code" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">map_to_color2d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">xvar</span><span class="p">,</span><span class="w"> </span><span class="n">yvar</span><span class="p">,</span><span class="w"> </span><span class="n">colors</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;magenta&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">map_to_color2d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">xvar</span><span class="p">,</span><span class="w"> </span><span class="n">yvar</span><span class="p">,</span><span class="w"> </span><span class="n">colors</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;yellow&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;green&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;magenta&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">xtrans</span><span class="o">=</span><span class="s">&quot;rank&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ytrans</span><span class="o">=</span><span class="s">&quot;rank&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">na.color</span><span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="w">    </span><span class="nf">summarize</span><span class="p">(</span>
-<span class="w">        </span><span class="n">min_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">({{</span><span class="n">xvar</span><span class="p">}}),</span><span class="w"> </span><span class="n">max_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">({{</span><span class="n">xvar</span><span class="p">}}),</span>
-<span class="w">        </span><span class="n">min_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">({{</span><span class="n">yvar</span><span class="p">}}),</span><span class="w"> </span><span class="n">max_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">({{</span><span class="n">yvar</span><span class="p">}})</span>
+<span class="w">        </span><span class="n">min_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">({{</span><span class="n">xvar</span><span class="p">}},</span><span class="n">na.rm</span><span class="o">=</span><span class="bp">T</span><span class="p">),</span><span class="w"> </span><span class="n">max_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">({{</span><span class="n">xvar</span><span class="p">}},</span><span class="n">na.rm</span><span class="o">=</span><span class="bp">T</span><span class="p">),</span>
+<span class="w">        </span><span class="n">min_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">({{</span><span class="n">yvar</span><span class="p">}},</span><span class="n">na.rm</span><span class="o">=</span><span class="bp">T</span><span class="p">),</span><span class="w"> </span><span class="n">max_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">({{</span><span class="n">yvar</span><span class="p">}},</span><span class="n">na.rm</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
 <span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="w">    </span><span class="nf">with</span><span class="p">(</span><span class="nf">expand_grid</span><span class="p">(</span>
 <span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">min_x</span><span class="p">,</span><span class="w"> </span><span class="n">max_x</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="p">),</span>
 <span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">min_y</span><span class="p">,</span><span class="w"> </span><span class="n">max_y</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
 <span class="w">    </span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="w">    </span><span class="nf">mutate</span><span class="p">(</span>
-<span class="w">        </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colors2d</span><span class="p">(</span><span class="nf">tibble</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">xtrans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rank&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ytrans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rank&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+<span class="w">        </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colors2d</span><span class="p">(</span><span class="nf">tibble</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">xtrans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xtrans</span><span class="p">,</span><span class="w"> </span><span class="n">ytrans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ytrans</span><span class="p">,</span><span class="w"> </span><span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
 <span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="w">    </span><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">fill</span><span class="o">=</span><span class="n">color</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="w">    </span><span class="nf">geom_raster</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
@@ -441,8 +454,9 @@ document.write(`
 
 <span class="w">    </span><span class="n">data2</span><span class="w"> </span><span class="o">&lt;-</span>
 <span class="w">    </span><span class="nf">select</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="n">xvar</span><span class="p">}},</span><span class="w"> </span><span class="p">{{</span><span class="n">yvar</span><span class="p">}})</span><span class="w"> </span><span class="o">|&gt;</span>
-<span class="w">    </span><span class="nf">colors2d</span><span class="p">(</span><span class="n">xtrans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rank&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ytrans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rank&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
-<span class="w">    </span><span class="nf">bind_cols</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span>_<span class="p">)</span>
+<span class="w">    </span><span class="nf">colors2d</span><span class="p">(</span><span class="n">xtrans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xtrans</span><span class="p">,</span><span class="w"> </span><span class="n">ytrans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ytrans</span><span class="p">,</span><span class="w"> </span><span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">bind_cols</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span>_<span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="nf">ifelse</span><span class="p">(</span><span class="nf">is.na</span><span class="p">({{</span><span class="n">xvar</span><span class="p">}})</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">({{</span><span class="n">yvar</span><span class="p">}}),</span><span class="w"> </span><span class="n">na.color</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="p">))</span><span class="w"> </span>
 
 <span class="w">    </span><span class="nf">list</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data2</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="n">lgd</span><span class="p">)</span>
 <span class="p">}</span>
@@ -497,25 +511,29 @@ document.write(`
 <h2>other palettes<a class="headerlink" href="#other-palettes" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">pals</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">color</span><span class="p">(</span><span class="nf">arc.bluepink</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;colors&gt;
+<span class=" -Color -Color-Black -Color-Black-BGC255">#FFFFFFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC231">#FFE6FEFF</span> <span class=" -Color -Color-Black -Color-Black-BGC225">#FFBDFFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC219">#FF80FEFF</span> <span class=" -Color -Color-Black -Color-Black-BGC231">#E7FFFFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC253">#D7DAFDFF</span> <span class=" -Color -Color-Black -Color-Black-BGC219">#D8A6FFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC177">#C065FEFF</span> <span class=" -Color -Color-Black -Color-Black-BGC195">#C0FCFDFF</span> <span class=" -Color -Color-Black -Color-Black-BGC153">#A7CAFFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC141">#8D7EFDFF</span> <span class=" -Color -Color-Black -Color-Black-BGC105">#7F65FEFF</span> <span class=" -Color -Color-Black -Color-Black-BGC123">#74FEFFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC117">#64C0FFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC105">#5873FEFF</span> <span class=" -Color -Color-White -Color-White-BGC63">#4B4CFFFF</span> 
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">arc.bluepink</span><span class="p">()</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">color</span><span class="p">(</span><span class="nf">arc.bluepink</span><span class="p">()[</span><span class="nf">c</span><span class="p">(</span><span class="m">16</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">13</span><span class="p">)])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>'#ffffff'</li><li>'#ffe6fe'</li><li>'#ffbdff'</li><li>'#ff80fe'</li><li>'#e7ffff'</li><li>'#d7dafd'</li><li>'#d8a6ff'</li><li>'#c065fe'</li><li>'#c0fcfd'</li><li>'#a7caff'</li><li>'#8d7efd'</li><li>'#7f65fe'</li><li>'#74feff'</li><li>'#64c0ff'</li><li>'#5873fe'</li><li>'#4b4cff'</li></ol>
-</div></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;colors&gt;
+<span class=" -Color -Color-White -Color-White-BGC63">#4B4CFFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC219">#FF80FEFF</span> <span class=" -Color -Color-Black -Color-Black-BGC255">#FFFFFFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC123">#74FEFFFF</span> 
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -535,18 +553,29 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tolochko.redblue</span><span class="p">()</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">color</span><span class="p">(</span><span class="nf">tolochko.redblue</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>'#dddddd'</li><li>'#7bb3d1'</li><li>'#016eae'</li><li>'#dd7c8a'</li><li>'#8d6c8f'</li><li>'#4a4779'</li><li>'#cc0024'</li><li>'#8a274a'</li><li>'#4b264d'</li></ol>
-</div></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;colors&gt;
+<span class=" -Color -Color-Black -Color-Black-BGC252">#DDDDDDFF</span> <span class=" -Color -Color-Black -Color-Black-BGC116">#7BB3D1FF</span> <span class=" -Color -Color-White -Color-White-BGC32">#016EAEFF</span> <span class=" -Color -Color-Black -Color-Black-BGC211">#DD7C8AFF</span> <span class=" -Color -Color-Black -Color-Black-BGC139">#8D6C8FFF</span> <span class=" -Color -Color-White -Color-White-BGC60">#4A4779FF</span> <span class=" -Color -Color-White -Color-White-BGC160">#CC0024FF</span> <span class=" -Color -Color-White -Color-White-BGC125">#8A274AFF</span> <span class=" -Color -Color-White -Color-White-BGC53">#4B264DFF</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">color</span><span class="p">(</span><span class="nf">tolochko.redblue</span><span class="p">()[</span><span class="nf">c</span><span class="p">(</span><span class="m">9</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">7</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;colors&gt;
+<span class=" -Color -Color-White -Color-White-BGC53">#4B264DFF</span> <span class=" -Color -Color-White -Color-White-BGC32">#016EAEFF</span> <span class=" -Color -Color-Black -Color-Black-BGC252">#DDDDDDFF</span> <span class=" -Color -Color-White -Color-White-BGC160">#CC0024FF</span> 
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -565,6 +594,118 @@ document.write(`
 </div>
 </div>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="choropleth">
+<h1>Choropleth<a class="headerlink" href="#choropleth" title="Link to this heading">#</a></h1>
+<p>see also: <a class="reference external" href="https://cran.r-project.org/web/packages/pals/vignettes/bivariate_choropleths.html">https://cran.r-project.org/web/packages/pals/vignettes/bivariate_choropleths.html</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linking to GEOS 3.12.2, GDAL 3.9.0, PROJ 9.4.1; sf_use_s2() is TRUE
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">data</span><span class="p">(</span><span class="n">USCancerRates</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="o">=</span><span class="s">&#39;latticeExtra&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
+<span class="w">    </span><span class="n">maps</span><span class="o">::</span><span class="nf">map</span><span class="p">(</span><span class="s">&quot;county&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">projection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tetra&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">st_as_sf</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">as_tibble</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">left_join</span><span class="p">(</span><span class="nf">rownames_to_column</span><span class="p">(</span><span class="n">USCancerRates</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;ID&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&#39;ID&#39;</span><span class="p">)</span>
+
+<span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 10</caption>
+<thead>
+	<tr><th scope=col>ID</th><th scope=col>geom</th><th scope=col>rate.male</th><th scope=col>LCL95.male</th><th scope=col>UCL95.male</th><th scope=col>rate.female</th><th scope=col>LCL95.female</th><th scope=col>UCL95.female</th><th scope=col>state</th><th scope=col>county</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;MULTIPOLYGON [°]&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;I&lt;chr&gt;&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>alabama,autauga</td><td>MULTIPOLYGON (((0.256464688...</td><td>283.1</td><td>242.6</td><td>329.8</td><td>173.6</td><td>149.8</td><td>200.3</td><td>Alabama</td><td>Autauga County</td></tr>
+	<tr><td>alabama,baldwin</td><td>MULTIPOLYGON (((0.220116483...</td><td>239.2</td><td>223.5</td><td>255.8</td><td>162.0</td><td>150.7</td><td>174.1</td><td>Alabama</td><td>Baldwin County</td></tr>
+	<tr><td>alabama,barbour</td><td>MULTIPOLYGON (((0.288449217...</td><td>335.9</td><td>288.9</td><td>389.1</td><td>185.3</td><td>157.2</td><td>217.5</td><td>Alabama</td><td>Barbour County</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">paletteer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="nf">log2</span><span class="p">(</span><span class="n">rate.male</span><span class="o">/</span><span class="n">rate.female</span><span class="p">),</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="n">geom</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_fill_paletteer_c</span><span class="p">(</span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;grDevices::RdBu&#39;</span><span class="p">,</span><span class="n">limits</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">oob</span><span class="o">=</span><span class="n">scales</span><span class="o">::</span><span class="n">squish</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/2db16ebee9b3e16ad319cc8e395c7ed15bf0855f39c8c0d0be688b172fa2c4a0.png"><img alt="../../_images/2db16ebee9b3e16ad319cc8e395c7ed15bf0855f39c8c0d0be688b172fa2c4a0.png" src="../../_images/2db16ebee9b3e16ad319cc8e395c7ed15bf0855f39c8c0d0be688b172fa2c4a0.png" style="width: 960px; height: 600px;" /></a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">color</span><span class="p">(</span><span class="nf">stevens.pinkgreen</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;colors&gt;
+<span class=" -Color -Color-Black -Color-Black-BGC254">#F3F3F3FF</span> <span class=" -Color -Color-Black -Color-Black-BGC194">#C2F1CEFF</span> <span class=" -Color -Color-Black -Color-Black-BGC158">#8BE2AFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC225">#EAC5DDFF</span> <span class=" -Color -Color-Black -Color-Black-BGC152">#9EC6D3FF</span> <span class=" -Color -Color-Black -Color-Black-BGC116">#7FC6B1FF</span> <span class=" -Color -Color-Black -Color-Black-BGC218">#E6A3D0FF</span> <span class=" -Color -Color-Black -Color-Black-BGC182">#BC9FCEFF</span> <span class=" -Color -Color-Black -Color-Black-BGC110">#7B8EAFFF</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">color</span><span class="p">(</span><span class="nf">stevens.pinkgreen</span><span class="p">()[</span><span class="nf">c</span><span class="p">(</span><span class="m">9</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">7</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;colors&gt;
+<span class=" -Color -Color-Black -Color-Black-BGC110">#7B8EAFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC158">#8BE2AFFF</span> <span class=" -Color -Color-Black -Color-Black-BGC254">#F3F3F3FF</span> <span class=" -Color -Color-Black -Color-Black-BGC218">#E6A3D0FF</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">map_to_color2d</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">xvar</span><span class="o">=</span><span class="n">rate.male</span><span class="p">,</span><span class="w"> </span><span class="n">yvar</span><span class="o">=</span><span class="n">rate.female</span><span class="p">,</span><span class="w"> </span><span class="n">colors</span><span class="o">=</span><span class="nf">stevens.pinkgreen</span><span class="p">()[</span><span class="nf">c</span><span class="p">(</span><span class="m">9</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">7</span><span class="p">)],</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">na.color</span><span class="o">=</span><span class="s">&#39;gray60&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">$</span><span class="n">data</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">rate.female</span><span class="o">&gt;</span><span class="m">400</span><span class="p">,</span><span class="w"> </span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="kc">NA</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="n">geom</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_sf</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_fill_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">guides</span><span class="p">(</span><span class="n">custom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">guide_custom</span><span class="p">(</span><span class="nf">as_grob</span><span class="p">(</span><span class="n">r</span><span class="o">$</span><span class="n">legend</span><span class="p">),</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="nf">unit</span><span class="p">(</span><span class="m">0.4</span><span class="p">,</span><span class="s">&#39;npc&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">height</span><span class="o">=</span><span class="nf">unit</span><span class="p">(</span><span class="m">0.4</span><span class="p">,</span><span class="s">&#39;npc&#39;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/338b7e6fe6ef8e2c32a68eab4d9eb97ec6c6024c43657308eb86c16dbec169a2.png"><img alt="../../_images/338b7e6fe6ef8e2c32a68eab4d9eb97ec6c6024c43657308eb86c16dbec169a2.png" src="../../_images/338b7e6fe6ef8e2c32a68eab4d9eb97ec6c6024c43657308eb86c16dbec169a2.png" style="width: 960px; height: 600px;" /></a>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -631,10 +772,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Bivariate Color Palette</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-palettes">other palettes</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choropleth">Choropleth</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>
