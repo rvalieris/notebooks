@@ -183,6 +183,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="color_palettes.html">Color Palettes</a></li>
 
 
@@ -201,6 +202,10 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="scale_transforms.html">Scale Transforms</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tables.html">Tables on plots</a></li>
 
 
 
@@ -228,6 +233,10 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Methods</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../methods/clustering.html">Clustering</a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="../methods/glmnet_cox.html">Regularized Cox Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../methods/pca-visualization-in-python.html">PCA visualization in Python</a></li>
 
@@ -400,6 +409,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dendrogram-on-the-alternate-side">Dendrogram on the alternate side</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-with-annotations">Heatmap with annotations</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#scrna-heatmap">scRNA Heatmap</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-ggh4x">alternative: ggh4x</a></li>
 </ul>
 
             </nav>
@@ -596,7 +606,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/4cb0697a6573b620d4644bcc4cd9ef994e51d591e7f47e88a819e3c7eb1603c4.png"><img alt="../../_images/4cb0697a6573b620d4644bcc4cd9ef994e51d591e7f47e88a819e3c7eb1603c4.png" src="../../_images/4cb0697a6573b620d4644bcc4cd9ef994e51d591e7f47e88a819e3c7eb1603c4.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/298d1d2def2b91598c1ba979e7393abb9733adde923f62c30dd80f7f130f1a93.png"><img alt="../../_images/298d1d2def2b91598c1ba979e7393abb9733adde923f62c30dd80f7f130f1a93.png" src="../../_images/298d1d2def2b91598c1ba979e7393abb9733adde923f62c30dd80f7f130f1a93.png" style="width: 900px; height: 540px;" /></a>
 </div>
 </div>
 </section>
@@ -705,6 +715,54 @@ document.write(`
 </div>
 </div>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="alternative-ggh4x">
+<h1>alternative: ggh4x<a class="headerlink" href="#alternative-ggh4x" title="Link to this heading">#</a></h1>
+<p>see: <a class="reference external" href="https://teunbrand.github.io/ggh4x/articles/PositionGuides.html#dendrograms">https://teunbrand.github.io/ggh4x/articles/PositionGuides.html#dendrograms</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">ggh4x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">clst1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">scale</span><span class="p">(</span><span class="n">mtcars</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">dist</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">hclust</span><span class="p">(</span><span class="s">&quot;ward.D2&quot;</span><span class="p">)</span>
+<span class="n">clst2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">scale</span><span class="p">(</span><span class="n">mtcars</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">t</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">dist</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">hclust</span><span class="p">(</span><span class="s">&quot;ward.D2&quot;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">scale</span><span class="p">(</span><span class="n">mtcars</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">rownames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;model&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">pivot_longer</span><span class="p">(</span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;vars&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;value&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">model</span><span class="p">)</span>
+
+<span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_raster</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">scale_fill_viridis_c</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">scale_y_dendrogram</span><span class="p">(</span><span class="n">hclust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clst1</span><span class="p">,</span><span class="w"> </span><span class="n">guide</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">guide_dendro</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">scale_x_dendrogram</span><span class="p">(</span><span class="n">hclust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clst2</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;top&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">guide</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">guide_dendro</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">guides</span><span class="p">(</span><span class="n">y.sec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">guide_axis</span><span class="p">(),</span><span class="w"> </span><span class="n">x.sec</span><span class="o">=</span><span class="nf">guide_axis</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;The S3 guide system was deprecated in ggplot2 3.5.0.
+<span class=" -Color -Color-Cyan">ℹ</span> It has been replaced by a ggproto system that can be extended.&quot;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/0a78ec607f9b8b92ce18775a4e6663a1ce4513150e3eabd6849cfbc32ff85a4f.png"><img alt="../../_images/0a78ec607f9b8b92ce18775a4e6663a1ce4513150e3eabd6849cfbc32ff85a4f.png" src="../../_images/0a78ec607f9b8b92ce18775a4e6663a1ce4513150e3eabd6849cfbc32ff85a4f.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -778,6 +836,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dendrogram-on-the-alternate-side">Dendrogram on the alternate side</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-with-annotations">Heatmap with annotations</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#scrna-heatmap">scRNA Heatmap</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-ggh4x">alternative: ggh4x</a></li>
 </ul>
 
   </nav></div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Density 2D &#8212; notebooks</title>
+    <title>Tables on plots &#8212; notebooks</title>
   
   
   
@@ -58,11 +58,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'src/ggplot2/density_2D';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/ggplot2/tables';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Labeling Data Series" href="labeling_series.html" />
-    <link rel="prev" title="Density 1D" href="density_1D.html" />
+    <link rel="next" title="Crinacle IEMs Ranking" href="../data-analysis/crinacle.html" />
+    <link rel="prev" title="Scale Transforms" href="scale_transforms.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,7 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="colors2d.html">Bivariate Color Palette</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="density_1D.html">Density 1D</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Density 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="density_2D.html">Density 2D</a></li>
 <li class="toctree-l1"><a class="reference internal" href="labeling_series.html">Labeling Data Series</a></li>
 
 
@@ -203,7 +203,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="tables.html">Tables on plots</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tables on plots</a></li>
 
 
 
@@ -376,7 +376,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -387,11 +389,26 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Density 2D</h1>
+    <h1>Tables on plots</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tables on plots</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridextra">gridExtra</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#flextable">flextable</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ggpp">ggpp</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-ggplot2">pure ggplot2</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -406,66 +423,99 @@ document.write(`
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
 <span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
 <span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span>
-<span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">ggpointdensity</span><span class="p">)</span>
-<span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">ggdensity</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">patchwork</span><span class="p">)</span>
 <span class="w">    </span><span class="nf">theme_set</span><span class="p">(</span><span class="nf">theme_cowplot</span><span class="p">())</span>
 <span class="p">})</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">16</span><span class="p">,</span><span class="n">repr.plot.height</span><span class="o">=</span><span class="m">10</span><span class="p">)</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">15</span><span class="p">,</span><span class="n">repr.plot.height</span><span class="o">=</span><span class="m">9</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="density-2d">
-<h1>Density 2D<a class="headerlink" href="#density-2d" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="tables-on-plots">
+<h1>Tables on plots<a class="headerlink" href="#tables-on-plots" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span>
-<span class="n">diamonds</span><span class="w"> </span><span class="o">|&gt;</span>
-<span class="nf">filter</span><span class="p">(</span><span class="n">carat</span><span class="o">&lt;</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
-<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">carat</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">price</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="nf">scale_y_sqrt</span><span class="p">()</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span><span class="w"> </span><span class="n">rownames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;model&#39;</span><span class="p">)</span>
+
+<span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span><span class="w"> </span><span class="n">disp</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_point</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
+<section id="gridextra">
+<h2>gridExtra<a class="headerlink" href="#gridextra" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&#39;geom_point&#39;</span><span class="p">)</span>
-<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_density_2d</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&#39;geom_density_2d&#39;</span><span class="p">)</span>
-<span class="n">p3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_density_2d_filled</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&#39;geom_density_2d_filled&#39;</span><span class="p">)</span>
-<span class="n">p4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">stat_density_2d</span><span class="p">(</span><span class="n">geom</span><span class="o">=</span><span class="s">&#39;raster&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">after_stat</span><span class="p">(</span><span class="n">density</span><span class="p">)),</span><span class="w"> </span><span class="n">contour</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">scale_fill_viridis_c</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&#39;geom_density_2d with contour=FALSE&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">,</span><span class="n">p3</span><span class="p">,</span><span class="n">p4</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">gridExtra</span><span class="o">::</span><span class="nf">tableGrob</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/ad694bab7032505fc642749b83cecd24959307c4ee99754622ce906200439e27.png"><img alt="../../_images/ad694bab7032505fc642749b83cecd24959307c4ee99754622ce906200439e27.png" src="../../_images/ad694bab7032505fc642749b83cecd24959307c4ee99754622ce906200439e27.png" style="width: 960px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/d305bc407fc7d5b7299474301fe96d0632f07bb19b9a76401e10e9c18efe5be4.png"><img alt="../../_images/d305bc407fc7d5b7299474301fe96d0632f07bb19b9a76401e10e9c18efe5be4.png" src="../../_images/d305bc407fc7d5b7299474301fe96d0632f07bb19b9a76401e10e9c18efe5be4.png" style="width: 900px; height: 540px;" /></a>
 </div>
 </div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="flextable">
+<h1>flextable<a class="headerlink" href="#flextable" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_hex</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">scale_fill_viridis_c</span><span class="p">(</span><span class="n">trans</span><span class="o">=</span><span class="s">&#39;log10&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&#39;geom_hex&#39;</span><span class="p">)</span>
-<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_pointdensity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">scale_color_viridis_c</span><span class="p">(</span><span class="n">trans</span><span class="o">=</span><span class="s">&#39;log10&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&#39;geom_pointdensity&#39;</span><span class="p">)</span>
-<span class="n">p3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_hdr</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="nf">after_stat</span><span class="p">(</span><span class="n">probs</span><span class="p">)),</span><span class="n">alpha</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&#39;geom_hdr&#39;</span><span class="p">)</span>
-<span class="n">p4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_hdr_points</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&#39;geom_hdr_points&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">,</span><span class="n">p3</span><span class="p">,</span><span class="n">p4</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">head</span><span class="p">(</span><span class="m">20</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="n">flextable</span><span class="o">::</span><span class="nf">flextable</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="n">flextable</span><span class="o">::</span><span class="nf">gen_grob</span><span class="p">(</span><span class="n">fit</span><span class="o">=</span><span class="s">&#39;fixed&#39;</span><span class="p">)</span>
+
+<span class="n">p1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tg</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/3083bfb5e11f5ba4f1718c14ba1c944c1979a75a335de9178d2f92f3308a374b.png"><img alt="../../_images/3083bfb5e11f5ba4f1718c14ba1c944c1979a75a335de9178d2f92f3308a374b.png" src="../../_images/3083bfb5e11f5ba4f1718c14ba1c944c1979a75a335de9178d2f92f3308a374b.png" style="width: 960px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/f5212b52a613f0c409e452d5c86c35a8b4277df8dac995f9d98e5cdc82794550.png"><img alt="../../_images/f5212b52a613f0c409e452d5c86c35a8b4277df8dac995f9d98e5cdc82794550.png" src="../../_images/f5212b52a613f0c409e452d5c86c35a8b4277df8dac995f9d98e5cdc82794550.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ggpp">
+<h1>ggpp<a class="headerlink" href="#ggpp" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">tibble</span><span class="p">(</span>
+<span class="w">    </span><span class="n">x</span><span class="o">=</span><span class="m">40</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="m">120</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="n">tb</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">p1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ggpp</span><span class="o">::</span><span class="nf">geom_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">tb</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/c3bb7d9de4a792a2be8457bd3f1ad5b44e37279e684a9fcbafa3470d8fb419a3.png"><img alt="../../_images/c3bb7d9de4a792a2be8457bd3f1ad5b44e37279e684a9fcbafa3470d8fb419a3.png" src="../../_images/c3bb7d9de4a792a2be8457bd3f1ad5b44e37279e684a9fcbafa3470d8fb419a3.png" style="width: 900px; height: 540px;" /></a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pure-ggplot2">
+<h1>pure ggplot2<a class="headerlink" href="#pure-ggplot2" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="nf">row_number</span><span class="p">())</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">pivot_longer</span><span class="p">(</span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;cols&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;vals&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">rows</span><span class="p">,</span><span class="w"> </span><span class="n">values_transform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.character</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">cs</span><span class="o">=</span><span class="nf">nchar</span><span class="p">(</span><span class="n">vals</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="n">vals</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_tile</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_text</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_x_discrete</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">position</span><span class="o">=</span><span class="s">&#39;top&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_y_reverse</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0.1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme</span><span class="p">(</span><span class="n">panel.spacing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="s">&#39;npc&#39;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme</span><span class="p">(</span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">())</span>
+
+
+<span class="n">p1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">plot_layout</span><span class="p">(</span><span class="n">widths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/bc8982e7589e035cc12427fac101a49acb537a2a694514ed62cbb7150f33e32f.png"><img alt="../../_images/bc8982e7589e035cc12427fac101a49acb537a2a694514ed62cbb7150f33e32f.png" src="../../_images/bc8982e7589e035cc12427fac101a49acb537a2a694514ed62cbb7150f33e32f.png" style="width: 900px; height: 540px;" /></a>
 </div>
 </div>
 </section>
@@ -501,20 +551,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="density_1D.html"
+       href="scale_transforms.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Density 1D</p>
+        <p class="prev-next-title">Scale Transforms</p>
       </div>
     </a>
     <a class="right-next"
-       href="labeling_series.html"
+       href="../data-analysis/crinacle.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Labeling Data Series</p>
+        <p class="prev-next-title">Crinacle IEMs Ranking</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -524,6 +574,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tables on plots</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridextra">gridExtra</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#flextable">flextable</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ggpp">ggpp</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-ggplot2">pure ggplot2</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
