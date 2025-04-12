@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
     <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=2a5f61ea" />
@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/methods/pca-visualization-in-r';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Tidy SHAP" href="tidy_shap.html" />
+    <link rel="next" title="Compositional data difference test" href="sc_abundance.html" />
     <link rel="prev" title="PCA visualization in Python" href="pca-visualization-in-python.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -250,6 +250,15 @@
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">PCA visualization in R</a></li>
 
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="sc_abundance.html">Compositional data difference test</a></li>
 
 
 
@@ -501,7 +510,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/609bfc822a55b6432c198edea7001793bb71aec3b6dcd0ce65cd594636c831d7.png"><img alt="../../_images/609bfc822a55b6432c198edea7001793bb71aec3b6dcd0ce65cd594636c831d7.png" src="../../_images/609bfc822a55b6432c198edea7001793bb71aec3b6dcd0ce65cd594636c831d7.png" style="width: 540px; height: 420px;" /></a>
+<a class="reference internal image-reference" href="../../_images/609bfc822a55b6432c198edea7001793bb71aec3b6dcd0ce65cd594636c831d7.png"><img alt="../../_images/609bfc822a55b6432c198edea7001793bb71aec3b6dcd0ce65cd594636c831d7.png" src="../../_images/609bfc822a55b6432c198edea7001793bb71aec3b6dcd0ce65cd594636c831d7.png" style="width: 540px; height: 420px;" />
+</a>
 </div>
 </div>
 </section>
@@ -534,7 +544,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/d26abfc0044003ef6a5f8b7fdea2c3dbd8aee41642a379eb9a2be55c0605ddb8.png"><img alt="../../_images/d26abfc0044003ef6a5f8b7fdea2c3dbd8aee41642a379eb9a2be55c0605ddb8.png" src="../../_images/d26abfc0044003ef6a5f8b7fdea2c3dbd8aee41642a379eb9a2be55c0605ddb8.png" style="width: 540px; height: 420px;" /></a>
+<a class="reference internal image-reference" href="../../_images/d26abfc0044003ef6a5f8b7fdea2c3dbd8aee41642a379eb9a2be55c0605ddb8.png"><img alt="../../_images/d26abfc0044003ef6a5f8b7fdea2c3dbd8aee41642a379eb9a2be55c0605ddb8.png" src="../../_images/d26abfc0044003ef6a5f8b7fdea2c3dbd8aee41642a379eb9a2be55c0605ddb8.png" style="width: 540px; height: 420px;" />
+</a>
 </div>
 </div>
 </section>
@@ -551,7 +562,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/f4733297e8cdb63c321afd3f2c1777f950dd8ede06067df71e7b4e3893d525d2.png"><img alt="../../_images/f4733297e8cdb63c321afd3f2c1777f950dd8ede06067df71e7b4e3893d525d2.png" src="../../_images/f4733297e8cdb63c321afd3f2c1777f950dd8ede06067df71e7b4e3893d525d2.png" style="width: 540px; height: 420px;" /></a>
+<a class="reference internal image-reference" href="../../_images/f4733297e8cdb63c321afd3f2c1777f950dd8ede06067df71e7b4e3893d525d2.png"><img alt="../../_images/f4733297e8cdb63c321afd3f2c1777f950dd8ede06067df71e7b4e3893d525d2.png" src="../../_images/f4733297e8cdb63c321afd3f2c1777f950dd8ede06067df71e7b4e3893d525d2.png" style="width: 540px; height: 420px;" />
+</a>
 </div>
 </div>
 </section>
@@ -590,7 +602,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/1b14c74e7b367db139aa0f75c8615a84379dd0722df3993e3f0fd9ca389026a5.png"><img alt="../../_images/1b14c74e7b367db139aa0f75c8615a84379dd0722df3993e3f0fd9ca389026a5.png" src="../../_images/1b14c74e7b367db139aa0f75c8615a84379dd0722df3993e3f0fd9ca389026a5.png" style="width: 540px; height: 420px;" /></a>
+<a class="reference internal image-reference" href="../../_images/1b14c74e7b367db139aa0f75c8615a84379dd0722df3993e3f0fd9ca389026a5.png"><img alt="../../_images/1b14c74e7b367db139aa0f75c8615a84379dd0722df3993e3f0fd9ca389026a5.png" src="../../_images/1b14c74e7b367db139aa0f75c8615a84379dd0722df3993e3f0fd9ca389026a5.png" style="width: 540px; height: 420px;" />
+</a>
 </div>
 </div>
 </section>
@@ -634,7 +647,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/d4f52811ff91b5909543c184d708a50adceb81654b7f3cc0660ffb3a6977f723.png"><img alt="../../_images/d4f52811ff91b5909543c184d708a50adceb81654b7f3cc0660ffb3a6977f723.png" src="../../_images/d4f52811ff91b5909543c184d708a50adceb81654b7f3cc0660ffb3a6977f723.png" style="width: 540px; height: 420px;" /></a>
+<a class="reference internal image-reference" href="../../_images/d4f52811ff91b5909543c184d708a50adceb81654b7f3cc0660ffb3a6977f723.png"><img alt="../../_images/d4f52811ff91b5909543c184d708a50adceb81654b7f3cc0660ffb3a6977f723.png" src="../../_images/d4f52811ff91b5909543c184d708a50adceb81654b7f3cc0660ffb3a6977f723.png" style="width: 540px; height: 420px;" />
+</a>
 </div>
 </div>
 </section>
@@ -675,7 +689,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/ae14c14d4c04b9311b9e4086c04f6751fd71dd8c2b3608c3ea7dc8e26c66b32e.png"><img alt="../../_images/ae14c14d4c04b9311b9e4086c04f6751fd71dd8c2b3608c3ea7dc8e26c66b32e.png" src="../../_images/ae14c14d4c04b9311b9e4086c04f6751fd71dd8c2b3608c3ea7dc8e26c66b32e.png" style="width: 540px; height: 420px;" /></a>
+<a class="reference internal image-reference" href="../../_images/ae14c14d4c04b9311b9e4086c04f6751fd71dd8c2b3608c3ea7dc8e26c66b32e.png"><img alt="../../_images/ae14c14d4c04b9311b9e4086c04f6751fd71dd8c2b3608c3ea7dc8e26c66b32e.png" src="../../_images/ae14c14d4c04b9311b9e4086c04f6751fd71dd8c2b3608c3ea7dc8e26c66b32e.png" style="width: 540px; height: 420px;" />
+</a>
 </div>
 </div>
 </section>
@@ -690,7 +705,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/ae48e130dccd74411657173ea5d48124a4b53e111904607379e56f0feac3ff42.png"><img alt="../../_images/ae48e130dccd74411657173ea5d48124a4b53e111904607379e56f0feac3ff42.png" src="../../_images/ae48e130dccd74411657173ea5d48124a4b53e111904607379e56f0feac3ff42.png" style="width: 540px; height: 420px;" /></a>
+<a class="reference internal image-reference" href="../../_images/ae48e130dccd74411657173ea5d48124a4b53e111904607379e56f0feac3ff42.png"><img alt="../../_images/ae48e130dccd74411657173ea5d48124a4b53e111904607379e56f0feac3ff42.png" src="../../_images/ae48e130dccd74411657173ea5d48124a4b53e111904607379e56f0feac3ff42.png" style="width: 540px; height: 420px;" />
+</a>
 </div>
 </div>
 </section>
@@ -735,11 +751,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="tidy_shap.html"
+       href="sc_abundance.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tidy SHAP</p>
+        <p class="prev-next-title">Compositional data difference test</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

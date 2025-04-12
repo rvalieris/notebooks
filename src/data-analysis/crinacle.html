@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
     <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=2a5f61ea" />
@@ -250,6 +250,15 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../methods/pca-visualization-in-r.html">PCA visualization in R</a></li>
 
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/sc_abundance.html">Compositional data difference test</a></li>
 
 
 
@@ -571,7 +580,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/d97920bcbe739e0c4893fd236e7c1d6c0c6c8595a01f340e86dbc8c1726fc693.png"><img alt="../../_images/d97920bcbe739e0c4893fd236e7c1d6c0c6c8595a01f340e86dbc8c1726fc693.png" src="../../_images/d97920bcbe739e0c4893fd236e7c1d6c0c6c8595a01f340e86dbc8c1726fc693.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/d97920bcbe739e0c4893fd236e7c1d6c0c6c8595a01f340e86dbc8c1726fc693.png"><img alt="../../_images/d97920bcbe739e0c4893fd236e7c1d6c0c6c8595a01f340e86dbc8c1726fc693.png" src="../../_images/d97920bcbe739e0c4893fd236e7c1d6c0c6c8595a01f340e86dbc8c1726fc693.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <p>the table includes 3 different grades: Technical, Tone, and overall Rank.</p>
@@ -589,7 +599,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/429a3e466f75c6ee453836f98291e5bd0e6f9b4a7ab2c9a92aa559463d1f8886.png"><img alt="../../_images/429a3e466f75c6ee453836f98291e5bd0e6f9b4a7ab2c9a92aa559463d1f8886.png" src="../../_images/429a3e466f75c6ee453836f98291e5bd0e6f9b4a7ab2c9a92aa559463d1f8886.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/429a3e466f75c6ee453836f98291e5bd0e6f9b4a7ab2c9a92aa559463d1f8886.png"><img alt="../../_images/429a3e466f75c6ee453836f98291e5bd0e6f9b4a7ab2c9a92aa559463d1f8886.png" src="../../_images/429a3e466f75c6ee453836f98291e5bd0e6f9b4a7ab2c9a92aa559463d1f8886.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <p>on the left we can see the total amount of headphones by rank, we see a somewhat normally-shaped distribution, with C-Ranks as the most common headphones in the table.</p>
@@ -618,7 +629,8 @@ note how warm signatures are frequent at the lower ranks but go down in frequenc
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Orientation inferred to be along y-axis; override with `position_quasirandom(orientation = &#39;x&#39;)`
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/67d4cab65697e8f7749af63dd86341d43c322b0205a6005491f7eafa8d79c33d.png"><img alt="../../_images/67d4cab65697e8f7749af63dd86341d43c322b0205a6005491f7eafa8d79c33d.png" src="../../_images/67d4cab65697e8f7749af63dd86341d43c322b0205a6005491f7eafa8d79c33d.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/67d4cab65697e8f7749af63dd86341d43c322b0205a6005491f7eafa8d79c33d.png"><img alt="../../_images/67d4cab65697e8f7749af63dd86341d43c322b0205a6005491f7eafa8d79c33d.png" src="../../_images/67d4cab65697e8f7749af63dd86341d43c322b0205a6005491f7eafa8d79c33d.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <p>on the left, we can see the overall price distribution of all headphones,
@@ -668,7 +680,8 @@ a natural question that follows is: what is the best price for performance that 
 Orientation inferred to be along y-axis; override with `position_quasirandom(orientation = &#39;x&#39;)`
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/7dfc64b169024d5b651993327a086558a8900592b0b622e00f361352644e6fca.png"><img alt="../../_images/7dfc64b169024d5b651993327a086558a8900592b0b622e00f361352644e6fca.png" src="../../_images/7dfc64b169024d5b651993327a086558a8900592b0b622e00f361352644e6fca.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/7dfc64b169024d5b651993327a086558a8900592b0b622e00f361352644e6fca.png"><img alt="../../_images/7dfc64b169024d5b651993327a086558a8900592b0b622e00f361352644e6fca.png" src="../../_images/7dfc64b169024d5b651993327a086558a8900592b0b622e00f361352644e6fca.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <p>here we have a scatter plot of the Rank x Price,
@@ -717,7 +730,8 @@ I only included C-Rank and above because I think if you only care about sound pe
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/c7f648cab42abab8cb89541517e8c28165556246a1dacc87eff940bc860bbe74.png"><img alt="../../_images/c7f648cab42abab8cb89541517e8c28165556246a1dacc87eff940bc860bbe74.png" src="../../_images/c7f648cab42abab8cb89541517e8c28165556246a1dacc87eff940bc860bbe74.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/c7f648cab42abab8cb89541517e8c28165556246a1dacc87eff940bc860bbe74.png"><img alt="../../_images/c7f648cab42abab8cb89541517e8c28165556246a1dacc87eff940bc860bbe74.png" src="../../_images/c7f648cab42abab8cb89541517e8c28165556246a1dacc87eff940bc860bbe74.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <p>if we group these selected top 10s by brand, we see that Moondrop appears 11 times across the ranks C and above, followed by ThieAudio.</p>
@@ -737,7 +751,8 @@ I only included C-Rank and above because I think if you only care about sound pe
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/e78af4d901352b0cd6233ab2ab93231ab0d36f3edc67879a7a3da718641fd605.png"><img alt="../../_images/e78af4d901352b0cd6233ab2ab93231ab0d36f3edc67879a7a3da718641fd605.png" src="../../_images/e78af4d901352b0cd6233ab2ab93231ab0d36f3edc67879a7a3da718641fd605.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/e78af4d901352b0cd6233ab2ab93231ab0d36f3edc67879a7a3da718641fd605.png"><img alt="../../_images/e78af4d901352b0cd6233ab2ab93231ab0d36f3edc67879a7a3da718641fd605.png" src="../../_images/e78af4d901352b0cd6233ab2ab93231ab0d36f3edc67879a7a3da718641fd605.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <p>there is a clear correlation between the total number of drivers, drivers setup, and the price, as expected.</p>
@@ -751,7 +766,8 @@ I only included C-Rank and above because I think if you only care about sound pe
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/1956986d2220704df7ff4dd55173ae5c63dc43e9f2649adfd8aaed094269609c.png"><img alt="../../_images/1956986d2220704df7ff4dd55173ae5c63dc43e9f2649adfd8aaed094269609c.png" src="../../_images/1956986d2220704df7ff4dd55173ae5c63dc43e9f2649adfd8aaed094269609c.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/1956986d2220704df7ff4dd55173ae5c63dc43e9f2649adfd8aaed094269609c.png"><img alt="../../_images/1956986d2220704df7ff4dd55173ae5c63dc43e9f2649adfd8aaed094269609c.png" src="../../_images/1956986d2220704df7ff4dd55173ae5c63dc43e9f2649adfd8aaed094269609c.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <p>more drivers do not necessarily mean better sound, although highly ranked headphones tend to have more drivers.</p>
@@ -766,7 +782,8 @@ I only included C-Rank and above because I think if you only care about sound pe
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/eda31ee10c428fc66317189058a81872386b054164d8121aae71a632d452aca1.png"><img alt="../../_images/eda31ee10c428fc66317189058a81872386b054164d8121aae71a632d452aca1.png" src="../../_images/eda31ee10c428fc66317189058a81872386b054164d8121aae71a632d452aca1.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/eda31ee10c428fc66317189058a81872386b054164d8121aae71a632d452aca1.png"><img alt="../../_images/eda31ee10c428fc66317189058a81872386b054164d8121aae71a632d452aca1.png" src="../../_images/eda31ee10c428fc66317189058a81872386b054164d8121aae71a632d452aca1.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -780,7 +797,8 @@ I only included C-Rank and above because I think if you only care about sound pe
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/720549157123d803c0ac46713d410e80bd1c05432f38bf006fe3c290402e0794.png"><img alt="../../_images/720549157123d803c0ac46713d410e80bd1c05432f38bf006fe3c290402e0794.png" src="../../_images/720549157123d803c0ac46713d410e80bd1c05432f38bf006fe3c290402e0794.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/720549157123d803c0ac46713d410e80bd1c05432f38bf006fe3c290402e0794.png"><img alt="../../_images/720549157123d803c0ac46713d410e80bd1c05432f38bf006fe3c290402e0794.png" src="../../_images/720549157123d803c0ac46713d410e80bd1c05432f38bf006fe3c290402e0794.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 </section>
@@ -862,7 +880,8 @@ Number of Fisher Scoring iterations: 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/985a17de91b5ffbe8f544b3bf9b1e20eb6f5c5892e78d6520902e2179e9467b2.png"><img alt="../../_images/985a17de91b5ffbe8f544b3bf9b1e20eb6f5c5892e78d6520902e2179e9467b2.png" src="../../_images/985a17de91b5ffbe8f544b3bf9b1e20eb6f5c5892e78d6520902e2179e9467b2.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/985a17de91b5ffbe8f544b3bf9b1e20eb6f5c5892e78d6520902e2179e9467b2.png"><img alt="../../_images/985a17de91b5ffbe8f544b3bf9b1e20eb6f5c5892e78d6520902e2179e9467b2.png" src="../../_images/985a17de91b5ffbe8f544b3bf9b1e20eb6f5c5892e78d6520902e2179e9467b2.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <p>the number of BA, EST, and DD drivers was associated with better ranking but the number of planar drivers did not affect the prediction.</p>

@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
     <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=2a5f61ea" />
@@ -250,6 +250,15 @@
 
 <li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-r.html">PCA visualization in R</a></li>
 
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="sc_abundance.html">Compositional data difference test</a></li>
 
 
 
@@ -625,7 +634,7 @@ its important to understand how each of these metrics work and what you want to 
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tune_metrics</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">.eval_time</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">group_by</span><span class="p">(</span><span class="n">.metric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
-<span class="nf">group_map</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="nf">group_map</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nf">factor</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">.eval_time</span><span class="p">,</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">paste</span><span class="p">(</span><span class="n">wflow_id</span><span class="p">,</span><span class="w"> </span><span class="n">.config</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">mean</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="w">    </span><span class="nf">geom_tile</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
 <span class="w">    </span><span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
@@ -640,8 +649,10 @@ its important to understand how each of these metrics work and what you want to 
 [[2]]
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/90899b568ce3d448abbbcebab4daa5973b7a702b96a61f9d66f5c9cd3d41020e.png"><img alt="../../_images/90899b568ce3d448abbbcebab4daa5973b7a702b96a61f9d66f5c9cd3d41020e.png" src="../../_images/90899b568ce3d448abbbcebab4daa5973b7a702b96a61f9d66f5c9cd3d41020e.png" style="width: 900px; height: 540px;" /></a>
-<a class="reference internal image-reference" href="../../_images/8e54fec97444a9393bade52a5154c0574e56d532bc8172ddd993ff82155aa935.png"><img alt="../../_images/8e54fec97444a9393bade52a5154c0574e56d532bc8172ddd993ff82155aa935.png" src="../../_images/8e54fec97444a9393bade52a5154c0574e56d532bc8172ddd993ff82155aa935.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/90899b568ce3d448abbbcebab4daa5973b7a702b96a61f9d66f5c9cd3d41020e.png"><img alt="../../_images/90899b568ce3d448abbbcebab4daa5973b7a702b96a61f9d66f5c9cd3d41020e.png" src="../../_images/90899b568ce3d448abbbcebab4daa5973b7a702b96a61f9d66f5c9cd3d41020e.png" style="width: 900px; height: 540px;" />
+</a>
+<a class="reference internal image-reference" href="../../_images/8e54fec97444a9393bade52a5154c0574e56d532bc8172ddd993ff82155aa935.png"><img alt="../../_images/8e54fec97444a9393bade52a5154c0574e56d532bc8172ddd993ff82155aa935.png" src="../../_images/8e54fec97444a9393bade52a5154c0574e56d532bc8172ddd993ff82155aa935.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -658,7 +669,8 @@ its important to understand how each of these metrics work and what you want to 
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/f8382b30e926d15448f3015a83c7d1e16fb0830b4266452322379ad3dc27a683.png"><img alt="../../_images/f8382b30e926d15448f3015a83c7d1e16fb0830b4266452322379ad3dc27a683.png" src="../../_images/f8382b30e926d15448f3015a83c7d1e16fb0830b4266452322379ad3dc27a683.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/f8382b30e926d15448f3015a83c7d1e16fb0830b4266452322379ad3dc27a683.png"><img alt="../../_images/f8382b30e926d15448f3015a83c7d1e16fb0830b4266452322379ad3dc27a683.png" src="../../_images/f8382b30e926d15448f3015a83c7d1e16fb0830b4266452322379ad3dc27a683.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <p>Note that, the model with lowest integrated brier might not necessarly be the same as the model with highest concordance.</p>
@@ -671,7 +683,7 @@ its important to understand how each of these metrics work and what you want to 
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">final_fits</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span>
 <span class="w">    </span><span class="c1"># map across each model in the table above</span>
 <span class="w">    </span><span class="nf">set_names</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">tune_metrics</span><span class="o">$</span><span class="n">wflow_id</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
-<span class="w">    </span><span class="nf">future_map</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="n">wi</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">future_map</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="n">wi</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># select the best model config, in case of tunnable parameters</span>
 <span class="w">        </span><span class="n">bwr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">extract_workflow_set_result</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">wi</span><span class="p">)</span>
 <span class="w">        </span><span class="n">best_params</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">select_best</span><span class="p">(</span><span class="n">bwr</span><span class="p">,</span><span class="w"> </span><span class="n">metric</span><span class="o">=</span><span class="s">&#39;concordance_survival&#39;</span><span class="p">)</span>
@@ -716,7 +728,8 @@ its important to understand how each of these metrics work and what you want to 
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Joining with `by = join_by(.metric, .estimator, .eval_time, .config, wflow_id)`
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/4941f8814a75404f7b41595e1e6d1c52fa4571d9a824b0c93b2d5cbcfbcd9a74.png"><img alt="../../_images/4941f8814a75404f7b41595e1e6d1c52fa4571d9a824b0c93b2d5cbcfbcd9a74.png" src="../../_images/4941f8814a75404f7b41595e1e6d1c52fa4571d9a824b0c93b2d5cbcfbcd9a74.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/4941f8814a75404f7b41595e1e6d1c52fa4571d9a824b0c93b2d5cbcfbcd9a74.png"><img alt="../../_images/4941f8814a75404f7b41595e1e6d1c52fa4571d9a824b0c93b2d5cbcfbcd9a74.png" src="../../_images/4941f8814a75404f7b41595e1e6d1c52fa4571d9a824b0c93b2d5cbcfbcd9a74.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -725,7 +738,7 @@ its important to understand how each of these metrics work and what you want to 
 <span class="nf">inner_join</span><span class="p">(</span><span class="n">tune_metrics</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">.eval_time</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="nf">group_by</span><span class="p">(</span><span class="n">.metric</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
-<span class="nf">group_map</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="nf">group_map</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nf">factor</span><span class="p">(</span><span class="nf">round</span><span class="p">(</span><span class="n">.eval_time</span><span class="p">,</span><span class="m">2</span><span class="p">)),</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">paste</span><span class="p">(</span><span class="n">wflow_id</span><span class="p">,</span><span class="w"> </span><span class="n">.config</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">.estimate</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
 <span class="w">    </span><span class="nf">geom_tile</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
 <span class="w">    </span><span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
@@ -743,8 +756,10 @@ its important to understand how each of these metrics work and what you want to 
 [[2]]
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/a3e515caa5da302d4f14934fb9a0cf03f0415e3a3a3b3a250d40e847957e11c5.png"><img alt="../../_images/a3e515caa5da302d4f14934fb9a0cf03f0415e3a3a3b3a250d40e847957e11c5.png" src="../../_images/a3e515caa5da302d4f14934fb9a0cf03f0415e3a3a3b3a250d40e847957e11c5.png" style="width: 900px; height: 540px;" /></a>
-<a class="reference internal image-reference" href="../../_images/6eddb705567c076a927554737ea6bf07ffb5eb455c19b8a0ad3ac79ce58c5aa6.png"><img alt="../../_images/6eddb705567c076a927554737ea6bf07ffb5eb455c19b8a0ad3ac79ce58c5aa6.png" src="../../_images/6eddb705567c076a927554737ea6bf07ffb5eb455c19b8a0ad3ac79ce58c5aa6.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/a3e515caa5da302d4f14934fb9a0cf03f0415e3a3a3b3a250d40e847957e11c5.png"><img alt="../../_images/a3e515caa5da302d4f14934fb9a0cf03f0415e3a3a3b3a250d40e847957e11c5.png" src="../../_images/a3e515caa5da302d4f14934fb9a0cf03f0415e3a3a3b3a250d40e847957e11c5.png" style="width: 900px; height: 540px;" />
+</a>
+<a class="reference internal image-reference" href="../../_images/6eddb705567c076a927554737ea6bf07ffb5eb455c19b8a0ad3ac79ce58c5aa6.png"><img alt="../../_images/6eddb705567c076a927554737ea6bf07ffb5eb455c19b8a0ad3ac79ce58c5aa6.png" src="../../_images/6eddb705567c076a927554737ea6bf07ffb5eb455c19b8a0ad3ac79ce58c5aa6.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 </section>
@@ -800,7 +815,8 @@ Computational engine: glmnet
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/f742ea77dc825a006f86468f0f905790048f59e89b9ff8f43c758070a9a2c714.png"><img alt="../../_images/f742ea77dc825a006f86468f0f905790048f59e89b9ff8f43c758070a9a2c714.png" src="../../_images/f742ea77dc825a006f86468f0f905790048f59e89b9ff8f43c758070a9a2c714.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/f742ea77dc825a006f86468f0f905790048f59e89b9ff8f43c758070a9a2c714.png"><img alt="../../_images/f742ea77dc825a006f86468f0f905790048f59e89b9ff8f43c758070a9a2c714.png" src="../../_images/f742ea77dc825a006f86468f0f905790048f59e89b9ff8f43c758070a9a2c714.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -857,7 +873,7 @@ Computational engine: mboost
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">shap.vals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fastshap</span><span class="o">::</span><span class="nf">explain</span><span class="p">(</span><span class="n">mboost_obj</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span><span class="m">100</span><span class="p">),</span><span class="w"> </span><span class="n">nsim</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">pred_wrapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">newdata</span><span class="p">)</span><span class="w"> </span><span class="nf">pull</span><span class="p">(</span><span class="nf">predict</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">new_data</span><span class="o">=</span><span class="n">newdata</span><span class="p">),</span><span class="n">.pred_time</span><span class="p">),</span><span class="w"> </span><span class="n">shap_only</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">parallel</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">shap.vals</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fastshap</span><span class="o">::</span><span class="nf">explain</span><span class="p">(</span><span class="n">mboost_obj</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span><span class="m">100</span><span class="p">),</span><span class="w"> </span><span class="n">nsim</span><span class="o">=</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">pred_wrapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">newdata</span><span class="p">)</span><span class="w"> </span><span class="nf">pull</span><span class="p">(</span><span class="nf">predict</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">new_data</span><span class="o">=</span><span class="n">newdata</span><span class="p">),</span><span class="n">.pred_time</span><span class="p">),</span><span class="w"> </span><span class="n">shap_only</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">parallel</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -886,7 +902,8 @@ Warning message:
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/07d24dbb3bf999e830fa14260be9720e8c5952de1a7c67f4d9dfa2215682e437.png"><img alt="../../_images/07d24dbb3bf999e830fa14260be9720e8c5952de1a7c67f4d9dfa2215682e437.png" src="../../_images/07d24dbb3bf999e830fa14260be9720e8c5952de1a7c67f4d9dfa2215682e437.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/07d24dbb3bf999e830fa14260be9720e8c5952de1a7c67f4d9dfa2215682e437.png"><img alt="../../_images/07d24dbb3bf999e830fa14260be9720e8c5952de1a7c67f4d9dfa2215682e437.png" src="../../_images/07d24dbb3bf999e830fa14260be9720e8c5952de1a7c67f4d9dfa2215682e437.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 </section>

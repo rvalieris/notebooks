@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
     <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=2a5f61ea" />
@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Survival prediction models, part 1" href="tidy_survival_part1.html" />
-    <link rel="prev" title="PCA visualization in R" href="pca-visualization-in-r.html" />
+    <link rel="prev" title="Compositional data difference test" href="sc_abundance.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -250,6 +250,15 @@
 
 <li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-r.html">PCA visualization in R</a></li>
 
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="sc_abundance.html">Compositional data difference test</a></li>
 
 
 
@@ -457,7 +466,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/b4b5ead2bd3327ef44426e06d21b518d19eea772aa9ed627420c472505d21a7a.png"><img alt="../../_images/b4b5ead2bd3327ef44426e06d21b518d19eea772aa9ed627420c472505d21a7a.png" src="../../_images/b4b5ead2bd3327ef44426e06d21b518d19eea772aa9ed627420c472505d21a7a.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/b4b5ead2bd3327ef44426e06d21b518d19eea772aa9ed627420c472505d21a7a.png"><img alt="../../_images/b4b5ead2bd3327ef44426e06d21b518d19eea772aa9ed627420c472505d21a7a.png" src="../../_images/b4b5ead2bd3327ef44426e06d21b518d19eea772aa9ed627420c472505d21a7a.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 </section>
@@ -673,7 +683,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/c8c6b9c14119c8d0e02c6e4e5c67b6ddb2fb8f6427f5d996d624e66ca4bb4ff7.png"><img alt="../../_images/c8c6b9c14119c8d0e02c6e4e5c67b6ddb2fb8f6427f5d996d624e66ca4bb4ff7.png" src="../../_images/c8c6b9c14119c8d0e02c6e4e5c67b6ddb2fb8f6427f5d996d624e66ca4bb4ff7.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/c8c6b9c14119c8d0e02c6e4e5c67b6ddb2fb8f6427f5d996d624e66ca4bb4ff7.png"><img alt="../../_images/c8c6b9c14119c8d0e02c6e4e5c67b6ddb2fb8f6427f5d996d624e66ca4bb4ff7.png" src="../../_images/c8c6b9c14119c8d0e02c6e4e5c67b6ddb2fb8f6427f5d996d624e66ca4bb4ff7.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -686,7 +697,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/3e5baa154d54bb3bfb8e6c7a8f9da18cf1017a3de63ac422fdd818221b8d7ae4.png"><img alt="../../_images/3e5baa154d54bb3bfb8e6c7a8f9da18cf1017a3de63ac422fdd818221b8d7ae4.png" src="../../_images/3e5baa154d54bb3bfb8e6c7a8f9da18cf1017a3de63ac422fdd818221b8d7ae4.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/3e5baa154d54bb3bfb8e6c7a8f9da18cf1017a3de63ac422fdd818221b8d7ae4.png"><img alt="../../_images/3e5baa154d54bb3bfb8e6c7a8f9da18cf1017a3de63ac422fdd818221b8d7ae4.png" src="../../_images/3e5baa154d54bb3bfb8e6c7a8f9da18cf1017a3de63ac422fdd818221b8d7ae4.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 </section>
@@ -694,7 +706,7 @@ document.write(`
 <h1>tidy shap<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tidy_shap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">shapviz.obj</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">transform_values</span><span class="o">=</span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tidy_shap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">shapviz.obj</span><span class="p">,</span><span class="w"> </span><span class="n">include_values</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">filter_values</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">transform_values</span><span class="o">=</span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">imp</span><span class="w"> </span><span class="o">&lt;-</span>
 <span class="w">        </span><span class="n">shapviz</span><span class="o">::</span><span class="nf">sv_importance</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="p">,</span><span class="w"> </span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;no&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="w">        </span><span class="nf">enframe</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;var&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="s">&#39;importance&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
@@ -704,12 +716,12 @@ document.write(`
 <span class="w">        </span><span class="nf">pivot_longer</span><span class="p">(</span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;var&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;shap&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">row_index</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
 <span class="w">        </span><span class="nf">inner_join</span><span class="p">(</span><span class="n">imp</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&#39;var&#39;</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nf">if</span><span class="p">(</span><span class="o">!</span><span class="w"> </span><span class="n">include_values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nf">return</span><span class="p">(</span><span class="n">shap_vars</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="w"> </span><span class="n">include_values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">return</span><span class="p">(</span><span class="n">shap_vars</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="n">var_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">shapviz.sv</span><span class="o">$</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">rownames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;row_index&#39;</span><span class="p">)</span>
-<span class="w">    </span><span class="nf">if</span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">filter_values</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">filter_values</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">var_values</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="n">var_values</span><span class="p">,</span><span class="w"> </span><span class="n">row_index</span><span class="p">,</span><span class="w"> </span><span class="nf">where</span><span class="p">(</span><span class="n">filter_values</span><span class="p">))</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
@@ -821,7 +833,8 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Orientation inferred to be along y-axis; override with `position_quasirandom(orientation = &#39;x&#39;)`
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/feee3d8c75415488d9c6f43bac61c6e61552560cc84033f139aa0448e5073888.png"><img alt="../../_images/feee3d8c75415488d9c6f43bac61c6e61552560cc84033f139aa0448e5073888.png" src="../../_images/feee3d8c75415488d9c6f43bac61c6e61552560cc84033f139aa0448e5073888.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/feee3d8c75415488d9c6f43bac61c6e61552560cc84033f139aa0448e5073888.png"><img alt="../../_images/feee3d8c75415488d9c6f43bac61c6e61552560cc84033f139aa0448e5073888.png" src="../../_images/feee3d8c75415488d9c6f43bac61c6e61552560cc84033f139aa0448e5073888.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -838,7 +851,8 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Orientation inferred to be along y-axis; override with `position_quasirandom(orientation = &#39;x&#39;)`
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/38d989c0433d152b96de9611b2e47c1844f602809e11910c908dd9f7575de5da.png"><img alt="../../_images/38d989c0433d152b96de9611b2e47c1844f602809e11910c908dd9f7575de5da.png" src="../../_images/38d989c0433d152b96de9611b2e47c1844f602809e11910c908dd9f7575de5da.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/38d989c0433d152b96de9611b2e47c1844f602809e11910c908dd9f7575de5da.png"><img alt="../../_images/38d989c0433d152b96de9611b2e47c1844f602809e11910c908dd9f7575de5da.png" src="../../_images/38d989c0433d152b96de9611b2e47c1844f602809e11910c908dd9f7575de5da.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -857,7 +871,8 @@ document.write(`
 &quot;Removed 107 rows containing missing values or values outside the scale range (`geom_point()`).&quot;
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/b6e1dc6dbbe749844e116cf8061bd1eb722c3a4bf62aab8c3e55d8a0b16bd17b.png"><img alt="../../_images/b6e1dc6dbbe749844e116cf8061bd1eb722c3a4bf62aab8c3e55d8a0b16bd17b.png" src="../../_images/b6e1dc6dbbe749844e116cf8061bd1eb722c3a4bf62aab8c3e55d8a0b16bd17b.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/b6e1dc6dbbe749844e116cf8061bd1eb722c3a4bf62aab8c3e55d8a0b16bd17b.png"><img alt="../../_images/b6e1dc6dbbe749844e116cf8061bd1eb722c3a4bf62aab8c3e55d8a0b16bd17b.png" src="../../_images/b6e1dc6dbbe749844e116cf8061bd1eb722c3a4bf62aab8c3e55d8a0b16bd17b.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -875,7 +890,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/7dfcc2f4df3cb5440be23b1c8c2fcca27a97bbb84fa1580e8e7dd45adfaadee7.png"><img alt="../../_images/7dfcc2f4df3cb5440be23b1c8c2fcca27a97bbb84fa1580e8e7dd45adfaadee7.png" src="../../_images/7dfcc2f4df3cb5440be23b1c8c2fcca27a97bbb84fa1580e8e7dd45adfaadee7.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/7dfcc2f4df3cb5440be23b1c8c2fcca27a97bbb84fa1580e8e7dd45adfaadee7.png"><img alt="../../_images/7dfcc2f4df3cb5440be23b1c8c2fcca27a97bbb84fa1580e8e7dd45adfaadee7.png" src="../../_images/7dfcc2f4df3cb5440be23b1c8c2fcca27a97bbb84fa1580e8e7dd45adfaadee7.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -894,7 +910,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/54291fb1eabd828736e989998988f84666065e570b03baaa731ab39ee591cef9.png"><img alt="../../_images/54291fb1eabd828736e989998988f84666065e570b03baaa731ab39ee591cef9.png" src="../../_images/54291fb1eabd828736e989998988f84666065e570b03baaa731ab39ee591cef9.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/54291fb1eabd828736e989998988f84666065e570b03baaa731ab39ee591cef9.png"><img alt="../../_images/54291fb1eabd828736e989998988f84666065e570b03baaa731ab39ee591cef9.png" src="../../_images/54291fb1eabd828736e989998988f84666065e570b03baaa731ab39ee591cef9.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 </section>
@@ -930,12 +947,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="pca-visualization-in-r.html"
+       href="sc_abundance.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">PCA visualization in R</p>
+        <p class="prev-next-title">Compositional data difference test</p>
       </div>
     </a>
     <a class="right-next"

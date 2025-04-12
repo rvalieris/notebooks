@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
     <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=2a5f61ea" />
@@ -250,6 +250,15 @@
 
 <li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-r.html">PCA visualization in R</a></li>
 
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="sc_abundance.html">Compositional data difference test</a></li>
 
 
 
@@ -512,7 +521,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/190b9df79afebb642ec8fecc0b535728671e5b8abd88f42096bfdead78cc3e56.png"><img alt="../../_images/190b9df79afebb642ec8fecc0b535728671e5b8abd88f42096bfdead78cc3e56.png" src="../../_images/190b9df79afebb642ec8fecc0b535728671e5b8abd88f42096bfdead78cc3e56.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/190b9df79afebb642ec8fecc0b535728671e5b8abd88f42096bfdead78cc3e56.png"><img alt="../../_images/190b9df79afebb642ec8fecc0b535728671e5b8abd88f42096bfdead78cc3e56.png" src="../../_images/190b9df79afebb642ec8fecc0b535728671e5b8abd88f42096bfdead78cc3e56.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 </section>
@@ -535,7 +545,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/fb581378b3a92f6df4c37eb0a3cf47dd69bba5f37aae7fcc9ac1c7260846ac7d.png"><img alt="../../_images/fb581378b3a92f6df4c37eb0a3cf47dd69bba5f37aae7fcc9ac1c7260846ac7d.png" src="../../_images/fb581378b3a92f6df4c37eb0a3cf47dd69bba5f37aae7fcc9ac1c7260846ac7d.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/fb581378b3a92f6df4c37eb0a3cf47dd69bba5f37aae7fcc9ac1c7260846ac7d.png"><img alt="../../_images/fb581378b3a92f6df4c37eb0a3cf47dd69bba5f37aae7fcc9ac1c7260846ac7d.png" src="../../_images/fb581378b3a92f6df4c37eb0a3cf47dd69bba5f37aae7fcc9ac1c7260846ac7d.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -548,7 +559,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/30f76dcca1a5d176656d26fc11e40697bf1ebabc8ca879172fa0c51382438bf3.png"><img alt="../../_images/30f76dcca1a5d176656d26fc11e40697bf1ebabc8ca879172fa0c51382438bf3.png" src="../../_images/30f76dcca1a5d176656d26fc11e40697bf1ebabc8ca879172fa0c51382438bf3.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/30f76dcca1a5d176656d26fc11e40697bf1ebabc8ca879172fa0c51382438bf3.png"><img alt="../../_images/30f76dcca1a5d176656d26fc11e40697bf1ebabc8ca879172fa0c51382438bf3.png" src="../../_images/30f76dcca1a5d176656d26fc11e40697bf1ebabc8ca879172fa0c51382438bf3.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 </section>
@@ -569,7 +581,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/c82feeb49f3a2a41330bbe703bdfcbe5de7753ab760277727227a9061e20b904.png"><img alt="../../_images/c82feeb49f3a2a41330bbe703bdfcbe5de7753ab760277727227a9061e20b904.png" src="../../_images/c82feeb49f3a2a41330bbe703bdfcbe5de7753ab760277727227a9061e20b904.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/c82feeb49f3a2a41330bbe703bdfcbe5de7753ab760277727227a9061e20b904.png"><img alt="../../_images/c82feeb49f3a2a41330bbe703bdfcbe5de7753ab760277727227a9061e20b904.png" src="../../_images/c82feeb49f3a2a41330bbe703bdfcbe5de7753ab760277727227a9061e20b904.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -590,7 +603,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/a20ef4e716613b0458558b1ec716ba9bdda2ce2718489f362398d76bedfee8ff.png"><img alt="../../_images/a20ef4e716613b0458558b1ec716ba9bdda2ce2718489f362398d76bedfee8ff.png" src="../../_images/a20ef4e716613b0458558b1ec716ba9bdda2ce2718489f362398d76bedfee8ff.png" style="width: 900px; height: 540px;" /></a>
+<a class="reference internal image-reference" href="../../_images/a20ef4e716613b0458558b1ec716ba9bdda2ce2718489f362398d76bedfee8ff.png"><img alt="../../_images/a20ef4e716613b0458558b1ec716ba9bdda2ce2718489f362398d76bedfee8ff.png" src="../../_images/a20ef4e716613b0458558b1ec716ba9bdda2ce2718489f362398d76bedfee8ff.png" style="width: 900px; height: 540px;" />
+</a>
 </div>
 </div>
 </section>

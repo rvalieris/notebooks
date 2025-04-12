@@ -1,0 +1,1038 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Compositional data difference test &#8212; notebooks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=2a5f61ea" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/methods/sc_abundance';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tidy SHAP" href="tidy_shap.html" />
+    <link rel="prev" title="PCA visualization in R" href="pca-visualization-in-r.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">notebooks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    notebooks
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">ggplot2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/clustered_heatmap.html">Clustered Heatmap</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/color_palettes.html">Color Palettes</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/colors2d.html">Bivariate Color Palette</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_1D.html">Density 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_2D.html">Density 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/labeling_series.html">Labeling Data Series</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/plot_composition.html">Composing multiple plots in a single page</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/scale_transforms.html">Scale Transforms</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/tables.html">Tables on plots</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data-analysis/crinacle.html">Crinacle IEMs Ranking</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../data-analysis/mahjong-yaku-stats.html">Mahjong Yaku stats</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="clustering.html">Clustering</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="glmnet_cox.html">Regularized Cox Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-python.html">PCA visualization in Python</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-r.html">PCA visualization in R</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Compositional data difference test</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tidy_shap.html">Tidy SHAP</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tidy_survival_part1.html">Survival prediction models, part 1</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tidy_survival_part2.html">Survival prediction models, part 2</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fun</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fun/dragon_curve.html">Dragon Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/mandelbrot.html">Mandelbrot Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/star.html">Star polygons</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/rvalieris/notebooks" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Compositional data difference test</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Compositional data difference test</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data">data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#counts">Counts</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#percentages">Percentages</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-test">Difference test</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clr-transform">clr transform</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#alr-transform">alr transform</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dirichlet-regression">Dirichlet regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">SeuratData</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">pheatmap</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggbeeswarm</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggcompare</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">compositions</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">DirichletReg</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nf">theme_set</span><span class="p">(</span><span class="nf">theme_cowplot</span><span class="p">())</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="o">=</span><span class="m">9</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="m">120</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="compositional-data-difference-test">
+<h1>Compositional data difference test<a class="headerlink" href="#compositional-data-difference-test" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data">
+<h1>data<a class="headerlink" href="#data" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">panc8</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">suppressMessages</span><span class="p">(</span><span class="nf">LoadData</span><span class="p">(</span><span class="s">&quot;panc8&quot;</span><span class="p">))</span>
+<span class="n">panc8</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;Assay RNA changing from Assay to Assay&quot;
+Warning message:
+&quot;Assay RNA changing from Assay to Assay5&quot;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>An object of class Seurat 
+34363 features across 14890 samples within 1 assay 
+Active assay: RNA (34363 features, 0 variable features)
+ 2 layers present: counts, data
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">panc8</span><span class="o">@</span><span class="n">meta.data</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 6 × 8</caption>
+<thead>
+	<tr><th></th><th scope=col>orig.ident</th><th scope=col>nCount_RNA</th><th scope=col>nFeature_RNA</th><th scope=col>tech</th><th scope=col>replicate</th><th scope=col>assigned_cluster</th><th scope=col>celltype</th><th scope=col>dataset</th></tr>
+	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>D101_5</th><td>D101</td><td> 4615.810</td><td>1986</td><td>celseq</td><td>celseq</td><td>NA</td><td>gamma </td><td>celseq</td></tr>
+	<tr><th scope=row>D101_7</th><td>D101</td><td>29001.563</td><td>4209</td><td>celseq</td><td>celseq</td><td>NA</td><td>acinar</td><td>celseq</td></tr>
+	<tr><th scope=row>D101_10</th><td>D101</td><td> 6707.857</td><td>2408</td><td>celseq</td><td>celseq</td><td>NA</td><td>alpha </td><td>celseq</td></tr>
+	<tr><th scope=row>D101_13</th><td>D101</td><td> 8797.224</td><td>2964</td><td>celseq</td><td>celseq</td><td>NA</td><td>delta </td><td>celseq</td></tr>
+	<tr><th scope=row>D101_14</th><td>D101</td><td> 5032.558</td><td>2264</td><td>celseq</td><td>celseq</td><td>NA</td><td>beta  </td><td>celseq</td></tr>
+	<tr><th scope=row>D101_17</th><td>D101</td><td>13474.866</td><td>3982</td><td>celseq</td><td>celseq</td><td>NA</td><td>ductal</td><td>celseq</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">    </span><span class="n">panc8</span><span class="o">@</span><span class="n">meta.data</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">distinct</span><span class="p">(</span><span class="n">orig.ident</span><span class="p">,</span><span class="w"> </span><span class="n">tech</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">as_tibble</span><span class="p">()</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 2</caption>
+<thead>
+	<tr><th scope=col>orig.ident</th><th scope=col>tech</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>D101   </td><td>celseq</td></tr>
+	<tr><td>D102   </td><td>celseq</td></tr>
+	<tr><td>D10631 </td><td>celseq</td></tr>
+	<tr><td>D1713  </td><td>celseq</td></tr>
+	<tr><td>D172444</td><td>celseq</td></tr>
+	<tr><td>D17All1</td><td>celseq</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="counts">
+<h1>Counts<a class="headerlink" href="#counts" title="Link to this heading">#</a></h1>
+<p>This is a pancreatic single cell dataset consisting of 65 samples, 13 different cell types, measured with 5 different techniques.</p>
+<p>Here, we will ignore the gene expression, and just look at the cell composition of each sample/tech.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">panc8</span><span class="o">@</span><span class="n">meta.data</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">count</span><span class="p">(</span><span class="n">orig.ident</span><span class="p">,</span><span class="w"> </span><span class="n">celltype</span><span class="p">,</span><span class="w"> </span><span class="n">tech</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">orig.ident</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">celltype</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="nf">geom_col</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;# of cells&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">tech</span><span class="p">,</span><span class="w"> </span><span class="n">scales</span><span class="o">=</span><span class="s">&#39;free&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/32a9496e4912ccf93a296b3442d0ba7451a845195a01b79aced9cd95079bdb3c.png"><img alt="../../_images/32a9496e4912ccf93a296b3442d0ba7451a845195a01b79aced9cd95079bdb3c.png" src="../../_images/32a9496e4912ccf93a296b3442d0ba7451a845195a01b79aced9cd95079bdb3c.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<p>Counts are the simplest way to look at the data.</p>
+<p>However, differences in the total number of cells between samples and techniques aren’t relevant to us.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">ncells_mtx</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">    </span><span class="n">panc8</span><span class="o">@</span><span class="n">meta.data</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="c1"># I am combining celltypes with low amount of cells into &quot;other&quot;</span>
+<span class="w">    </span><span class="c1"># this is just for illustration purposes</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">ct2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ifelse</span><span class="p">(</span><span class="n">celltype</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;epsilon&#39;</span><span class="p">,</span><span class="s">&#39;schwann&#39;</span><span class="p">,</span><span class="s">&#39;mast&#39;</span><span class="p">,</span><span class="s">&#39;macrophage&#39;</span><span class="p">,</span><span class="s">&#39;quiescent_stellate&#39;</span><span class="p">,</span><span class="s">&#39;endothelial&#39;</span><span class="p">),</span><span class="w"> </span><span class="s">&#39;other&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">celltype</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">count</span><span class="p">(</span><span class="n">orig.ident</span><span class="p">,</span><span class="w"> </span><span class="n">ct2</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">pivot_wider</span><span class="p">(</span><span class="n">names_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ct2</span><span class="p">,</span><span class="w"> </span><span class="n">values_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">values_fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">column_to_rownames</span><span class="p">(</span><span class="s">&#39;orig.ident&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">ncells_mtx</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,];</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">ncells_mtx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 5 × 8</caption>
+<thead>
+	<tr><th></th><th scope=col>acinar</th><th scope=col>activated_stellate</th><th scope=col>alpha</th><th scope=col>beta</th><th scope=col>delta</th><th scope=col>ductal</th><th scope=col>gamma</th><th scope=col>other</th></tr>
+	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>AZ</th><td> 4</td><td>1</td><td>28</td><td>12</td><td>7</td><td> 3</td><td>5</td><td>1</td></tr>
+	<tr><th scope=row>D101</th><td> 6</td><td>1</td><td> 7</td><td> 5</td><td>2</td><td> 6</td><td>3</td><td>1</td></tr>
+	<tr><th scope=row>D102</th><td> 7</td><td>0</td><td> 3</td><td>13</td><td>3</td><td> 5</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>D10631</th><td>14</td><td>1</td><td> 5</td><td> 0</td><td>0</td><td>12</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>D1713</th><td>20</td><td>5</td><td> 4</td><td> 4</td><td>1</td><td>48</td><td>0</td><td>3</td></tr>
+</tbody>
+</table>
+</div><div class="output text_html">14890</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colSums</span><span class="p">(</span><span class="n">ncells_mtx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.dl-inline {width: auto; margin:0; padding: 0}
+.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
+.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
+.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
+</style><dl class=dl-inline><dt>acinar</dt><dd>1864</dd><dt>activated_stellate</dt><dd>474</dd><dt>alpha</dt><dd>4615</dd><dt>beta</dt><dd>3679</dd><dt>delta</dt><dd>1013</dd><dt>ductal</dt><dd>1954</dd><dt>gamma</dt><dd>625</dd><dt>other</dt><dd>666</dd></dl>
+</div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="percentages">
+<h1>Percentages<a class="headerlink" href="#percentages" title="Link to this heading">#</a></h1>
+<p>Percentages uses the sum of the cells in each sample as the normalizing denominator, so that each row will sum to 1.</p>
+<p>The “acomp” function is part of the compositions package, and does this normalization for us.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="nf">rowSums</span><span class="p">(</span><span class="nf">acomp</span><span class="p">(</span><span class="n">ncells_mtx</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      1       1       1       1       1       1 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">color_p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colorRampPalette</span><span class="p">(</span><span class="nf">rev</span><span class="p">(</span><span class="nf">brewer.pal</span><span class="p">(</span><span class="s">&#39;Spectral&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="m">11</span><span class="p">)))(</span><span class="m">100</span><span class="p">)</span>
+<span class="nf">acomp</span><span class="p">(</span><span class="n">ncells_mtx</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">pheatmap</span><span class="p">(</span>
+<span class="w">    </span><span class="n">color</span><span class="o">=</span><span class="n">color_p</span><span class="p">,</span>
+<span class="w">    </span><span class="n">clustering_method</span><span class="o">=</span><span class="s">&#39;ward.D2&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">clustering_disttance_rows</span><span class="o">=</span><span class="s">&#39;canberra&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">clustering_disttance_cols</span><span class="o">=</span><span class="s">&#39;canberra&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">annotation_row</span><span class="o">=</span><span class="nf">column_to_rownames</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;orig.ident&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">border_color</span><span class="o">=</span><span class="kc">NA</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/35d0c5a373aa7b74ac0e7ea6fd4397c077ef038b4a81ec6e0e014a1525f721bc.png"><img alt="../../_images/35d0c5a373aa7b74ac0e7ea6fd4397c077ef038b4a81ec6e0e014a1525f721bc.png" src="../../_images/35d0c5a373aa7b74ac0e7ea6fd4397c077ef038b4a81ec6e0e014a1525f721bc.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="difference-test">
+<h1>Difference test<a class="headerlink" href="#difference-test" title="Link to this heading">#</a></h1>
+<p>To compare the proportions between cell types, we can use a statistical test.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">comparisons</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">combn</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">metadata</span><span class="o">$</span><span class="n">tech</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">simplify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">test_func</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="kc">...</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">wilcox.test</span><span class="p">(</span><span class="kc">...</span><span class="p">,</span><span class="w"> </span><span class="n">exact</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">list</span><span class="p">(</span><span class="n">p.value</span><span class="o">=</span><span class="n">r</span><span class="o">$</span><span class="n">p.value</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="o">=</span><span class="s">&#39;wilcox.test&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">acomp</span><span class="p">(</span><span class="n">ncells_mtx</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">rownames_to_column</span><span class="p">(</span><span class="s">&#39;orig.ident&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">pivot_longer</span><span class="p">(</span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;celltype&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;cell_percentage&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="o">=-</span><span class="n">orig.ident</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">inner_join</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&#39;orig.ident&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tech</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">cell_percentage</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;darkgray&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">outlier.shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_quasirandom</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">stat_compare</span><span class="p">(</span><span class="n">comparisons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">comparisons</span><span class="p">,</span><span class="w"> </span><span class="n">correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;fdr&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">cutoff</span><span class="o">=</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="n">panel_indep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="o">=</span><span class="n">test_func</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.x</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="n">vjust</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="o">=</span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">celltype</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;Removed 67 rows containing missing values or values outside the scale range (`geom_bracket()`).&quot;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/d3142080ab0db0509e4a34d359f4e68aee67a481092279a8e7959590155faa6d.png"><img alt="../../_images/d3142080ab0db0509e4a34d359f4e68aee67a481092279a8e7959590155faa6d.png" src="../../_images/d3142080ab0db0509e4a34d359f4e68aee67a481092279a8e7959590155faa6d.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<p>Many cell types show significant pvalues, but since the cell types are parts of a whole, its difficult to attribute this change to a specific cell type.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="clr-transform">
+<h1>clr transform<a class="headerlink" href="#clr-transform" title="Link to this heading">#</a></h1>
+<p>The clr transform uses the geometric mean of the subsets as the denominator.</p>
+<p>the clr() function is also part of the compositions package.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">acomp</span><span class="p">(</span><span class="n">ncells_mtx</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">clr</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">rownames_to_column</span><span class="p">(</span><span class="s">&#39;orig.ident&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">pivot_longer</span><span class="p">(</span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;celltype&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;clr_log_ratio&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="o">=-</span><span class="n">orig.ident</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">inner_join</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&#39;orig.ident&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tech</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">clr_log_ratio</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;darkgray&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">outlier.shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_quasirandom</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">stat_compare</span><span class="p">(</span><span class="n">comparisons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">comparisons</span><span class="p">,</span><span class="w"> </span><span class="n">correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;fdr&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">cutoff</span><span class="o">=</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="n">panel_indep</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="o">=</span><span class="n">test_func</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.x</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="n">vjust</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="o">=</span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">celltype</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;Removed 76 rows containing missing values or values outside the scale range (`geom_bracket()`).&quot;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/95a6ec6b8a369feb3478763cf72fc821e961881911f63e115b805086c067cfa4.png"><img alt="../../_images/95a6ec6b8a369feb3478763cf72fc821e961881911f63e115b805086c067cfa4.png" src="../../_images/95a6ec6b8a369feb3478763cf72fc821e961881911f63e115b805086c067cfa4.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<p>notice how many of the significant pvalues disappeared.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="alr-transform">
+<h1>alr transform<a class="headerlink" href="#alr-transform" title="Link to this heading">#</a></h1>
+<p>The alr transform uses a specified subset as the denominator, here the cell type “other” was used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">acomp</span><span class="p">(</span><span class="n">ncells_mtx</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">alr</span><span class="p">(</span><span class="n">ivar</span><span class="o">=</span><span class="s">&#39;other&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="c1"># using celltype &#39;other&#39; as the denominator</span>
+<span class="nf">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">rownames_to_column</span><span class="p">(</span><span class="s">&#39;orig.ident&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">pivot_longer</span><span class="p">(</span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;celltype&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;alr_log_ratio&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="o">=-</span><span class="n">orig.ident</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">inner_join</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&#39;orig.ident&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tech</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">alr_log_ratio</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;darkgray&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">outlier.shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_quasirandom</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">stat_compare</span><span class="p">(</span><span class="n">comparisons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">comparisons</span><span class="p">,</span><span class="w"> </span><span class="n">correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;fdr&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">cutoff</span><span class="o">=</span><span class="m">0.2</span><span class="p">,</span><span class="w"> </span><span class="n">panel_indep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="o">=</span><span class="n">test_func</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.x</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="n">vjust</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="o">=</span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">celltype</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;Removed 113 rows containing non-finite outside the scale range (`stat_boxplot()`).&quot;
+Warning message:
+&quot;Removed 113 rows containing non-finite outside the scale range (`stat_compare()`).&quot;
+Warning message:
+&quot;Removed 26 rows containing missing values or values outside the scale range (`position_quasirandom()`).&quot;
+Warning message:
+&quot;Removed 87 rows containing missing values or values outside the scale range (`geom_point()`).&quot;
+Warning message:
+&quot;Removed 67 rows containing missing values or values outside the scale range (`geom_bracket()`).&quot;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/08a2ff39f4bf20450837d539b90a1291e0d3d42ebf510ff5fa6bf8a01ebbbaf5.png"><img alt="../../_images/08a2ff39f4bf20450837d539b90a1291e0d3d42ebf510ff5fa6bf8a01ebbbaf5.png" src="../../_images/08a2ff39f4bf20450837d539b90a1291e0d3d42ebf510ff5fa6bf8a01ebbbaf5.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<p>No cell types show significant (&lt;0.1) pvalues here.</p>
+<p>but remember to think carefully about which subset to use as the denominator.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dirichlet-regression">
+<h1>Dirichlet regression<a class="headerlink" href="#dirichlet-regression" title="Link to this heading">#</a></h1>
+<p>The Dirichlet distribution models the probability of a multinomial random variable that sums to 1.</p>
+<p>It provides an alternative to log-ratio regression for the modeling of compositional data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span><span class="w"> </span><span class="n">tech</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&#39;fluidigmc1&#39;</span><span class="p">)</span><span class="w"> </span><span class="c1"># remove outlier</span>
+
+<span class="n">z</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ncells_mtx</span><span class="p">[</span><span class="n">meta</span><span class="o">$</span><span class="n">orig.ident</span><span class="p">,]</span><span class="w"> </span>
+<span class="n">z</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">z</span><span class="o">/</span><span class="nf">rowSums</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+
+<span class="nf">all</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">meta</span><span class="o">$</span><span class="n">orig.ident</span><span class="p">)</span><span class="w"> </span><span class="c1"># make sure its in the same order</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">TRUE</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">dr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DR_data</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="nf">rowSums</span><span class="p">(</span><span class="n">dr</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in DR_data(z):
+&quot;some entries are 0 or 1 =&gt; transformation forced&quot;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      1       1       1       1       1       1 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the Dirichlet distribution can’t model zeroes or ones, so a transformation was applied in these cases.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DirichReg</span><span class="p">(</span><span class="n">dr</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">tech</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">meta</span><span class="p">)</span>
+<span class="n">reg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+DirichReg(formula = dr ~ tech - 1, data = meta)
+using the common parametrization
+
+Log-likelihood: 771.9 on 32 df (105 BFGS + 1 NR Iterations)
+
+-----------------------------------------
+Coefficients for variable no. 1: acinar
+   techcelseq    techcelseq2     techindrop  techsmartseq2  
+       0.6371         0.3604         1.4701         0.2580  
+-----------------------------------------
+Coefficients for variable no. 2: activated_stellate
+   techcelseq    techcelseq2     techindrop  techsmartseq2  
+      -0.9922        -0.3468         0.7442        -0.2810  
+-----------------------------------------
+Coefficients for variable no. 3: alpha
+   techcelseq    techcelseq2     techindrop  techsmartseq2  
+       0.2472         1.7536         2.4029         1.9901  
+-----------------------------------------
+Coefficients for variable no. 4: beta
+   techcelseq    techcelseq2     techindrop  techsmartseq2  
+     -0.04158        1.05837        2.60706        0.92925  
+-----------------------------------------
+Coefficients for variable no. 5: delta
+   techcelseq    techcelseq2     techindrop  techsmartseq2  
+      -0.5621         0.4265         1.3318         0.2516  
+-----------------------------------------
+Coefficients for variable no. 6: ductal
+   techcelseq    techcelseq2     techindrop  techsmartseq2  
+       0.8086         0.6040         1.6510         0.8798  
+-----------------------------------------
+Coefficients for variable no. 7: gamma
+   techcelseq    techcelseq2     techindrop  techsmartseq2  
+      -1.1218        -0.1968         0.6864         0.4714  
+-----------------------------------------
+Coefficients for variable no. 8: other
+   techcelseq    techcelseq2     techindrop  techsmartseq2  
+      -1.1189        -0.2716         1.0149        -0.2910  
+-----------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tidy_dr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">dr_reg</span><span class="p">,</span><span class="w"> </span><span class="n">exp</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">confint</span><span class="p">(</span><span class="n">dr_reg</span><span class="p">,</span><span class="w"> </span><span class="n">exp</span><span class="o">=</span><span class="n">exp</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">map_df</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">w</span><span class="o">$</span><span class="n">coefficients</span><span class="p">),</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">if</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">base</span><span class="o">::</span><span class="nf">exp</span><span class="p">(</span><span class="n">w</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[[</span><span class="n">i</span><span class="p">]])</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">w</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[[</span><span class="n">i</span><span class="p">]]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">w</span><span class="o">$</span><span class="n">ci</span><span class="p">[[</span><span class="m">1</span><span class="p">]][[</span><span class="n">i</span><span class="p">]])</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">rownames_to_column</span><span class="p">(</span><span class="s">&#39;term&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">rename</span><span class="p">(</span><span class="n">ci.low</span><span class="o">=</span><span class="n">V1</span><span class="p">,</span><span class="w"> </span><span class="n">ci.high</span><span class="o">=</span><span class="n">V2</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">mutate</span><span class="p">(</span>
+<span class="w">            </span><span class="n">subset</span><span class="o">=</span><span class="nf">names</span><span class="p">(</span><span class="n">w</span><span class="o">$</span><span class="n">coefficients</span><span class="p">)[[</span><span class="n">i</span><span class="p">]]</span>
+<span class="w">        </span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">        </span><span class="nf">inner_join</span><span class="p">(</span><span class="nf">as_tibble</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span><span class="n">rownames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;term&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="s">&#39;term&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">tidy_dr</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span><span class="w"> </span><span class="n">exp</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">term</span><span class="o">=</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&#39;tech&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">term</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">term</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">value</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;darkgray&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_pointrange</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="n">ci.low</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="o">=</span><span class="n">ci.high</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">subset</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&#39;regression coefficients&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/3d32527acbd6a0689cb10c2182305a4d0a156a5a8379a179dc9966059c09638d.png"><img alt="../../_images/3d32527acbd6a0689cb10c2182305a4d0a156a5a8379a179dc9966059c09638d.png" src="../../_images/3d32527acbd6a0689cb10c2182305a4d0a156a5a8379a179dc9966059c09638d.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="further-reading">
+<h1>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Compositional_data">https://en.wikipedia.org/wiki/Compositional_data</a></p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Dirichlet_distribution">https://en.wikipedia.org/wiki/Dirichlet_distribution</a></p>
+<p><a class="reference external" href="http://www.stat.boogaart.de/compositions/">http://www.stat.boogaart.de/compositions/</a></p>
+<p><a class="reference external" href="https://www.geo.fu-berlin.de/en/v/soga-r/Advances-statistics/Feature-scales/Intro_compositional_data/index.html">https://www.geo.fu-berlin.de/en/v/soga-r/Advances-statistics/Feature-scales/Intro_compositional_data/index.html</a></p>
+<p><a class="reference external" href="http://www.csam.or.kr/journal/view.html?doi=10.29220/CSAM.2022.29.4.453">http://www.csam.or.kr/journal/view.html?doi=10.29220/CSAM.2022.29.4.453</a></p>
+<p><a class="reference external" href="https://ijbnpa.biomedcentral.com/articles/10.1186/s12966-018-0685-1">https://ijbnpa.biomedcentral.com/articles/10.1186/s12966-018-0685-1</a></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./src/methods"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pca-visualization-in-r.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PCA visualization in R</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tidy_shap.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tidy SHAP</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Compositional data difference test</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data">data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#counts">Counts</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#percentages">Percentages</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-test">Difference test</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clr-transform">clr transform</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#alr-transform">alr transform</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dirichlet-regression">Dirichlet regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By rvalieris
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

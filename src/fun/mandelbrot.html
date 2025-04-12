@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
     <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=2a5f61ea" />
@@ -256,6 +256,15 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../methods/sc_abundance.html">Compositional data difference test</a></li>
+
+
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="../methods/tidy_shap.html">Tidy SHAP</a></li>
 
 
@@ -419,7 +428,7 @@ document.write(`
 <h1>Mandelbrot Set<a class="headerlink" href="#mandelbrot-set" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mandelbrot_vectorized</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">px</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">py</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">1500</span><span class="p">,</span><span class="w"> </span><span class="n">num_iter</span><span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mandelbrot_vectorized</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">px</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">py</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">1500</span><span class="p">,</span><span class="w"> </span><span class="n">num_iter</span><span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1"># variables</span>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">px</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">px</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
 <span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="n">py</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">py</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
@@ -428,7 +437,7 @@ document.write(`
 <span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 <span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="nf">for </span><span class="p">(</span><span class="n">rep</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">num_iter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="n">rep</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">num_iter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">which</span><span class="p">(</span><span class="nf">Mod</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 <span class="w">        </span><span class="n">z</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">z</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
 <span class="w">        </span><span class="n">k</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">k</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="nf">abs</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">index</span><span class="p">]))</span>
@@ -436,7 +445,7 @@ document.write(`
 <span class="w">    </span>
 <span class="w">    </span><span class="n">k</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num_iter</span>
 
-<span class="w">    </span><span class="nf">return</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">return</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -450,7 +459,7 @@ document.write(`
 <span class="n">clr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">colorRampPalette</span><span class="p">(</span><span class="n">pal2</span><span class="p">)(</span><span class="m">300</span><span class="p">)</span>
 <span class="n">clr</span><span class="p">[</span><span class="m">300</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;black&#39;</span>
 
-<span class="n">display</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="n">display</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">z</span><span class="p">[</span><span class="n">z</span><span class="o">==</span><span class="nf">max</span><span class="p">(</span><span class="n">z</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span>
 <span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">pal2</span><span class="p">)</span><span class="o">*</span><span class="m">2</span><span class="p">)</span>
 <span class="w">    </span><span class="n">z</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">z</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">pal2</span><span class="p">)</span><span class="o">*</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span>
@@ -469,7 +478,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/2052a8dab519558b48214568c370d147084eaadaf42c6d55742f0b4bd4141a69.png"><img alt="../../_images/2052a8dab519558b48214568c370d147084eaadaf42c6d55742f0b4bd4141a69.png" src="../../_images/2052a8dab519558b48214568c370d147084eaadaf42c6d55742f0b4bd4141a69.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/2052a8dab519558b48214568c370d147084eaadaf42c6d55742f0b4bd4141a69.png"><img alt="../../_images/2052a8dab519558b48214568c370d147084eaadaf42c6d55742f0b4bd4141a69.png" src="../../_images/2052a8dab519558b48214568c370d147084eaadaf42c6d55742f0b4bd4141a69.png" style="width: 600px; height: 600px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -480,7 +490,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/9331e61bdd7ccabd12a65a97d669bad6fa824adddc836577bcb4f8d0b9ac4297.png"><img alt="../../_images/9331e61bdd7ccabd12a65a97d669bad6fa824adddc836577bcb4f8d0b9ac4297.png" src="../../_images/9331e61bdd7ccabd12a65a97d669bad6fa824adddc836577bcb4f8d0b9ac4297.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/9331e61bdd7ccabd12a65a97d669bad6fa824adddc836577bcb4f8d0b9ac4297.png"><img alt="../../_images/9331e61bdd7ccabd12a65a97d669bad6fa824adddc836577bcb4f8d0b9ac4297.png" src="../../_images/9331e61bdd7ccabd12a65a97d669bad6fa824adddc836577bcb4f8d0b9ac4297.png" style="width: 600px; height: 600px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -491,7 +502,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/a6ea848daf7a3d691d6d724a69bf87ce081921f8fc577574150ec2a55bbdd952.png"><img alt="../../_images/a6ea848daf7a3d691d6d724a69bf87ce081921f8fc577574150ec2a55bbdd952.png" src="../../_images/a6ea848daf7a3d691d6d724a69bf87ce081921f8fc577574150ec2a55bbdd952.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/a6ea848daf7a3d691d6d724a69bf87ce081921f8fc577574150ec2a55bbdd952.png"><img alt="../../_images/a6ea848daf7a3d691d6d724a69bf87ce081921f8fc577574150ec2a55bbdd952.png" src="../../_images/a6ea848daf7a3d691d6d724a69bf87ce081921f8fc577574150ec2a55bbdd952.png" style="width: 600px; height: 600px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -502,7 +514,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/8c87d124ec530a65a035e54181bb6c0f865bacc39fc2528fa3a803041e19ae4a.png"><img alt="../../_images/8c87d124ec530a65a035e54181bb6c0f865bacc39fc2528fa3a803041e19ae4a.png" src="../../_images/8c87d124ec530a65a035e54181bb6c0f865bacc39fc2528fa3a803041e19ae4a.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/8c87d124ec530a65a035e54181bb6c0f865bacc39fc2528fa3a803041e19ae4a.png"><img alt="../../_images/8c87d124ec530a65a035e54181bb6c0f865bacc39fc2528fa3a803041e19ae4a.png" src="../../_images/8c87d124ec530a65a035e54181bb6c0f865bacc39fc2528fa3a803041e19ae4a.png" style="width: 600px; height: 600px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -513,7 +526,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/4beeb89b38df76e7689cd620678b88a718e3307904270a587d44dce9fc399240.png"><img alt="../../_images/4beeb89b38df76e7689cd620678b88a718e3307904270a587d44dce9fc399240.png" src="../../_images/4beeb89b38df76e7689cd620678b88a718e3307904270a587d44dce9fc399240.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/4beeb89b38df76e7689cd620678b88a718e3307904270a587d44dce9fc399240.png"><img alt="../../_images/4beeb89b38df76e7689cd620678b88a718e3307904270a587d44dce9fc399240.png" src="../../_images/4beeb89b38df76e7689cd620678b88a718e3307904270a587d44dce9fc399240.png" style="width: 600px; height: 600px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -524,7 +538,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/648eb08f65ae312a36c60a7d89f9dd5dfc24f8142bdf92dc6b4a4ad5e48c7d3c.png"><img alt="../../_images/648eb08f65ae312a36c60a7d89f9dd5dfc24f8142bdf92dc6b4a4ad5e48c7d3c.png" src="../../_images/648eb08f65ae312a36c60a7d89f9dd5dfc24f8142bdf92dc6b4a4ad5e48c7d3c.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/648eb08f65ae312a36c60a7d89f9dd5dfc24f8142bdf92dc6b4a4ad5e48c7d3c.png"><img alt="../../_images/648eb08f65ae312a36c60a7d89f9dd5dfc24f8142bdf92dc6b4a4ad5e48c7d3c.png" src="../../_images/648eb08f65ae312a36c60a7d89f9dd5dfc24f8142bdf92dc6b4a4ad5e48c7d3c.png" style="width: 600px; height: 600px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -535,7 +550,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/6dda918284174f4595b263fc1da4f540177e4b7988e813c44bdf13cca62d3453.png"><img alt="../../_images/6dda918284174f4595b263fc1da4f540177e4b7988e813c44bdf13cca62d3453.png" src="../../_images/6dda918284174f4595b263fc1da4f540177e4b7988e813c44bdf13cca62d3453.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/6dda918284174f4595b263fc1da4f540177e4b7988e813c44bdf13cca62d3453.png"><img alt="../../_images/6dda918284174f4595b263fc1da4f540177e4b7988e813c44bdf13cca62d3453.png" src="../../_images/6dda918284174f4595b263fc1da4f540177e4b7988e813c44bdf13cca62d3453.png" style="width: 600px; height: 600px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -546,7 +562,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/2ff9a398afb0c872663d59ed7b24da52a1cb2ad549f0cbbc5af8b69df6518753.png"><img alt="../../_images/2ff9a398afb0c872663d59ed7b24da52a1cb2ad549f0cbbc5af8b69df6518753.png" src="../../_images/2ff9a398afb0c872663d59ed7b24da52a1cb2ad549f0cbbc5af8b69df6518753.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/2ff9a398afb0c872663d59ed7b24da52a1cb2ad549f0cbbc5af8b69df6518753.png"><img alt="../../_images/2ff9a398afb0c872663d59ed7b24da52a1cb2ad549f0cbbc5af8b69df6518753.png" src="../../_images/2ff9a398afb0c872663d59ed7b24da52a1cb2ad549f0cbbc5af8b69df6518753.png" style="width: 600px; height: 600px;" />
+</a>
 </div>
 </div>
 </section>
