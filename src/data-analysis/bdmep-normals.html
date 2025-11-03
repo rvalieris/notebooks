@@ -1,0 +1,1136 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Climate Change in Brazil &#8212; notebooks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=2a5f61ea" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/data-analysis/bdmep-normals';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Crinacle IEMs Ranking" href="crinacle.html" />
+    <link rel="prev" title="Tables on plots" href="../ggplot2/tables.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">notebooks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    notebooks
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">ggplot2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/clustered_heatmap.html">Clustered Heatmap</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/color_palettes.html">Color Palettes</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/colors2d.html">Bivariate Color Palette</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_1D.html">Density 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_2D.html">Density 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/labeling_series.html">Labeling Data Series</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/plot_composition.html">Composing multiple plots in a single page</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/scale_transforms.html">Scale Transforms</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/tables.html">Tables on plots</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Climate Change in Brazil</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="crinacle.html">Crinacle IEMs Ranking</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="mahjong-yaku-stats.html">Mahjong Yaku stats</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../methods/clustering.html">Clustering</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/dimensionality_reduction.html">Dimensionality Reduction</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/glmnet_cox.html">Regularized Cox Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../methods/pca-visualization-in-python.html">PCA visualization in Python</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/pca-visualization-in-r.html">PCA visualization in R</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/sc_abundance.html">Compositional data difference test</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_shap.html">Tidy SHAP</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part1.html">Survival prediction models, part 1</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../methods/tidy_survival_part2.html">Survival prediction models, part 2</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fun</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fun/dragon_curve.html">Dragon Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/mandelbrot.html">Mandelbrot Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/star.html">Star polygons</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/rvalieris/notebooks" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Climate Change in Brazil</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Climate Change in Brazil</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-vs-altitude">Temperature vs Altitude</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#delta-temperature">delta temperature</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">geobr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggvoronoi</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">paletteer</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">scico</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggbeeswarm</span><span class="p">)</span>
+<span class="nf">theme_set</span><span class="p">(</span><span class="nf">theme_cowplot</span><span class="p">())</span>
+<span class="p">})</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="o">=</span><span class="m">9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="climate-change-in-brazil">
+<h1>Climate Change in Brazil<a class="headerlink" href="#climate-change-in-brazil" title="Link to this heading">#</a></h1>
+<p>data from INMET: <a class="reference external" href="https://portal.inmet.gov.br/normais">https://portal.inmet.gov.br/normais</a>,
+downloaded on 2024-08-03</p>
+<p>The data comprises of <a class="reference external" href="https://en.wikipedia.org/wiki/Climatological_normal">climate normals</a>, a 30-year monthy temperature average of the periods of 1961-1990, 1981-2010 and 1991-2020.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">    </span><span class="nf">read_tsv</span><span class="p">(</span><span class="s">&#39;merged.tsv&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">col_types</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">temp</span><span class="p">),</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">Altitude</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">rename</span><span class="p">(</span><span class="n">mes</span><span class="o">=</span><span class="n">agg</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">mutate</span><span class="p">(</span><span class="n">mes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">mes</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;Janeiro&#39;</span><span class="p">,</span><span class="s">&#39;Fevereiro&#39;</span><span class="p">,</span><span class="s">&#39;Marco&#39;</span><span class="p">,</span><span class="s">&#39;Abril&#39;</span><span class="p">,</span>
+<span class="w">                                      </span><span class="s">&#39;Maio&#39;</span><span class="p">,</span><span class="s">&#39;Junho&#39;</span><span class="p">,</span><span class="s">&#39;Julho&#39;</span><span class="p">,</span><span class="s">&#39;Agosto&#39;</span><span class="p">,</span><span class="s">&#39;Setembro&#39;</span><span class="p">,</span>
+<span class="w">                                      </span><span class="s">&#39;Outubro&#39;</span><span class="p">,</span><span class="s">&#39;Novembro&#39;</span><span class="p">,</span><span class="s">&#39;Dezembro&#39;</span><span class="p">,</span><span class="s">&#39;Ano&#39;</span><span class="p">)))</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 9</caption>
+<thead>
+	<tr><th scope=col>Codigo</th><th scope=col>Nome.da.Estacao</th><th scope=col>UF</th><th scope=col>mes</th><th scope=col>temp</th><th scope=col>Latitude</th><th scope=col>Longitude</th><th scope=col>Altitude</th><th scope=col>periodo</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>82704</td><td>CRUZEIRO DO SUL</td><td>AC</td><td>Janeiro  </td><td>25.3</td><td>-7.633333</td><td>-72.66667</td><td>170</td><td>1961-1990</td></tr>
+	<tr><td>82704</td><td>CRUZEIRO DO SUL</td><td>AC</td><td>Fevereiro</td><td>25.1</td><td>-7.633333</td><td>-72.66667</td><td>170</td><td>1961-1990</td></tr>
+	<tr><td>82704</td><td>CRUZEIRO DO SUL</td><td>AC</td><td>Marco    </td><td>25.1</td><td>-7.633333</td><td>-72.66667</td><td>170</td><td>1961-1990</td></tr>
+	<tr><td>82704</td><td>CRUZEIRO DO SUL</td><td>AC</td><td>Abril    </td><td>24.9</td><td>-7.633333</td><td>-72.66667</td><td>170</td><td>1961-1990</td></tr>
+	<tr><td>82704</td><td>CRUZEIRO DO SUL</td><td>AC</td><td>Maio     </td><td>24.7</td><td>-7.633333</td><td>-72.66667</td><td>170</td><td>1961-1990</td></tr>
+	<tr><td>82704</td><td>CRUZEIRO DO SUL</td><td>AC</td><td>Junho    </td><td>24.0</td><td>-7.633333</td><td>-72.66667</td><td>170</td><td>1961-1990</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">periodo</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">UF</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_quasirandom</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;gray30&#39;</span><span class="p">,</span><span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">outlier.shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_grid</span><span class="p">(</span><span class="n">.</span><span class="o">~</span><span class="n">mes</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.x</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="m">90</span><span class="p">,</span><span class="n">vjust</span><span class="o">=</span><span class="n">.</span><span class="m">5</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&#39;temp celcius&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/38b0c482b94a0ca5f1b729dde035892eeeb7f1c1afe004a930a5fe10d1341611.png"><img alt="../../_images/38b0c482b94a0ca5f1b729dde035892eeeb7f1c1afe004a930a5fe10d1341611.png" src="../../_images/38b0c482b94a0ca5f1b729dde035892eeeb7f1c1afe004a930a5fe10d1341611.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">!=</span><span class="s">&#39;Ano&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">summarize</span><span class="p">(</span>
+<span class="w">    </span><span class="n">min_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">quantile</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="o">=</span><span class="m">0.25</span><span class="p">),</span>
+<span class="w">    </span><span class="n">max_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">quantile</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="o">=</span><span class="bp">T</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="o">=</span><span class="m">0.75</span><span class="p">),</span>
+<span class="w">    </span><span class="n">med_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">median</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="o">=</span><span class="bp">T</span><span class="p">),</span>
+<span class="w">    </span><span class="n">.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">mes</span><span class="p">,</span><span class="w"> </span><span class="n">periodo</span><span class="p">),</span>
+<span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">mes</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">med_temp</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">periodo</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">periodo</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="n">periodo</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_ribbon</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="n">min_temp</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="o">=</span><span class="n">max_temp</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_line</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/32e095f2cdc25da57327761fa86f966c44f924d72f1ae828173a13fef52ad25e.png"><img alt="../../_images/32e095f2cdc25da57327761fa86f966c44f924d72f1ae828173a13fef52ad25e.png" src="../../_images/32e095f2cdc25da57327761fa86f966c44f924d72f1ae828173a13fef52ad25e.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">!=</span><span class="s">&#39;Ano&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">UF</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">UF</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">periodo</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">.na_rm</span><span class="o">=</span><span class="bp">T</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">mes</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_quasirandom</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;gray30&#39;</span><span class="p">,</span><span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">outlier.shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_grid</span><span class="p">(</span><span class="n">.</span><span class="o">~</span><span class="n">UF</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.x</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="m">90</span><span class="p">,</span><span class="n">vjust</span><span class="o">=</span><span class="n">.</span><span class="m">5</span><span class="p">,</span><span class="n">family</span><span class="o">=</span><span class="s">&#39;mono&#39;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s">&#39;temp celcius&#39;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;periodo&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/3d11a8230ef49d9446fea212f340a2b95f2265520e28982806e77fe8a2436622.png"><img alt="../../_images/3d11a8230ef49d9446fea212f340a2b95f2265520e28982806e77fe8a2436622.png" src="../../_images/3d11a8230ef49d9446fea212f340a2b95f2265520e28982806e77fe8a2436622.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">!=</span><span class="s">&#39;Ano&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">UF</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;RO&#39;</span><span class="p">,</span><span class="s">&#39;DF&#39;</span><span class="p">,</span><span class="s">&#39;RR&#39;</span><span class="p">,</span><span class="s">&#39;AP&#39;</span><span class="p">,</span><span class="s">&#39;AC&#39;</span><span class="p">,</span><span class="s">&#39;SE&#39;</span><span class="p">,</span><span class="s">&#39;AL&#39;</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">UF</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">UF</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">.na_rm</span><span class="o">=</span><span class="bp">T</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">mes</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">periodo</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">outlier.shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">UF</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.x</span><span class="o">=</span><span class="nf">element_text</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="m">90</span><span class="p">,</span><span class="n">vjust</span><span class="o">=</span><span class="m">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/01a02d83359defb4dd1debad40d47b3b6d07fbcf33dc4acf6ec8783f64e5f605.png"><img alt="../../_images/01a02d83359defb4dd1debad40d47b3b6d07fbcf33dc4acf6ec8783f64e5f605.png" src="../../_images/01a02d83359defb4dd1debad40d47b3b6d07fbcf33dc4acf6ec8783f64e5f605.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">states</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_state</span><span class="p">(</span>
+<span class="w">    </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2020</span><span class="p">,</span>
+<span class="w">    </span><span class="n">showProgress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using year/date 2020
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">states_coords</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">    </span><span class="n">states</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">st_union</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">st_simplify</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">st_boundary</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">st_coordinates</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">as.data.frame</span><span class="p">()</span><span class="w"> </span>
+
+<span class="n">state_coords_1</span><span class="w"> </span><span class="o">&lt;-</span>
+<span class="w">    </span><span class="nf">filter</span><span class="p">(</span><span class="n">states_coords</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">L1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span><span class="nf">count</span><span class="p">(</span><span class="n">states_coords</span><span class="p">,</span><span class="w"> </span><span class="n">L1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">            </span><span class="nf">slice_max</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">            </span><span class="nf">pull</span><span class="p">(</span><span class="n">L1</span><span class="p">)</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">select</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">slice_head</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="n">Codigo</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Longitude</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Latitude</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">stat_voronoi</span><span class="p">(</span><span class="n">geom</span><span class="o">=</span><span class="s">&#39;path&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">outline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_coords_1</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_sf</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="kc">NULL</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;darkgray&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">states</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;Weather stations&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;`fortify(&lt;SpatialPolygonsDataFrame&gt;)` was deprecated in ggplot2 3.4.4.
+<span class=" -Color -Color-Cyan">ℹ</span> Please migrate to sf.&quot;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/8e0f97dceda592dcea87f9c51d3e02cd92fb4726d0de51cba8b6c51b4b575d2c.png"><img alt="../../_images/8e0f97dceda592dcea87f9c51d3e02cd92fb4726d0de51cba8b6c51b4b575d2c.png" src="../../_images/8e0f97dceda592dcea87f9c51d3e02cd92fb4726d0de51cba8b6c51b4b575d2c.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">slice_head</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="n">Codigo</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Longitude</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Latitude</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">Altitude</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_voronoi</span><span class="p">(</span><span class="n">outline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_coords_1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_sf</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="kc">NULL</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">states</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">scale_fill_viridis_c</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="s">&#39;inferno&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/d06a11777815b32ca6a0bab1c7037956da391d0c574c1b5b12884ff50924db18.png"><img alt="../../_images/d06a11777815b32ca6a0bab1c7037956da391d0c574c1b5b12884ff50924db18.png" src="../../_images/d06a11777815b32ca6a0bab1c7037956da391d0c574c1b5b12884ff50924db18.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">==</span><span class="s">&#39;Janeiro&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">temp</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Longitude</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Latitude</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">temp</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_voronoi</span><span class="p">(</span><span class="n">outline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_coords_1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_sf</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="kc">NULL</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">states</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">scale_fill_scico</span><span class="p">(</span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;hawaii&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">periodo</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.key.size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="s">&quot;line&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;Average Temperature in January&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="s">&#39;temp celcius&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/ead871dff2a7f3dc773161f5063cda68081a10f73f3bf77eb1a9e764688f31dc.png"><img alt="../../_images/ead871dff2a7f3dc773161f5063cda68081a10f73f3bf77eb1a9e764688f31dc.png" src="../../_images/ead871dff2a7f3dc773161f5063cda68081a10f73f3bf77eb1a9e764688f31dc.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="temperature-vs-altitude">
+<h1>Temperature vs Altitude<a class="headerlink" href="#temperature-vs-altitude" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">==</span><span class="s">&#39;Janeiro&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">lm</span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Altitude</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span>_<span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">m1</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = temp ~ Altitude, data = filter(df, mes == &quot;Janeiro&quot;))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.4842 -0.5922  0.1358  0.6923  3.3429 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 26.8038505  0.0672737  398.43   &lt;2e-16 ***
+Altitude    -0.0049851  0.0001264  -39.43   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1.181 on 736 degrees of freedom
+Multiple R-squared:  0.6787,	Adjusted R-squared:  0.6783 
+F-statistic:  1555 on 1 and 736 DF,  p-value: &lt; 2.2e-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># -1 temperature point per 200 Altitude</span>
+<span class="m">1</span><span class="o">/</span><span class="m">0.0049851</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">200.597781388538</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">==</span><span class="s">&#39;Janeiro&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m1</span><span class="o">$</span><span class="n">residuals</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Longitude</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Latitude</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">res</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_voronoi</span><span class="p">(</span><span class="n">outline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_coords_1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_sf</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="kc">NULL</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">states</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">scale_fill_paletteer_c</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s">&#39;grDevices::RdBu&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">limits</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">oob</span><span class="o">=</span><span class="n">scales</span><span class="o">::</span><span class="n">squish</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">periodo</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;January temperature change, adjusted for Altitude&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.key.size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="s">&quot;line&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/04e29b7910e63b07bf0c37ca5711c18c3d9c05e5bc1ddbbd9e6987adf63560ff.png"><img alt="../../_images/04e29b7910e63b07bf0c37ca5711c18c3d9c05e5bc1ddbbd9e6987adf63560ff.png" src="../../_images/04e29b7910e63b07bf0c37ca5711c18c3d9c05e5bc1ddbbd9e6987adf63560ff.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">==</span><span class="s">&#39;Janeiro&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">lm</span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Altitude</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Longitude</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Latitude</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span>_<span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">m2</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = temp ~ Altitude + Longitude + Latitude, data = filter(df, 
+    mes == &quot;Janeiro&quot;))
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.90365 -0.55448 -0.04891  0.62727  2.71339 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 30.0712899  0.2401458  125.22   &lt;2e-16 ***
+Altitude    -0.0043443  0.0001102  -39.43   &lt;2e-16 ***
+Longitude    0.0504501  0.0048983   10.30   &lt;2e-16 ***
+Latitude     0.0741476  0.0043576   17.02   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.9349 on 734 degrees of freedom
+Multiple R-squared:  0.7991,	Adjusted R-squared:  0.7982 
+F-statistic: 972.9 on 3 and 734 DF,  p-value: &lt; 2.2e-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">==</span><span class="s">&#39;Janeiro&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m2</span><span class="o">$</span><span class="n">residuals</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Longitude</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Latitude</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">res</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_voronoi</span><span class="p">(</span><span class="n">outline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_coords_1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_sf</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="kc">NULL</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">states</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">scale_fill_paletteer_c</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s">&#39;grDevices::RdBu&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">limits</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">oob</span><span class="o">=</span><span class="n">scales</span><span class="o">::</span><span class="n">squish</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">periodo</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;January temperature change, adjusted for Altitude+Longitude+Latitude&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.key.size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="s">&quot;line&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/478112396f9557d4f6c6b8a059063816178e3025194849f9e392e14288d2386c.png"><img alt="../../_images/478112396f9557d4f6c6b8a059063816178e3025194849f9e392e14288d2386c.png" src="../../_images/478112396f9557d4f6c6b8a059063816178e3025194849f9e392e14288d2386c.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">==</span><span class="s">&#39;Janeiro&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">lm</span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">UF</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Altitude</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Longitude</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Latitude</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span>_<span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">m3</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">m3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = temp ~ UF + Altitude + Longitude + Latitude, data = filter(df, 
+    mes == &quot;Janeiro&quot;))
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.53425 -0.44375 -0.00074  0.47207  1.91739 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 20.359912   1.029470  19.777  &lt; 2e-16 ***
+UFAL         4.669301   0.600367   7.777 2.62e-14 ***
+UFAM        -0.256167   0.324327  -0.790  0.42988    
+UFAP         0.181087   0.518513   0.349  0.72701    
+UFBA         4.670519   0.514136   9.084  &lt; 2e-16 ***
+UFCE         4.157320   0.532656   7.805 2.14e-14 ***
+UFDF         4.346347   0.580237   7.491 2.05e-13 ***
+UFES         4.744603   0.577723   8.213 1.03e-15 ***
+UFGO         4.503830   0.450074  10.007  &lt; 2e-16 ***
+UFMA         2.529512   0.466128   5.427 7.89e-08 ***
+UFMG         4.962694   0.499729   9.931  &lt; 2e-16 ***
+UFMS         4.534043   0.457622   9.908  &lt; 2e-16 ***
+UFMT         3.067743   0.400213   7.665 5.90e-14 ***
+UFPA         1.168258   0.402401   2.903  0.00381 ** 
+UFPB         4.759465   0.592570   8.032 4.01e-15 ***
+UFPE         4.970667   0.560150   8.874  &lt; 2e-16 ***
+UFPI         3.932376   0.500039   7.864 1.39e-14 ***
+UFPR         4.098236   0.493529   8.304 5.11e-16 ***
+UFRJ         4.795814   0.541195   8.862  &lt; 2e-16 ***
+UFRN         5.103790   0.576758   8.849  &lt; 2e-16 ***
+UFRO         0.148463   0.780146   0.190  0.84913    
+UFRR         0.881576   0.548167   1.608  0.10823    
+UFRS         3.280858   0.521889   6.287 5.68e-10 ***
+UFSC         3.330361   0.530682   6.276 6.07e-10 ***
+UFSE         4.457375   0.591741   7.533 1.52e-13 ***
+UFSP         4.486961   0.499399   8.985  &lt; 2e-16 ***
+UFTO         3.185915   0.456526   6.979 6.86e-12 ***
+Altitude    -0.005192   0.000109 -47.612  &lt; 2e-16 ***
+Longitude   -0.105415   0.014122  -7.464 2.46e-13 ***
+Latitude     0.142920   0.016706   8.555  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.7253 on 708 degrees of freedom
+Multiple R-squared:  0.8834,	Adjusted R-squared:  0.8786 
+F-statistic: 184.9 on 29 and 708 DF,  p-value: &lt; 2.2e-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">==</span><span class="s">&#39;Janeiro&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m3</span><span class="o">$</span><span class="n">residuals</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Longitude</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Latitude</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">res</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_voronoi</span><span class="p">(</span><span class="n">outline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_coords_1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_sf</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="kc">NULL</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">states</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">scale_fill_paletteer_c</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s">&#39;grDevices::RdBu&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">limits</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">oob</span><span class="o">=</span><span class="n">scales</span><span class="o">::</span><span class="n">squish</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">periodo</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;January temperature change, adjusted for Altitude+Longitude+Latitude+UF&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.key.size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="s">&quot;line&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/83ab24ab7096fa34e771efe66be9da1619fb010cf678303ba7216cd72908fd36.png"><img alt="../../_images/83ab24ab7096fa34e771efe66be9da1619fb010cf678303ba7216cd72908fd36.png" src="../../_images/83ab24ab7096fa34e771efe66be9da1619fb010cf678303ba7216cd72908fd36.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">==</span><span class="s">&#39;Ano&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">lm</span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">UF</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Altitude</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Longitude</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Latitude</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span>_<span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">m4</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">m4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = temp ~ UF + Altitude + Longitude + Latitude, data = filter(df, 
+    mes == &quot;Ano&quot;))
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.87835 -0.57859 -0.00098  0.60844  3.05717 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 20.5151139  1.3097334  15.664  &lt; 2e-16 ***
+UFAL         4.1351596  0.7752313   5.334 1.31e-07 ***
+UFAM        -0.3251572  0.4248844  -0.765 0.444371    
+UFAP         0.3029129  0.6611421   0.458 0.646981    
+UFBA         4.5265385  0.6660147   6.796 2.37e-11 ***
+UFCE         3.8892245  0.6883239   5.650 2.37e-08 ***
+UFDF         5.1397953  0.7391640   6.954 8.46e-12 ***
+UFES         4.7171152  0.7416989   6.360 3.73e-10 ***
+UFGO         5.5363202  0.5851868   9.461  &lt; 2e-16 ***
+UFMA         3.1349333  0.6047224   5.184 2.88e-07 ***
+UFMG         5.1089479  0.6465612   7.902 1.13e-14 ***
+UFMS         4.4115166  0.5912692   7.461 2.66e-13 ***
+UFMT         3.7196637  0.5214658   7.133 2.55e-12 ***
+UFPA         1.4943098  0.5249232   2.847 0.004552 ** 
+UFPB         4.2387263  0.7595194   5.581 3.47e-08 ***
+UFPE         4.2939043  0.7260379   5.914 5.31e-09 ***
+UFPI         4.8752291  0.6486859   7.516 1.82e-13 ***
+UFPR         3.2291393  0.6389625   5.054 5.59e-07 ***
+UFRJ         4.4907323  0.6986984   6.427 2.46e-10 ***
+UFRN         4.4770467  0.7469206   5.994 3.34e-09 ***
+UFRO         0.8268439  0.9732641   0.850 0.395874    
+UFRR        -0.1310591  0.6925815  -0.189 0.849968    
+UFRS         1.7029729  0.6728096   2.531 0.011596 *  
+UFSC         2.3531834  0.6836131   3.442 0.000613 ***
+UFSE         4.1843957  0.7582751   5.518 4.89e-08 ***
+UFSP         4.4207214  0.6450926   6.853 1.64e-11 ***
+UFTO         4.5100513  0.5904990   7.638 7.63e-14 ***
+Altitude    -0.0049841  0.0001361 -36.626  &lt; 2e-16 ***
+Longitude   -0.1124812  0.0178121  -6.315 4.92e-10 ***
+Latitude     0.2803677  0.0209919  13.356  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.8947 on 672 degrees of freedom
+Multiple R-squared:  0.9278,	Adjusted R-squared:  0.9246 
+F-statistic: 297.6 on 29 and 672 DF,  p-value: &lt; 2.2e-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">==</span><span class="s">&#39;Ano&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m4</span><span class="o">$</span><span class="n">residuals</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Longitude</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Latitude</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">res</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_voronoi</span><span class="p">(</span><span class="n">outline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_coords_1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_sf</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="kc">NULL</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">states</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">    </span><span class="nf">scale_fill_paletteer_c</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s">&#39;grDevices::RdBu&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">limits</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="n">oob</span><span class="o">=</span><span class="n">scales</span><span class="o">::</span><span class="n">squish</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">periodo</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">labs</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;Year average temperature change, adjusted for Altitude+Longitude+Latitude+UF&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.key.size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="s">&quot;line&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/b168e6baa214bee1d56e519fc624cf3ca188a84abcbe6be1cd732a2e47a8775d.png"><img alt="../../_images/b168e6baa214bee1d56e519fc624cf3ca188a84abcbe6be1cd732a2e47a8775d.png" src="../../_images/b168e6baa214bee1d56e519fc624cf3ca188a84abcbe6be1cd732a2e47a8775d.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="delta-temperature">
+<h1>delta temperature<a class="headerlink" href="#delta-temperature" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">==</span><span class="s">&#39;Ano&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">pivot_wider</span><span class="p">(</span><span class="n">names_prefix</span><span class="o">=</span><span class="s">&#39;p&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">names_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">periodo</span><span class="p">,</span><span class="w"> </span><span class="n">values_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="n">Codigo</span><span class="o">==</span><span class="m">83630</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 3 × 10</caption>
+<thead>
+	<tr><th scope=col>Codigo</th><th scope=col>Nome.da.Estacao</th><th scope=col>UF</th><th scope=col>mes</th><th scope=col>Latitude</th><th scope=col>Longitude</th><th scope=col>Altitude</th><th scope=col>p1961-1990</th><th scope=col>p1981-2010</th><th scope=col>p1991-2020</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>83630</td><td>FRANCA</td><td>SP</td><td>Ano</td><td>-20.58333</td><td>-47.36667</td><td>1026.20</td><td>20.5</td><td>  NA</td><td>  NA</td></tr>
+	<tr><td>83630</td><td>FRANCA</td><td>SP</td><td>Ano</td><td>-20.58333</td><td>-47.36667</td><td>1026.20</td><td>  NA</td><td>20.9</td><td>  NA</td></tr>
+	<tr><td>83630</td><td>FRANCA</td><td>SP</td><td>Ano</td><td>-20.58431</td><td>-47.38243</td><td>1003.55</td><td>  NA</td><td>  NA</td><td>21.4</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">select</span><span class="p">(</span><span class="n">Codigo</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">periodo</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">pivot_wider</span><span class="p">(</span><span class="n">names_prefix</span><span class="o">=</span><span class="s">&#39;p&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">names_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">periodo</span><span class="p">,</span><span class="w"> </span><span class="n">values_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">`p1991-2020`</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">`p1961-1990`</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">delta</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">delta</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_density</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">mes</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;average delta temperature between periods (1961-1990) and (1991-2020)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/7a437783800f85b9677599f10300ba4bbf2891d3b49119bdc17c47acb6684225.png"><img alt="../../_images/7a437783800f85b9677599f10300ba4bbf2891d3b49119bdc17c47acb6684225.png" src="../../_images/7a437783800f85b9677599f10300ba4bbf2891d3b49119bdc17c47acb6684225.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">mes</span><span class="o">==</span><span class="s">&#39;Ano&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">select</span><span class="p">(</span><span class="n">Codigo</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">UF</span><span class="p">,</span><span class="w"> </span><span class="n">periodo</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">pivot_wider</span><span class="p">(</span><span class="n">names_prefix</span><span class="o">=</span><span class="s">&#39;p&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">names_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">periodo</span><span class="p">,</span><span class="w"> </span><span class="n">values_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">mutate</span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">`p1991-2020`</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">`p1961-1990`</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">delta</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nf">fct_reorder</span><span class="p">(</span><span class="n">UF</span><span class="p">,</span><span class="n">delta</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="n">delta</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">scale_fill_paletteer_c</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s">&#39;grDevices::RdBu&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="n">limits</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">oob</span><span class="o">=</span><span class="n">scales</span><span class="o">::</span><span class="n">squish</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_hline</span><span class="p">(</span><span class="n">yintercept</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">linetype</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="o">=</span><span class="m">21</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;state&#39;</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s">&#39;year average delta temperature between periods (1961-1990) and (1991-2020)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in regularize.values(x, y, ties, missing(ties), na.rm = na.rm):
+&quot;collapsing to unique &#39;x&#39; values&quot;
+Warning message in regularize.values(x, y, ties, missing(ties), na.rm = na.rm):
+&quot;collapsing to unique &#39;x&#39; values&quot;
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/e175900bf92bae925f4c0a74fec9a5192dc67eb652321fe0bf4c399a230663c2.png"><img alt="../../_images/e175900bf92bae925f4c0a74fec9a5192dc67eb652321fe0bf4c399a230663c2.png" src="../../_images/e175900bf92bae925f4c0a74fec9a5192dc67eb652321fe0bf4c399a230663c2.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./src/data-analysis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../ggplot2/tables.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tables on plots</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="crinacle.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Crinacle IEMs Ranking</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Climate Change in Brazil</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-vs-altitude">Temperature vs Altitude</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#delta-temperature">delta temperature</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By rvalieris
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,807 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Dimensionality Reduction &#8212; notebooks</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/overrides.css?v=2a5f61ea" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/methods/dimensionality_reduction';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Regularized Cox Regression" href="glmnet_cox.html" />
+    <link rel="prev" title="Clustering" href="clustering.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">notebooks</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    notebooks
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">ggplot2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/clustered_heatmap.html">Clustered Heatmap</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/color_palettes.html">Color Palettes</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/colors2d.html">Bivariate Color Palette</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_1D.html">Density 1D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/density_2D.html">Density 2D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/labeling_series.html">Labeling Data Series</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/plot_composition.html">Composing multiple plots in a single page</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/scale_transforms.html">Scale Transforms</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../ggplot2/tables.html">Tables on plots</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data-analysis/bdmep-normals.html">Climate Change in Brazil</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../data-analysis/crinacle.html">Crinacle IEMs Ranking</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../data-analysis/mahjong-yaku-stats.html">Mahjong Yaku stats</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="clustering.html">Clustering</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Dimensionality Reduction</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="glmnet_cox.html">Regularized Cox Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-python.html">PCA visualization in Python</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="pca-visualization-in-r.html">PCA visualization in R</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="sc_abundance.html">Compositional data difference test</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tidy_shap.html">Tidy SHAP</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tidy_survival_part1.html">Survival prediction models, part 1</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="tidy_survival_part2.html">Survival prediction models, part 2</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fun</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fun/dragon_curve.html">Dragon Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/mandelbrot.html">Mandelbrot Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fun/star.html">Star polygons</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/rvalieris/notebooks" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Dimensionality Reduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dimensionality Reduction</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">PCA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pls">PLS</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ica">ICA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#umap">UMAP</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nmf">NMF</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">recipes</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">embed</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggforce</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidymodels</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">mixOmics</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">fastICA</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">bestNormalize</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nf">theme_set</span><span class="p">(</span><span class="n">cowplot</span><span class="o">::</span><span class="nf">theme_cowplot</span><span class="p">())</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="o">=</span><span class="m">15</span><span class="p">,</span><span class="n">repr.plot.height</span><span class="o">=</span><span class="m">9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="dimensionality-reduction">
+<h1>Dimensionality Reduction<a class="headerlink" href="#dimensionality-reduction" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dataset">
+<h1>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">beans</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">beans</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 17</caption>
+<thead>
+	<tr><th scope=col>area</th><th scope=col>perimeter</th><th scope=col>major_axis_length</th><th scope=col>minor_axis_length</th><th scope=col>aspect_ratio</th><th scope=col>eccentricity</th><th scope=col>convex_area</th><th scope=col>equiv_diameter</th><th scope=col>extent</th><th scope=col>solidity</th><th scope=col>roundness</th><th scope=col>compactness</th><th scope=col>shape_factor_1</th><th scope=col>shape_factor_2</th><th scope=col>shape_factor_3</th><th scope=col>shape_factor_4</th><th scope=col>class</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;fct&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>28395</td><td>610.291</td><td>208.1781</td><td>173.8887</td><td>1.197191</td><td>0.5498122</td><td>28715</td><td>190.1411</td><td>0.7639225</td><td>0.9888560</td><td>0.9580271</td><td>0.9133578</td><td>0.007331506</td><td>0.003147289</td><td>0.8342224</td><td>0.9987239</td><td>seker</td></tr>
+	<tr><td>28734</td><td>638.018</td><td>200.5248</td><td>182.7344</td><td>1.097356</td><td>0.4117853</td><td>29172</td><td>191.2728</td><td>0.7839681</td><td>0.9849856</td><td>0.8870336</td><td>0.9538608</td><td>0.006978659</td><td>0.003563624</td><td>0.9098505</td><td>0.9984303</td><td>seker</td></tr>
+	<tr><td>29380</td><td>624.110</td><td>212.8261</td><td>175.9311</td><td>1.209713</td><td>0.5627273</td><td>29690</td><td>193.4109</td><td>0.7781132</td><td>0.9895588</td><td>0.9478495</td><td>0.9087742</td><td>0.007243912</td><td>0.003047733</td><td>0.8258706</td><td>0.9990661</td><td>seker</td></tr>
+	<tr><td>30008</td><td>645.884</td><td>210.5580</td><td>182.5165</td><td>1.153638</td><td>0.4986160</td><td>30724</td><td>195.4671</td><td>0.7826813</td><td>0.9766957</td><td>0.9039364</td><td>0.9283288</td><td>0.007016729</td><td>0.003214562</td><td>0.8617944</td><td>0.9941988</td><td>seker</td></tr>
+	<tr><td>30140</td><td>620.134</td><td>201.8479</td><td>190.2793</td><td>1.060798</td><td>0.3336797</td><td>30417</td><td>195.8965</td><td>0.7730980</td><td>0.9908933</td><td>0.9848771</td><td>0.9705155</td><td>0.006697010</td><td>0.003664972</td><td>0.9419004</td><td>0.9991661</td><td>seker</td></tr>
+	<tr><td>30279</td><td>634.927</td><td>212.5606</td><td>181.5102</td><td>1.171067</td><td>0.5204007</td><td>30600</td><td>196.3477</td><td>0.7756885</td><td>0.9895098</td><td>0.9438518</td><td>0.9237260</td><td>0.007020065</td><td>0.003152779</td><td>0.8532696</td><td>0.9992358</td><td>seker</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">data_split</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">initial_split</span><span class="p">(</span><span class="n">beans</span><span class="p">,</span><span class="w"> </span><span class="n">prop</span><span class="o">=</span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="n">strata</span><span class="o">=</span><span class="n">class</span><span class="p">)</span>
+
+<span class="n">train</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">training</span><span class="p">(</span><span class="n">data_split</span><span class="p">)</span>
+<span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">testing</span><span class="p">(</span><span class="n">data_split</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">table</span><span class="p">(</span><span class="n">test</span><span class="o">$</span><span class="n">class</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>barbunya   bombay     cali dermason    horoz    seker     sira 
+     377      149      501     1068      571      616      804 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">recipe</span><span class="p">(</span><span class="n">class</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="nf">training</span><span class="p">(</span><span class="n">data_split</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">step_zv</span><span class="p">(</span><span class="nf">all_numeric_predictors</span><span class="p">())</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">step_orderNorm</span><span class="p">(</span><span class="nf">all_numeric_predictors</span><span class="p">())</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">step_normalize</span><span class="p">(</span><span class="nf">all_numeric_predictors</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">prep</span><span class="p">(</span><span class="n">rec</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">bake</span><span class="p">(</span><span class="n">new_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A tibble: 6 × 17</caption>
+<thead>
+	<tr><th scope=col>area</th><th scope=col>perimeter</th><th scope=col>major_axis_length</th><th scope=col>minor_axis_length</th><th scope=col>aspect_ratio</th><th scope=col>eccentricity</th><th scope=col>convex_area</th><th scope=col>equiv_diameter</th><th scope=col>extent</th><th scope=col>solidity</th><th scope=col>roundness</th><th scope=col>compactness</th><th scope=col>shape_factor_1</th><th scope=col>shape_factor_2</th><th scope=col>shape_factor_3</th><th scope=col>shape_factor_4</th><th scope=col>class</th></tr>
+	<tr><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;fct&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>-0.22707620</td><td>-0.23018275</td><td>-0.16469484</td><td>-0.23910970</td><td>-0.20754041</td><td>-0.20754041</td><td>-0.22559124</td><td>-0.22707620</td><td>-0.8822719</td><td>-0.1943821</td><td> 0.3836976</td><td>0.22397181</td><td> 0.22262276</td><td> 0.18580716</td><td>0.22397181</td><td> 0.59773080</td><td>barbunya</td></tr>
+	<tr><td>-0.04290947</td><td> 0.09303214</td><td>-0.04185585</td><td>-0.01631711</td><td>-0.14312389</td><td>-0.14312389</td><td>-0.03974877</td><td>-0.04290947</td><td>-0.0650482</td><td>-0.5539308</td><td>-0.6375409</td><td>0.12612765</td><td> 0.02526677</td><td> 0.07005982</td><td>0.12612765</td><td>-0.47992550</td><td>barbunya</td></tr>
+	<tr><td> 0.18527169</td><td> 0.18152486</td><td>-0.21076825</td><td> 0.68236860</td><td>-1.20737228</td><td>-1.20737228</td><td> 0.19223703</td><td> 0.18527169</td><td>-0.3552394</td><td>-0.8085312</td><td>-0.2728307</td><td>1.20901030</td><td>-0.69437546</td><td> 0.69739281</td><td>1.20901030</td><td> 1.14281500</td><td>barbunya</td></tr>
+	<tr><td> 0.28980582</td><td> 0.33791292</td><td> 0.15696362</td><td> 0.40932021</td><td>-0.06188383</td><td>-0.06188383</td><td> 0.29901242</td><td> 0.28980582</td><td>-0.3292879</td><td>-0.9801218</td><td>-0.9006753</td><td>0.08140858</td><td>-0.42626321</td><td>-0.08774724</td><td>0.08140858</td><td> 1.02670620</td><td>barbunya</td></tr>
+	<tr><td> 0.32956574</td><td> 0.40303270</td><td> 0.11181557</td><td> 0.56562739</td><td>-0.50518005</td><td>-0.50518005</td><td> 0.35551973</td><td> 0.32956574</td><td>-0.3493591</td><td>-2.0537833</td><td>-1.3669328</td><td>0.50458217</td><td>-0.56562739</td><td> 0.05213076</td><td>0.50458217</td><td> 0.02026528</td><td>barbunya</td></tr>
+	<tr><td> 0.33401467</td><td> 0.35664129</td><td> 0.15829591</td><td> 0.52864141</td><td>-0.25620575</td><td>-0.25620575</td><td> 0.35159776</td><td> 0.33401467</td><td>-0.6570107</td><td>-1.6255933</td><td>-0.8406982</td><td>0.23450863</td><td>-0.52139209</td><td>-0.04949569</td><td>0.23450863</td><td>-0.66848372</td><td>barbunya</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">plot_rec</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="n">recipe</span><span class="p">,</span><span class="w"> </span><span class="n">outcome</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">prep</span><span class="p">(</span><span class="n">recipe</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">bake</span><span class="p">(</span><span class="n">new_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="w">    </span><span class="nf">ggplot</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.panel_x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.panel_y</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="p">{{</span><span class="n">outcome</span><span class="p">}},</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="p">{{</span><span class="n">outcome</span><span class="p">}}))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">geom_autodensity</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">facet_matrix</span><span class="p">(</span><span class="nf">vars</span><span class="p">(</span><span class="o">-</span><span class="p">{{</span><span class="n">outcome</span><span class="p">}}),</span><span class="w"> </span><span class="n">layer.diag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pca">
+<h1>PCA<a class="headerlink" href="#pca" title="Link to this heading">#</a></h1>
+<p>Principal Components Analysis is a dimensionality reduction technique to transform data onto a new coordinate system such that the directions (principal components) capture the largest variation in the data.</p>
+<p>For a more detailed visualization of PCA results, see <a class="reference internal" href="pca-visualization-in-r.html"><span class="std std-doc">PCA Visualization in R</span></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">step_pca</span><span class="p">(</span><span class="nf">all_predictors</span><span class="p">(),</span><span class="w"> </span><span class="n">num_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">plot_rec</span><span class="p">(</span><span class="n">class</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/cba5f17c94cc15f1d2623d10cc27cfde1f99a5bb8e587fef13c77f1f8bf28bad.png"><img alt="../../_images/cba5f17c94cc15f1d2623d10cc27cfde1f99a5bb8e587fef13c77f1f8bf28bad.png" src="../../_images/cba5f17c94cc15f1d2623d10cc27cfde1f99a5bb8e587fef13c77f1f8bf28bad.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pls">
+<h1>PLS<a class="headerlink" href="#pls" title="Link to this heading">#</a></h1>
+<p>Partial Least Squares regression is a supervised technique similar to PCA, it finds a linear regression model by projecting the predicted variables and the observable variables to a new space of maximum covariance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">step_pls</span><span class="p">(</span><span class="nf">all_predictors</span><span class="p">(),</span><span class="w"> </span><span class="n">outcome</span><span class="o">=</span><span class="s">&#39;class&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">num_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">plot_rec</span><span class="p">(</span><span class="n">class</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/1c60c9be48f421f4434b19dd8fcf11d6f76b86f4492324638b4cb9b0725c6373.png"><img alt="../../_images/1c60c9be48f421f4434b19dd8fcf11d6f76b86f4492324638b4cb9b0725c6373.png" src="../../_images/1c60c9be48f421f4434b19dd8fcf11d6f76b86f4492324638b4cb9b0725c6373.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ica">
+<h1>ICA<a class="headerlink" href="#ica" title="Link to this heading">#</a></h1>
+<p>Independent Component Analysis is a computational method for separating a signal into additive subcomponents. This is done by assuming that at most one subcomponent is Gaussian and that the subcomponents are statistically independent from each other.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">step_ica</span><span class="p">(</span><span class="nf">all_predictors</span><span class="p">(),</span><span class="w"> </span><span class="n">num_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">plot_rec</span><span class="p">(</span><span class="n">class</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/ac579d63a52aeb526f642f76126c464112ff07db1797ca9ccd7f420b25df9580.png"><img alt="../../_images/ac579d63a52aeb526f642f76126c464112ff07db1797ca9ccd7f420b25df9580.png" src="../../_images/ac579d63a52aeb526f642f76126c464112ff07db1797ca9ccd7f420b25df9580.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="umap">
+<h1>UMAP<a class="headerlink" href="#umap" title="Link to this heading">#</a></h1>
+<p>Uniform Manifold Approximation and Projection is a dimension reduction technique that can be used for visualisation similarly to t-SNE, but also for general non-linear dimension reduction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">step_umap</span><span class="p">(</span><span class="nf">all_predictors</span><span class="p">(),</span><span class="w"> </span><span class="n">num_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">plot_rec</span><span class="p">(</span><span class="n">class</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/646dec6fe16b0e4fad60900c0942dbfb3af448ce92ef428112a941f6876848cb.png"><img alt="../../_images/646dec6fe16b0e4fad60900c0942dbfb3af448ce92ef428112a941f6876848cb.png" src="../../_images/646dec6fe16b0e4fad60900c0942dbfb3af448ce92ef428112a941f6876848cb.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+<p>UMAP can also to make use of a label information to perform supervised dimension reduction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">step_umap</span><span class="p">(</span><span class="nf">all_predictors</span><span class="p">(),</span><span class="w"> </span><span class="n">outcome</span><span class="o">=</span><span class="nf">vars</span><span class="p">(</span><span class="n">class</span><span class="p">),</span><span class="w"> </span><span class="n">num_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">plot_rec</span><span class="p">(</span><span class="n">class</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/cbbb968f483c0cfb28b2e479a318b8f501d493207df2478393249a87af0aa6ea.png"><img alt="../../_images/cbbb968f483c0cfb28b2e479a318b8f501d493207df2478393249a87af0aa6ea.png" src="../../_images/cbbb968f483c0cfb28b2e479a318b8f501d493207df2478393249a87af0aa6ea.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="nmf">
+<h1>NMF<a class="headerlink" href="#nmf" title="Link to this heading">#</a></h1>
+<p>Non-negative Matrix Factorization is a technique to factorize a matrix V into two matrices W and H, such that W * H = V, with the property that all three matrices have no negative elements.</p>
+<p>Note that for demonstration purposes the data was transformed to be within 0 and 1, in practice if your data have negative numbers NMF is not a good fit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="c1"># transform data to be non-negative</span>
+<span class="nf">step_range</span><span class="p">(</span><span class="nf">all_predictors</span><span class="p">(),</span><span class="w"> </span><span class="n">min</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">clipping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">step_nnmf_sparse</span><span class="p">(</span><span class="nf">all_predictors</span><span class="p">(),</span><span class="w"> </span><span class="n">num_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span>
+<span class="nf">plot_rec</span><span class="p">(</span><span class="n">class</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/b049d3887052709efffb8c4ab2dd99e43f8656bbb9a5a5821ad3e710bca87b53.png"><img alt="../../_images/b049d3887052709efffb8c4ab2dd99e43f8656bbb9a5a5821ad3e710bca87b53.png" src="../../_images/b049d3887052709efffb8c4ab2dd99e43f8656bbb9a5a5821ad3e710bca87b53.png" style="width: 900px; height: 540px;" />
+</a>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="further-reading">
+<h1>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://www.tmwr.org/dimensionality">https://www.tmwr.org/dimensionality</a></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./src/methods"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="clustering.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Clustering</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="glmnet_cox.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Regularized Cox Regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dimensionality Reduction</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">PCA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pls">PLS</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ica">ICA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#umap">UMAP</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nmf">NMF</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By rvalieris
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
