@@ -3,6 +3,8 @@ project:
   title: notebooks
   authors:
     - name: rvalieris
+  github: https://github.com/rvalieris/notebooks
+  edit_url: null
   toc:
     - file: intro.md
     - title: ggplot2
