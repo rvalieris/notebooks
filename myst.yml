@@ -1,0 +1,24 @@
+version: 1
+project:
+  title: notebooks
+  authors:
+    - name: rvalieris
+  toc:
+    - file: intro.md
+    - title: ggplot2
+      children:
+        - pattern: src/ggplot2/*
+    - title: Data Analysis
+      children:
+        - pattern: src/data-analysis/*
+    - title: Methods
+      children:
+        - pattern: src/methods/*
+    - title: Fun
+      children:
+        - pattern: src/fun/*
+site:
+  options:
+    folders: true
+    logo_text: Notebooks
+  template: book-theme
