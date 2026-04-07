@@ -20,6 +20,8 @@ project:
       children:
         - pattern: src/fun/*
 site:
+  parts:
+    footer: footer.md
   options:
     folders: true
     logo_text: Notebooks

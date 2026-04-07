@@ -1,2 +1,0 @@
-#!/bin/bash
-exec git --git-dir=ghpages.git --work-tree=_build/html "$@"

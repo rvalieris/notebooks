@@ -1,0 +1,2 @@
+```{anywidget} ./analytics.mjs
+```
