@@ -1,5 +1,5 @@
 ---
-date: 2026-03-03
+date: 2026-06-19
 ---
 
 # Notebooks
@@ -7,10 +7,10 @@ date: 2026-03-03
 These are my collection of notebooks.
 
 
-:::{note} Recently Added
+:::{note} News
 
-**2026-04-06**: [Steam Hardware Survey](src/data-analysis/steam_survey)
+**2026-06-18**: Updated [Steam Hardware Survey](src/data-analysis/steam_survey)
 
-**2026-03-23**: [Performance Measure Properness](src/methods/properness)
+**2026-03-23**: Added [Performance Measure Properness](src/methods/properness)
 :::
 
